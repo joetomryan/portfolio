@@ -35,7 +35,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--desk);
+  background: var(--sheet);
   color: var(--ink);
   font: 400 18px/1.7 var(--serif);
   -webkit-font-smoothing: antialiased;
@@ -122,10 +122,7 @@ kbd {
 .sheet {
   position: relative;
   overflow: hidden;
-  padding: 64px 72px 32px;
-  background: var(--sheet);
-  border: var(--border);
-  box-shadow: var(--shadow);
+  padding: 0 12px 32px 4px;
 }
 
 /* ---------- views ---------- */
@@ -678,9 +675,10 @@ kbd {
   background: var(--sheet);
   box-shadow: -18px 0 30px rgba(0, 0, 0, 0.12);
   transform: translateX(105%);
+  visibility: hidden;
   pointer-events: none;
 }
-.turn.go { animation: turn 0.6s cubic-bezier(0.6, 0, 0.3, 1); }
+.turn.go { visibility: visible; animation: turn 0.6s cubic-bezier(0.6, 0, 0.3, 1); }
 @keyframes turn {
   0% { transform: translateX(105%); }
   50% { transform: translateX(0); }
@@ -711,7 +709,7 @@ kbd {
   .side-nav a { font-size: 17px; }
   .side-nav a.current::before { display: none; }
   .side-nav a.current { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 5px; }
-  .sheet { padding: 36px 22px 24px; box-shadow: 5px 5px 0 var(--ink); }
+  .sheet { padding: 12px 0 24px; }
 }
 
 @media (max-width: 560px) {
