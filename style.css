@@ -9,6 +9,7 @@
 @font-face { font-family: "Inter"; font-weight: 600; font-style: normal; font-display: swap; src: url("/fonts/inter-latin-600-normal.woff2") format("woff2"); }
 
 :root {
+  color-scheme: light;
   --desk: #ebe4d6;
   --sheet: #fbf8f1;
   --ink: #1f1c18;
@@ -25,19 +26,6 @@
   --sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --desk: #141210;
-    --sheet: #1e1b17;
-    --ink: #ece4d4;
-    --dim: #a39a89;
-    --rule: #3a352d;
-    --link: #8fb0e6;
-    --accent: #d4735c;
-    --water: #1c2c27;
-    --track: #4a2c25;
-  }
-}
 
 * { box-sizing: border-box; }
 
