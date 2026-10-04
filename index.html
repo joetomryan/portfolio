@@ -9,290 +9,304 @@
   <meta property="og:description" content="deployment engineer at avoca.ai. i build ai systems that run in production.">
   <meta property="og:url" content="https://joetomryan.com">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#f1efe8">
+  <meta name="theme-color" content="#ebe4d6">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <div class="wipe" aria-hidden="true"></div>
+  <div class="layout">
 
-  <header class="bar">
-    <a class="logo" href="#" data-home>jtr</a>
-    <span class="status"><i></i>shipping</span>
-    <span class="hint">press <kbd>1</kbd>–<kbd>5</kbd> · <kbd>esc</kbd> home</span>
-  </header>
+    <aside class="side">
+      <a class="mark" href="#" data-home>jtr</a>
 
-  <!-- ============ HOME ============ -->
-  <main class="view" data-view="home">
-    <section class="hero">
-      <h1 class="name" aria-label="joe tom ryan">
-        <span class="word">joe</span> <span class="word">tom</span> <span class="word">ryan</span>
-      </h1>
-      <p class="tagline">deployment engineer at <a href="https://avoca.ai">avoca.ai</a>.<br>i build ai systems that run in production: <mark>voice</mark>, <mark>memory</mark>, <mark>vision</mark>.</p>
-    </section>
+      <h2 class="side-label">navigation</h2>
+      <nav class="side-nav" aria-label="sections">
+        <a href="#" data-home data-nav="home">home</a>
+        <a href="#work" data-nav="work">work</a>
+        <a href="#projects" data-nav="projects">projects</a>
+        <a href="#research" data-nav="research">research</a>
+        <a href="#life" data-nav="life">life</a>
+        <a href="#contact" data-nav="contact">contact</a>
+      </nav>
 
-    <section class="block">
-      <h2 class="label">experience</h2>
-      <ol class="rows">
-        <li>
-          <span class="when">now</span>
-          <span class="what"><b>deployment engineer</b> @ avoca.ai</span>
-          <span class="metric">ai to production</span>
-        </li>
-        <li>
-          <span class="when">100x.inc</span>
-          <span class="what"><b>sally</b> real-time voice ai</span>
-          <span class="metric">50k+ convos / mo</span>
-        </li>
-        <li>
-          <span class="when">building</span>
-          <span class="what"><b>cortex</b> memory for ai agents</span>
-          <span class="metric">sub-5ms search</span>
-        </li>
-        <li>
-          <span class="when">founder</span>
-          <span class="what"><b>medai</b> clinical computer vision</span>
-          <span class="metric">30+ clinics</span>
-        </li>
-      </ol>
-    </section>
+      <h2 class="side-label">find me on</h2>
+      <nav class="side-nav side-links" aria-label="elsewhere">
+        <a href="https://twitter.com/joetomryan">twitter</a>
+        <a href="https://linkedin.com/in/joetomryan">linkedin</a>
+        <a href="https://github.com/joetomryan">github</a>
+      </nav>
 
-    <section class="block numbers">
-      <div><b data-count="50" data-suffix="k+">50k+</b><span>voice conversations a month</span></div>
-      <div><b data-count="800" data-prefix="&lt;" data-suffix="ms">&lt;800ms</b><span>voice latency</span></div>
-      <div><b data-count="38" data-suffix="%">38%</b><span>conversion lift</span></div>
-      <div><b data-count="99" data-suffix="%+">99%+</b><span>screening accuracy</span></div>
-    </section>
+      <p class="keys">keys <kbd>1</kbd>–<kbd>5</kbd> · <kbd>esc</kbd></p>
+    </aside>
 
-    <section class="block">
-      <h2 class="label">stack <small>(click to light up)</small></h2>
-      <ul class="chips">
-        <li><button>python</button></li>
-        <li><button>langgraph</button></li>
-        <li><button>mcp</button></li>
-        <li><button>a2a</button></li>
-        <li><button>claude</button></li>
-        <li><button>multi-agent systems</button></li>
-        <li><button>streaming stt / tts</button></li>
-        <li><button>hybrid retrieval</button></li>
-        <li><button>knowledge graphs</button></li>
-        <li><button>computer vision</button></li>
-        <li><button>efficientnet</button></li>
-        <li><button>gans</button></li>
-        <li><button>vtk</button></li>
-        <li><button>lstm</button></li>
-        <li><button>gradient boosting</button></li>
-      </ul>
-    </section>
+    <div class="desk">
+      <div class="sheet">
+        <div class="turn" aria-hidden="true"></div>
 
-    <nav class="columns" aria-label="sections">
-      <a href="#work" data-key="1"><span class="num">01</span><span class="title">work</span><span class="teaser">everything i've shipped, in order</span><span class="arrow">→</span></a>
-      <a href="#projects" data-key="2"><span class="num">02</span><span class="title">projects</span><span class="teaser">cortex, nikolai and open source</span><span class="arrow">→</span></a>
-      <a href="#research" data-key="3"><span class="num">03</span><span class="title">research</span><span class="teaser">ai safety and machine memory</span><span class="arrow">→</span></a>
-      <a href="#life" data-key="4"><span class="num">04</span><span class="title">life</span><span class="teaser">karuna, basketball, aquascaping</span><span class="arrow">→</span></a>
-      <a href="#contact" data-key="5"><span class="num">05</span><span class="title">contact</span><span class="teaser">say hi</span><span class="arrow">→</span></a>
-    </nav>
-  </main>
+        <!-- ============ HOME ============ -->
+        <main class="view" data-view="home">
+          <h1 class="name" aria-label="joe tom ryan">
+            <span class="word">joe</span> <span class="word">tom</span> <span class="word">ryan</span>
+          </h1>
 
-  <!-- ============ WORK ============ -->
-  <article class="view page" data-view="work" id="work">
-    <a class="back" href="#" data-home>← back</a>
-    <h1 class="page-title"><span>01</span>work</h1>
-    <p class="lede">i don't build demos. i build ai systems that run in production.</p>
+          <p class="kicker">some things about me:</p>
+          <ul class="about">
+            <li>i'm a deployment engineer at <a href="https://avoca.ai">avoca.ai</a>, taking ai systems from prototype to production.</li>
+            <li>before this, i built <a href="#work">sally</a> at <a href="https://100x.inc">100x.inc</a>, a real-time voice ai platform for enterprise, and founded <a href="#work">medai</a>, computer vision used in 30+ clinics.</li>
+            <li>i don't build demos. i build ai systems that run in production: voice, memory and vision.</li>
+          </ul>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">now</span><h2>deployment engineer · <a href="https://avoca.ai">avoca.ai</a></h2></div>
-      <p>taking ai systems from prototype to production for real customers.</p>
-    </div>
+          <h2 class="label">experience</h2>
+          <ol class="rows">
+            <li>
+              <span class="when">now</span>
+              <span class="what"><b>deployment engineer</b>, avoca.ai</span>
+              <span class="metric">ai to production</span>
+            </li>
+            <li>
+              <span class="when">100x.inc</span>
+              <span class="what"><b>sally</b>, real-time voice ai</span>
+              <span class="metric">50k+ conversations / mo</span>
+            </li>
+            <li>
+              <span class="when">building</span>
+              <span class="what"><b>cortex</b>, memory for ai agents</span>
+              <span class="metric">sub-5ms search</span>
+            </li>
+            <li>
+              <span class="when">founder</span>
+              <span class="what"><b>medai</b>, clinical computer vision</span>
+              <span class="metric">30+ clinics</span>
+            </li>
+          </ol>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">100x.inc</span><h2>sally · <a href="https://100x.inc">real-time voice ai</a></h2></div>
-      <p>a voice ai platform for enterprise, serving 50k+ conversations a month across 30+ u.s. enterprise clients.</p>
-      <ul class="facts">
-        <li>sub-800ms latency end to end</li>
-        <li>streaming stt / tts</li>
-        <li>langgraph orchestration</li>
-        <li>38% lift in conversion</li>
-      </ul>
-    </div>
+          <h2 class="label">pick a book <small>(or press 1–5)</small></h2>
+          <nav class="shelf" aria-label="sections">
+            <a class="spine" href="#work" data-key="1" style="--c: #2f5a45">
+              <span class="spine-num">i</span><span class="spine-title">work</span><span class="spine-sub">what i've shipped</span>
+            </a>
+            <a class="spine" href="#projects" data-key="2" style="--c: #33438a">
+              <span class="spine-num">ii</span><span class="spine-title">projects</span><span class="spine-sub">cortex, nikolai, oss</span>
+            </a>
+            <a class="spine light" href="#research" data-key="3" style="--c: #e9e4d8">
+              <span class="spine-num">iii</span><span class="spine-title">research</span><span class="spine-sub">safety and memory</span>
+            </a>
+            <a class="spine" href="#life" data-key="4" style="--c: #7a2e22">
+              <span class="spine-num">iv</span><span class="spine-title">life</span><span class="spine-sub">karuna, hoops, tanks</span>
+            </a>
+            <a class="spine" href="#contact" data-key="5" style="--c: #8a7a55">
+              <span class="spine-num">v</span><span class="spine-title">contact</span><span class="spine-sub">say hi</span>
+            </a>
+            <span class="filler" aria-hidden="true" style="--c: #c9b88f; height: 190px"></span>
+            <span class="filler" aria-hidden="true" style="--c: #4b5d6b; height: 214px"></span>
+            <span class="filler lean" aria-hidden="true" style="--c: #a2683f; height: 200px"></span>
+            <span class="bookend" aria-hidden="true"></span>
+          </nav>
+        </main>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">building</span><h2>cortex · memory for ai agents</h2></div>
-      <p>a persistent semantic memory layer for autonomous agents, exposed as an mcp server.</p>
-      <ul class="facts">
-        <li>hybrid retrieval</li>
-        <li>self-linking knowledge graphs</li>
-        <li>episodic memory</li>
-        <li>sub-5ms search</li>
-      </ul>
-    </div>
+        <!-- ============ WORK ============ -->
+        <article class="view" data-view="work" id="work">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter i</span>work</h1>
+          <p class="lede">i don't build demos. i build ai systems that run in production.</p>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">founder</span><h2>medai · clinical computer vision</h2></div>
-      <p>shipped computer vision that clinicians actually adopted, in 30+ healthcare facilities.</p>
-      <ul class="facts">
-        <li>diabetic retinopathy screening, 99%+ accuracy</li>
-        <li>cbct-based dental implant planning</li>
-        <li>production ml inference</li>
-        <li>55% cost reduction</li>
-      </ul>
-    </div>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">now</span><h2>deployment engineer · <a href="https://avoca.ai">avoca.ai</a></h2></div>
+            <p>taking ai systems from prototype to production for real customers.</p>
+          </div>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">earlier</span><h2>pantrypal · demand forecasting</h2></div>
-      <p>real-time demand forecasting for inventory optimization, using lstm and gradient boosting ensembles.</p>
-    </div>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">100x.inc</span><h2>sally · <a href="https://100x.inc">real-time voice ai</a></h2></div>
+            <p>a voice ai platform for enterprise, serving 50k+ conversations a month across 30+ u.s. enterprise clients.</p>
+            <ul class="facts">
+              <li>sub-800ms latency end to end</li>
+              <li>streaming stt / tts</li>
+              <li>langgraph orchestration</li>
+              <li>38% lift in conversion</li>
+            </ul>
+          </div>
 
-    <a class="next" href="#projects">next: projects →</a>
-  </article>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">building</span><h2>cortex · memory for ai agents</h2></div>
+            <p>a persistent semantic memory layer for autonomous agents, exposed as an mcp server.</p>
+            <ul class="facts">
+              <li>hybrid retrieval</li>
+              <li>self-linking knowledge graphs</li>
+              <li>episodic memory</li>
+              <li>sub-5ms search</li>
+            </ul>
+          </div>
 
-  <!-- ============ PROJECTS ============ -->
-  <article class="view page" data-view="projects" id="projects">
-    <a class="back" href="#" data-home>← back</a>
-    <h1 class="page-title"><span>02</span>projects</h1>
-    <p class="lede">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>. here's what i can show.</p>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">founder</span><h2>medai · clinical computer vision</h2></div>
+            <p>shipped computer vision that clinicians actually adopted, in 30+ healthcare facilities.</p>
+            <ul class="facts">
+              <li>diabetic retinopathy screening, 99%+ accuracy</li>
+              <li>cbct-based dental implant planning</li>
+              <li>production ml inference</li>
+              <li>55% cost reduction</li>
+            </ul>
+          </div>
 
-    <div class="cards">
-      <a class="card" href="https://github.com/joetomryan">
-        <span class="tag">building</span>
-        <h2>cortex</h2>
-        <p>mcp-native semantic memory server for ai agents.</p>
-        <span class="go">↗</span>
-      </a>
-      <a class="card" href="https://github.com/joetomryan">
-        <span class="tag hot">in development</span>
-        <h2>nikolai</h2>
-        <p>a multi-agent ai chief of staff. claude subagents, mcp and the a2a protocol.</p>
-        <span class="go">↗</span>
-      </a>
-      <a class="card" href="https://github.com/joetomryan/voice-ai-architecture">
-        <span class="tag">open source</span>
-        <h2>voice-ai-architecture</h2>
-        <p>reference design for real-time voice ai.</p>
-        <span class="go">↗</span>
-      </a>
-      <a class="card" href="https://github.com/joetomryan/multi-agent-patterns">
-        <span class="tag">open source</span>
-        <h2>multi-agent-patterns</h2>
-        <p>reusable orchestration patterns for agent systems.</p>
-        <span class="go">↗</span>
-      </a>
-      <a class="card" href="https://github.com/joetomryan/retinopathy-classifier">
-        <span class="tag">open source</span>
-        <h2>retinopathy-classifier</h2>
-        <p>diabetic retinopathy detection with efficientnet + gans.</p>
-        <span class="go">↗</span>
-      </a>
-      <a class="card" href="https://github.com/joetomryan/dental-implant-planner">
-        <span class="tag">open source</span>
-        <h2>dental-implant-planner</h2>
-        <p>3d implant planning with vtk and ml.</p>
-        <span class="go">↗</span>
-      </a>
-    </div>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">earlier</span><h2>pantrypal · demand forecasting</h2></div>
+            <p>real-time demand forecasting for inventory optimization, using lstm and gradient boosting ensembles.</p>
+          </div>
 
-    <a class="next" href="#research">next: research →</a>
-  </article>
+          <a class="next" href="#projects">next chapter: projects →</a>
+        </article>
 
-  <!-- ============ RESEARCH ============ -->
-  <article class="view page" data-view="research" id="research">
-    <a class="back" href="#" data-home>← back</a>
-    <h1 class="page-title"><span>03</span>research</h1>
-    <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
+        <!-- ============ PROJECTS ============ -->
+        <article class="view" data-view="projects" id="projects">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter ii</span>projects</h1>
+          <p class="lede">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>. here's what i can show.</p>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">interest</span><h2>ai safety</h2></div>
-      <p>i ship agents that act on their own in front of real customers. that makes safety a practical question for me, not an abstract one: how do you know what an agent will do, and how do you keep it that way?</p>
-      <ul class="questions">
-        <li>how do you evaluate an agent whose behaviour depends on what it remembers?</li>
-        <li>can an agent's memory be audited, corrected and made to forget?</li>
-        <li>when should an autonomous system stop and hand control back to a human?</li>
-      </ul>
-    </div>
+          <div class="cards">
+            <a class="card" href="https://github.com/joetomryan">
+              <span class="tag">building</span>
+              <h2>cortex</h2>
+              <p>mcp-native semantic memory server for ai agents.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan">
+              <span class="tag hot">in development</span>
+              <h2>nikolai</h2>
+              <p>a multi-agent ai chief of staff. claude subagents, mcp and the a2a protocol.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan/voice-ai-architecture">
+              <span class="tag">open source</span>
+              <h2>voice-ai-architecture</h2>
+              <p>reference design for real-time voice ai.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan/multi-agent-patterns">
+              <span class="tag">open source</span>
+              <h2>multi-agent-patterns</h2>
+              <p>reusable orchestration patterns for agent systems.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan/retinopathy-classifier">
+              <span class="tag">open source</span>
+              <h2>retinopathy-classifier</h2>
+              <p>diabetic retinopathy detection with efficientnet + gans.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan/dental-implant-planner">
+              <span class="tag">open source</span>
+              <h2>dental-implant-planner</h2>
+              <p>3d implant planning with vtk and ml.</p>
+              <span class="go">↗</span>
+            </a>
+          </div>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">interest</span><h2>consciousness through memory</h2></div>
-      <p>cortex started as infrastructure: give agents memory that persists. but persistent memory raises a bigger question. if a system carries its past forward, reflects on it and changes because of it, what is it becoming? i think deep memory architectures are one of the more concrete paths toward something like machine consciousness.</p>
-      <ul class="questions">
-        <li>what is the smallest memory architecture that gives an agent a sense of continuity over time?</li>
-        <li>how should episodic memories consolidate into semantic knowledge, the way they do in us?</li>
-        <li>can an agent build a model of itself from its own history?</li>
-      </ul>
-    </div>
+          <a class="next" href="#research">next chapter: research →</a>
+        </article>
 
-    <a class="next" href="#life">next: life →</a>
-  </article>
+        <!-- ============ RESEARCH ============ -->
+        <article class="view" data-view="research" id="research">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter iii</span>research</h1>
+          <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
 
-  <!-- ============ LIFE ============ -->
-  <article class="view page" data-view="life" id="life">
-    <a class="back" href="#" data-home>← back</a>
-    <h1 class="page-title"><span>04</span>life</h1>
-    <p class="lede">what i do when i'm not deploying things. (sometimes still deploying things.)</p>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">interest</span><h2>ai safety</h2></div>
+            <p>i ship agents that act on their own in front of real customers. that makes safety a practical question for me, not an abstract one: how do you know what an agent will do, and how do you keep it that way?</p>
+            <ul class="questions">
+              <li>how do you evaluate an agent whose behaviour depends on what it remembers?</li>
+              <li>can an agent's memory be audited, corrected and made to forget?</li>
+              <li>when should an autonomous system stop and hand control back to a human?</li>
+            </ul>
+          </div>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">obsession</span><h2>building startups</h2></div>
-      <p>my favourite hobby is also my work. i love building things at scale that help a lot of people, whether that's screening in 30+ clinics or thousands of conversations a month.</p>
-    </div>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">interest</span><h2>consciousness through memory</h2></div>
+            <p>cortex started as infrastructure: give agents memory that persists. but persistent memory raises a bigger question. if a system carries its past forward, reflects on it and changes because of it, what is it becoming? i think deep memory architectures are one of the more concrete paths toward something like machine consciousness.</p>
+            <ul class="questions">
+              <li>what is the smallest memory architecture that gives an agent a sense of continuity over time?</li>
+              <li>how should episodic memories consolidate into semantic knowledge, the way they do in us?</li>
+              <li>can an agent build a model of itself from its own history?</li>
+            </ul>
+          </div>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">founded</span><h2>karuna</h2></div>
-      <p>karuna is a drive i started to get puppies vaccinated, so they survive their first months without catching parvo, lepto and other diseases that kill so many of them early.</p>
-      <div class="paws" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span></div>
-    </div>
+          <a class="next" href="#life">next chapter: life →</a>
+        </article>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">court</span><h2>basketball</h2></div>
-      <p>played for my college team. <button class="ball" aria-label="bounce the ball">🏀</button> <small class="dim">(tap it)</small></p>
-    </div>
+        <!-- ============ LIFE ============ -->
+        <article class="view" data-view="life" id="life">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter iv</span>life</h1>
+          <p class="lede">what i do when i'm not deploying things. (sometimes still deploying things.)</p>
 
-    <div class="entry">
-      <div class="entry-head"><span class="tag">underwater</span><h2>aquascaping</h2></div>
-      <p>building nature underwater. what fascinates me is the science: managing nitrates, the nitrogen cycle and co2 so plants grow, and watching a glass box develop into a mature ecosystem of its own.</p>
-      <div class="tank" aria-hidden="true">
-        <div class="cycle">
-          <span>fish waste</span><i>→</i><span>ammonia</span><i>→</i><span>nitrite</span><i>→</i><span>nitrate</span><i>→</i><span>plants</span>
-        </div>
-        <div class="bubbles"></div>
-        <div class="plants"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+          <div class="entry">
+            <div class="entry-head"><span class="tag">obsession</span><h2>building startups</h2></div>
+            <p>my favourite hobby is also my work. i love building things at scale that help a lot of people, whether that's screening in 30+ clinics or thousands of conversations a month.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">founded</span><h2>karuna</h2></div>
+            <p>karuna is a drive i started to get puppies vaccinated, so they survive their first months without catching parvo, lepto and other diseases that kill so many of them early.</p>
+            <div class="paws" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span></div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">court</span><h2>basketball</h2></div>
+            <p>played for my college team. <button class="ball" aria-label="bounce the ball">🏀</button> <small class="dim">(tap it)</small></p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">underwater</span><h2>aquascaping</h2></div>
+            <p>building nature underwater. what fascinates me is the science: managing nitrates, the nitrogen cycle and co2 so plants grow, and watching a glass box develop into a mature ecosystem of its own.</p>
+            <div class="tank" aria-hidden="true">
+              <div class="cycle">
+                <span>fish waste</span><i>→</i><span>ammonia</span><i>→</i><span>nitrite</span><i>→</i><span>nitrate</span><i>→</i><span>plants</span>
+              </div>
+              <div class="bubbles"></div>
+              <div class="plants"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">daily</span><h2>training</h2></div>
+            <p>working out and staying athletic. it keeps the rest of this running.</p>
+          </div>
+
+          <a class="next" href="#contact">next chapter: contact →</a>
+        </article>
+
+        <!-- ============ CONTACT ============ -->
+        <article class="view" data-view="contact" id="contact">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter v</span>contact</h1>
+          <p class="lede">building something, hiring, or thinking about the same questions? write to me.</p>
+
+          <button class="copy" data-email="joetomryan7@gmail.com">
+            <span class="copy-text">joetomryan7@gmail.com</span>
+            <span class="copy-hint">click to copy</span>
+            <span class="stamp" aria-hidden="true">copied</span>
+          </button>
+
+          <ul class="links">
+            <li><a href="https://linkedin.com/in/joetomryan">linkedin ↗</a></li>
+            <li><a href="https://twitter.com/joetomryan">twitter ↗</a></li>
+            <li><a href="https://github.com/joetomryan">github ↗</a></li>
+            <li><a href="mailto:joetomryan7@gmail.com">email ↗</a></li>
+          </ul>
+        </article>
+
+        <footer class="folio">
+          <span>joe tom ryan</span>
+          <span class="folio-num">— <span data-folio>1</span> —</span>
+          <span>© <span data-year>2026</span></span>
+        </footer>
       </div>
     </div>
-
-    <div class="entry">
-      <div class="entry-head"><span class="tag">daily</span><h2>training</h2></div>
-      <p>working out and staying athletic. it keeps the rest of this running.</p>
-    </div>
-
-    <a class="next" href="#contact">next: contact →</a>
-  </article>
-
-  <!-- ============ CONTACT ============ -->
-  <article class="view page" data-view="contact" id="contact">
-    <a class="back" href="#" data-home>← back</a>
-    <h1 class="page-title"><span>05</span>contact</h1>
-    <p class="lede">building something, hiring, or thinking about the same questions? write to me.</p>
-
-    <button class="copy" data-email="joetomryan7@gmail.com">
-      <span class="copy-text">joetomryan7@gmail.com</span>
-      <span class="copy-hint">click to copy</span>
-      <span class="stamp" aria-hidden="true">copied!</span>
-    </button>
-
-    <ul class="links">
-      <li><a href="https://linkedin.com/in/joetomryan">linkedin ↗</a></li>
-      <li><a href="https://twitter.com/joetomryan">twitter ↗</a></li>
-      <li><a href="https://github.com/joetomryan">github ↗</a></li>
-      <li><a href="mailto:joetomryan7@gmail.com">email ↗</a></li>
-    </ul>
-  </article>
-
-  <footer class="foot">
-    <span>© <span data-year>2026</span> joe tom ryan</span>
-    <span>hand-written html. no frameworks.</span>
-  </footer>
+  </div>
 
   <script src="/app.js" defer></script>
 </body>
