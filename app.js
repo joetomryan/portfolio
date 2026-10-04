@@ -66,25 +66,6 @@
     if (e.key === 'Escape' && location.hash) goHome();
   });
 
-  /* ---------- click anywhere: a few drops of ink ---------- */
-
-  if (!reduceMotion) {
-    document.addEventListener('pointerdown', (e) => {
-      for (let i = 0; i < 6; i++) {
-        const d = document.createElement('span');
-        d.className = 'dot';
-        const angle = (Math.PI * 2 * i) / 6 + Math.random() * 0.6;
-        const dist = 18 + Math.random() * 22;
-        d.style.left = `${e.clientX - 3}px`;
-        d.style.top = `${e.clientY - 3}px`;
-        d.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
-        d.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
-        d.addEventListener('animationend', () => d.remove());
-        document.body.appendChild(d);
-      }
-    });
-  }
-
   /* ---------- unit grids, flow diagrams, step rows ---------- */
 
   document.querySelectorAll('.units').forEach((el) => {

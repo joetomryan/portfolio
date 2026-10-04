@@ -679,7 +679,7 @@ span.repo-name { color: var(--ink); }
   color: var(--dim);
 }
 
-/* ---------- page turn + ink dots ---------- */
+/* ---------- page turn ---------- */
 
 .turn {
   position: absolute;
@@ -698,18 +698,6 @@ span.repo-name { color: var(--ink); }
   100% { transform: translateX(-105%); }
 }
 
-.dot {
-  position: fixed;
-  z-index: 60;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ink);
-  pointer-events: none;
-  animation: dot 0.55s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
-}
-.dot:nth-child(odd) { background: var(--accent); }
-@keyframes dot { to { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; } }
 
 /* ---------- small screens ---------- */
 
