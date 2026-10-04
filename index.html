@@ -11,9 +11,8 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#fbf8f1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/lora-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/lora-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -23,15 +22,15 @@
     <aside class="side">
       <a class="mark" href="#" data-home>jtr</a>
 
-      <h2 class="side-label">navigation</h2>
-      <nav class="side-nav" aria-label="sections">
-        <a href="#" data-home data-nav="home">home</a>
-        <a href="#work" data-nav="work">work</a>
-        <a href="#projects" data-nav="projects">projects</a>
-        <a href="#education" data-nav="education">education</a>
-        <a href="#research" data-nav="research">research</a>
-        <a href="#life" data-nav="life">life</a>
-        <a href="#contact" data-nav="contact">contact</a>
+      <h2 class="side-label">contents</h2>
+      <nav class="stack" aria-label="sections">
+        <a class="book" href="#" data-home data-nav="home" style="--c: #1f1c18; --w: 176px; --x: 0px"><span class="book-title">home</span><span class="glimpse">the first page</span></a>
+        <a class="book" href="#work" data-nav="work" style="--c: #2f5a45; --w: 188px; --x: 10px"><span class="book-title">work</span><span class="glimpse">avoca ai, 100x, medai</span></a>
+        <a class="book" href="#projects" data-nav="projects" style="--c: #33438a; --w: 168px; --x: 4px"><span class="book-title">projects</span><span class="glimpse">cortex, nikolai, open source</span></a>
+        <a class="book" href="#education" data-nav="education" style="--c: #2f6468; --w: 192px; --x: 14px"><span class="book-title">education</span><span class="glimpse">b.e. cs, startups over grades</span></a>
+        <a class="book light" href="#research" data-nav="research" style="--c: #e9e4d8; --w: 172px; --x: 2px"><span class="book-title">research</span><span class="glimpse">ai safety and machine memory</span></a>
+        <a class="book" href="#life" data-nav="life" style="--c: #7a2e22; --w: 184px; --x: 8px"><span class="book-title">life</span><span class="glimpse">karuna, basketball, aquascaping</span></a>
+        <a class="book" href="#contact" data-nav="contact" style="--c: #8a7a55; --w: 198px; --x: 0px"><span class="book-title">contact</span><span class="glimpse">say hi</span></a>
       </nav>
 
       <h2 class="side-label">find me on</h2>
@@ -50,8 +49,8 @@
 
         <!-- ================= HOME ================= -->
         <main class="view" data-view="home">
-          <h1 class="name" aria-label="joe tom ryan">
-            <span class="word">joe</span> <span class="word">tom</span> <span class="word">ryan</span>
+          <h1 class="name" aria-label="Joe Tom Ryan">
+            <span class="word">Joe</span> <span class="word">Tom</span> <span class="word">Ryan</span>
           </h1>
 
           <p class="kicker">some things about me:</p>
@@ -121,9 +120,9 @@
         </main>
 
         <!-- ================= AVOCA ================= -->
-        <article class="view case" data-view="avoca" data-parent="work" id="avoca">
+        <article class="view case" data-view="avoca" data-parent="work">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>experience · jun 2026 – present · remote</span>avoca ai</h1>
+          <h1 class="page-title"><span>experience · jun 2026 – present · remote</span>Avoca AI</h1>
           <p class="role">deployed engineer · yc w23 · applied ai &amp; platform engineering</p>
           <p class="lede">i own enterprise deployments of real-time voice and sms agents end to end: agent design, crm integrations, typescript backend features, and the observability and incident systems behind them. i sit between customers and core engineering, turning field failures into scoped tickets, design docs and production changes.</p>
 
@@ -179,7 +178,7 @@
         </article>
 
         <!-- ================= 100X ================= -->
-        <article class="view case" data-view="x100" data-parent="work" id="x100">
+        <article class="view case" data-view="x100" data-parent="work">
           <a class="back" href="#" data-home>← back</a>
           <h1 class="page-title"><span>experience · jul 2025 – may 2026 · remote</span>100x</h1>
           <p class="role">founding ai engineer · sally, conversational &amp; real-time voice ai</p>
@@ -256,9 +255,9 @@
         </article>
 
         <!-- ================= MEDAI ================= -->
-        <article class="view case" data-view="medai" data-parent="work" id="medai">
+        <article class="view case" data-view="medai" data-parent="work">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>founder · feb 2024 – jul 2025</span>medai</h1>
+          <h1 class="page-title"><span>founder · feb 2024 – jul 2025</span>MedAI</h1>
           <p class="role">founder &amp; ai engineer · clinical computer vision</p>
           <p class="lede">computer vision that clinicians actually used: diabetic retinopathy screening and cbct-based dental implant planning, built and clinically deployed across 30+ clinics.</p>
 
@@ -323,9 +322,9 @@
         </article>
 
         <!-- ================= CORTEX ================= -->
-        <article class="view case" data-view="cortex" data-parent="projects" id="cortex">
+        <article class="view case" data-view="cortex" data-parent="projects">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>open source · building</span>cortex</h1>
+          <h1 class="page-title"><span>open source · building</span>Cortex</h1>
           <p class="role">persistent semantic memory layer for autonomous ai agents</p>
           <p class="lede">an open-source, mcp-native memory server. agents remember across sessions, link what they learn into a knowledge graph, and consolidate experiences into lasting memory.</p>
 
@@ -371,9 +370,9 @@
         </article>
 
         <!-- ================= WORK ================= -->
-        <article class="view" data-view="work" id="work">
+        <article class="view" data-view="work">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter i</span>work</h1>
+          <h1 class="page-title"><span>chapter i</span>Work</h1>
           <p class="lede">i don't build demos. i build ai systems that run in production.</p>
 
           <a class="entry entry-link" href="#avoca">
@@ -398,9 +397,9 @@
         </article>
 
         <!-- ================= PROJECTS ================= -->
-        <article class="view" data-view="projects" id="projects">
+        <article class="view" data-view="projects">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter ii</span>projects</h1>
+          <h1 class="page-title"><span>chapter ii</span>Projects</h1>
           <p class="lede">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>. here's what i can show.</p>
 
           <div class="cards">
@@ -452,9 +451,9 @@
         </article>
 
         <!-- ================= EDUCATION ================= -->
-        <article class="view" data-view="education" id="education">
+        <article class="view" data-view="education">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter iii</span>education</h1>
+          <h1 class="page-title"><span>chapter iii</span>Education</h1>
           <p class="lede">b.e. computer science · sir m. visvesvaraya institute of technology, bangalore · 2022 – 2026</p>
 
           <p class="prose">i had a good college life: friends, the basketball team, late nights that had nothing to do with exams. but most of my time didn't go into studying for grades. it went into building things real people used.</p>
@@ -499,9 +498,9 @@
         </article>
 
         <!-- ================= RESEARCH ================= -->
-        <article class="view" data-view="research" id="research">
+        <article class="view" data-view="research">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter iv</span>research</h1>
+          <h1 class="page-title"><span>chapter iv</span>Research</h1>
           <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
 
           <div class="entry">
@@ -528,9 +527,9 @@
         </article>
 
         <!-- ================= LIFE ================= -->
-        <article class="view" data-view="life" id="life">
+        <article class="view" data-view="life">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter v</span>life</h1>
+          <h1 class="page-title"><span>chapter v</span>Life</h1>
           <p class="lede">what i do when i'm not deploying things. (sometimes still deploying things.)</p>
 
           <div class="entry">
@@ -570,9 +569,9 @@
         </article>
 
         <!-- ================= CONTACT ================= -->
-        <article class="view" data-view="contact" id="contact">
+        <article class="view" data-view="contact">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter vi</span>contact</h1>
+          <h1 class="page-title"><span>chapter vi</span>Contact</h1>
           <p class="lede">building something, hiring, or thinking about the same questions? write to me. i'm in bangalore, working remote.</p>
 
           <button class="copy" data-email="joetomryan7@gmail.com">
