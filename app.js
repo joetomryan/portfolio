@@ -10,12 +10,20 @@
 
   const viewFor = (hash) => views.find((v) => v.dataset.view === hash.replace('#', '')) || views[0];
 
+  // page numbers: chapters first, then the experience pages after them
+  const pageOrder = [...views.filter((v) => !v.dataset.parent), ...views.filter((v) => v.dataset.parent)];
+  const titles = { x100: '100x', avoca: 'avoca ai' };
+
   const show = (view) => {
     const name = view.dataset.view;
-    views.forEach((v) => v.classList.toggle('active', v === view));
-    navLinks.forEach((a) => a.classList.toggle('current', a.dataset.nav === name));
-    folio.textContent = views.indexOf(view) + 1;
-    document.title = name === 'home' ? 'joe tom ryan' : `${name} · joe tom ryan`;
+    const section = view.dataset.parent || name;
+    views.forEach((v) => v.classList.remove('active', 'in'));
+    view.classList.add('active');
+    // charts and diagrams animate in once the page is on screen
+    requestAnimationFrame(() => requestAnimationFrame(() => view.classList.add('in')));
+    navLinks.forEach((a) => a.classList.toggle('current', a.dataset.nav === section));
+    folio.textContent = pageOrder.indexOf(view) + 1;
+    document.title = name === 'home' ? 'joe tom ryan' : `${titles[name] || name} · joe tom ryan`;
     window.scrollTo(0, 0);
   };
 
@@ -82,6 +90,37 @@
       }
     });
   }
+
+  /* ---------- unit grids, flow diagrams, step rows ---------- */
+
+  document.querySelectorAll('.units').forEach((el) => {
+    el.style.setProperty('--cols', el.dataset.cols || 10);
+    el.innerHTML = Array.from({ length: +el.dataset.n }, (_, i) => `<i style="--i: ${i}"></i>`).join('');
+  });
+  document.querySelectorAll('.flow').forEach((flow) =>
+    flow.querySelectorAll(':scope > .node').forEach((n, i) => n.style.setProperty('--i', i))
+  );
+  document.querySelectorAll('.steps b').forEach((b, i) => b.style.setProperty('--i', i % 7));
+
+  /* ---------- tooltips on chart marks ---------- */
+
+  const tip = document.querySelector('.tip');
+  const showTip = (el) => {
+    const r = el.getBoundingClientRect();
+    tip.textContent = el.dataset.tip;
+    tip.style.left = `${Math.min(Math.max(r.left + r.width / 2, 140), window.innerWidth - 140)}px`;
+    tip.style.top = `${r.top}px`;
+    tip.classList.add('show');
+  };
+  const hideTip = () => tip.classList.remove('show');
+  document.querySelectorAll('[data-tip]').forEach((el) => {
+    el.tabIndex = 0;
+    el.addEventListener('pointerenter', () => showTip(el));
+    el.addEventListener('pointerleave', hideTip);
+    el.addEventListener('focus', () => showTip(el));
+    el.addEventListener('blur', hideTip);
+  });
+  window.addEventListener('scroll', hideTip, { passive: true });
 
   /* ---------- aquarium bubbles ---------- */
 

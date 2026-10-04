@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>joe tom ryan</title>
-  <meta name="description" content="deployment engineer at avoca.ai. i build ai systems that run in production: voice, memory, vision.">
+  <meta name="description" content="ai engineer who ships production llm systems end to end. deployed engineer at avoca ai (yc w23), previously founding ai engineer at 100x and founder of medai.">
   <meta property="og:title" content="joe tom ryan">
-  <meta property="og:description" content="deployment engineer at avoca.ai. i build ai systems that run in production.">
+  <meta property="og:description" content="ai engineer who ships production llm systems end to end. deployed engineer at avoca ai (yc w23).">
   <meta property="og:url" content="https://joetomryan.com">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#ebe4d6">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -28,6 +28,7 @@
         <a href="#" data-home data-nav="home">home</a>
         <a href="#work" data-nav="work">work</a>
         <a href="#projects" data-nav="projects">projects</a>
+        <a href="#education" data-nav="education">education</a>
         <a href="#research" data-nav="research">research</a>
         <a href="#life" data-nav="life">life</a>
         <a href="#contact" data-nav="contact">contact</a>
@@ -40,14 +41,14 @@
         <a href="https://github.com/joetomryan">github</a>
       </nav>
 
-      <p class="keys">keys <kbd>1</kbd>–<kbd>5</kbd> · <kbd>esc</kbd></p>
+      <p class="keys">keys <kbd>1</kbd>–<kbd>6</kbd> · <kbd>esc</kbd></p>
     </aside>
 
     <div class="desk">
       <div class="sheet">
         <div class="turn" aria-hidden="true"></div>
 
-        <!-- ============ HOME ============ -->
+        <!-- ================= HOME ================= -->
         <main class="view" data-view="home">
           <h1 class="name" aria-label="joe tom ryan">
             <span class="word">joe</span> <span class="word">tom</span> <span class="word">ryan</span>
@@ -55,128 +56,370 @@
 
           <p class="kicker">some things about me:</p>
           <ul class="about">
-            <li>i'm a deployment engineer at <a href="https://avoca.ai">avoca.ai</a>, taking ai systems from prototype to production.</li>
-            <li>before this, i built <a href="#work">sally</a> at <a href="https://100x.inc">100x.inc</a>, a real-time voice ai platform for enterprise, and founded <a href="#work">medai</a>, computer vision used in 30+ clinics.</li>
-            <li>i don't build demos. i build ai systems that run in production: voice, memory and vision.</li>
+            <li>i'm an ai engineer who ships production llm systems end to end, from architecture and backend code to deployment and reliability in the field.</li>
+            <li>right now i'm a deployed engineer at <a href="#avoca">avoca ai</a> (yc w23), owning enterprise deployments of real-time voice and sms agents.</li>
+            <li>before this i was founding ai engineer at <a href="#x100">100x</a>, where i built sally, and i founded <a href="#medai">medai</a>, computer vision used in 30+ clinics.</li>
+            <li>i also build <a href="#cortex">cortex</a>, an open-source memory layer for ai agents.</li>
           </ul>
 
-          <h2 class="label">experience</h2>
+          <h2 class="label">experience <small>(click a row for the full story)</small></h2>
           <ol class="rows">
             <li>
-              <span class="when">now</span>
-              <span class="what"><b>deployment engineer</b>, avoca.ai</span>
-              <span class="metric">ai to production</span>
+              <a href="#avoca">
+                <span class="when">jun 2026 – now</span>
+                <span class="what"><b>avoca ai</b> deployed engineer · yc w23</span>
+                <span class="metric">voice + sms agents <i>→</i></span>
+              </a>
             </li>
             <li>
-              <span class="when">100x.inc</span>
-              <span class="what"><b>sally</b>, real-time voice ai</span>
-              <span class="metric">50k+ conversations / mo</span>
+              <a href="#x100">
+                <span class="when">jul 2025 – may 2026</span>
+                <span class="what"><b>100x</b> founding ai engineer</span>
+                <span class="metric">50k+ conversations / mo <i>→</i></span>
+              </a>
             </li>
             <li>
-              <span class="when">building</span>
-              <span class="what"><b>cortex</b>, memory for ai agents</span>
-              <span class="metric">sub-5ms search</span>
+              <a href="#medai">
+                <span class="when">feb 2024 – jul 2025</span>
+                <span class="what"><b>medai</b> founder &amp; ai engineer</span>
+                <span class="metric">30+ clinics <i>→</i></span>
+              </a>
             </li>
             <li>
-              <span class="when">founder</span>
-              <span class="what"><b>medai</b>, clinical computer vision</span>
-              <span class="metric">30+ clinics</span>
+              <a href="#cortex">
+                <span class="when">open source</span>
+                <span class="what"><b>cortex</b> memory for ai agents</span>
+                <span class="metric">sub-5ms search <i>→</i></span>
+              </a>
             </li>
           </ol>
 
-          <h2 class="label">pick a book <small>(or press 1–5)</small></h2>
-          <nav class="shelf" aria-label="sections">
+          <h2 class="label">pick a book <small>(or press 1–6)</small></h2>
+          <nav class="shelf" aria-label="chapters">
             <a class="spine" href="#work" data-key="1" style="--c: #2f5a45">
               <span class="spine-num">i</span><span class="spine-title">work</span><span class="spine-sub">what i've shipped</span>
             </a>
             <a class="spine" href="#projects" data-key="2" style="--c: #33438a">
               <span class="spine-num">ii</span><span class="spine-title">projects</span><span class="spine-sub">cortex, nikolai, oss</span>
             </a>
-            <a class="spine light" href="#research" data-key="3" style="--c: #e9e4d8">
-              <span class="spine-num">iii</span><span class="spine-title">research</span><span class="spine-sub">safety and memory</span>
+            <a class="spine" href="#education" data-key="3" style="--c: #2f6468">
+              <span class="spine-num">iii</span><span class="spine-title">education</span><span class="spine-sub">built, not memorised</span>
             </a>
-            <a class="spine" href="#life" data-key="4" style="--c: #7a2e22">
-              <span class="spine-num">iv</span><span class="spine-title">life</span><span class="spine-sub">karuna, hoops, tanks</span>
+            <a class="spine light" href="#research" data-key="4" style="--c: #e9e4d8">
+              <span class="spine-num">iv</span><span class="spine-title">research</span><span class="spine-sub">safety and memory</span>
             </a>
-            <a class="spine" href="#contact" data-key="5" style="--c: #8a7a55">
-              <span class="spine-num">v</span><span class="spine-title">contact</span><span class="spine-sub">say hi</span>
+            <a class="spine" href="#life" data-key="5" style="--c: #7a2e22">
+              <span class="spine-num">v</span><span class="spine-title">life</span><span class="spine-sub">karuna, hoops, tanks</span>
+            </a>
+            <a class="spine" href="#contact" data-key="6" style="--c: #8a7a55">
+              <span class="spine-num">vi</span><span class="spine-title">contact</span><span class="spine-sub">say hi</span>
             </a>
             <span class="filler" aria-hidden="true" style="--c: #c9b88f; height: 190px"></span>
-            <span class="filler" aria-hidden="true" style="--c: #4b5d6b; height: 214px"></span>
             <span class="filler lean" aria-hidden="true" style="--c: #a2683f; height: 200px"></span>
             <span class="bookend" aria-hidden="true"></span>
           </nav>
         </main>
 
-        <!-- ============ WORK ============ -->
+        <!-- ================= AVOCA ================= -->
+        <article class="view case" data-view="avoca" data-parent="work" id="avoca">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>experience · jun 2026 – present · remote</span>avoca ai</h1>
+          <p class="role">deployed engineer · yc w23 · applied ai &amp; platform engineering</p>
+          <p class="lede">i own enterprise deployments of real-time voice and sms agents end to end: agent design, crm integrations, typescript backend features, and the observability and incident systems behind them. i sit between customers and core engineering, turning field failures into scoped tickets, design docs and production changes.</p>
+
+          <h2 class="label">by the numbers</h2>
+          <div class="tiles">
+            <div class="tile">
+              <span class="tile-label">scheduling failure codes</span>
+              <span class="tile-value">19</span>
+              <div class="units" data-n="19" data-cols="10" aria-hidden="true"></div>
+              <span class="tile-note">a structured failure taxonomy i built, so every failed booking carries a reason you can query, alert on and fix.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">crm &amp; scheduling systems integrated</span>
+              <span class="tile-value">4+</span>
+              <ul class="chips"><li>servicetitan</li><li>housecall pro</li><li>pestpac</li><li>fieldroutes</li><li>+ others</li></ul>
+              <span class="tile-note">via apis, adapters and webhooks, with platform features that keep agent behaviour consistent across crms.</span>
+            </div>
+          </div>
+
+          <h2 class="label">a call, end to end</h2>
+          <div class="flow">
+            <span class="node">customer<small>call or sms</small></span><i>→</i>
+            <span class="node">voice agent<small>vapi · elevenlabs</small></span><i>→</i>
+            <span class="node">prompts &amp; blueprints<small>knowledge-base variables</small></span><i>→</i>
+            <span class="node">tool calls<small>booking logic</small></span><i>→</i>
+            <span class="node">crm write<small>servicetitan · housecall pro · …</small></span>
+          </div>
+
+          <h2 class="label">when it breaks</h2>
+          <div class="flow">
+            <span class="node">structured telemetry<small>19-code taxonomy</small></span><i>→</i>
+            <span class="node">slis / slos<small>log-based metrics</small></span><i>→</i>
+            <span class="node">datadog monitors<small>logs · apm</small></span><i>→</i>
+            <span class="node">dedupe &amp; severity<small>noise reduction</small></span><i>→</i>
+            <span class="node">incident.io<small>routing</small></span><i>→</i>
+            <span class="node">root cause<small>exact config or commit</small></span>
+          </div>
+
+          <h2 class="label">what i do</h2>
+          <ul class="did">
+            <li><b>enterprise ownership.</b> own multiple enterprise accounts end to end, from agent build and crm integration to launch and production reliability.</li>
+            <li><b>llm agent engineering.</b> configure and deploy production llm agents: prompt and blueprint composition, tool wiring, knowledge-base variables and booking logic across the voice platform layer.</li>
+            <li><b>integrations &amp; platform.</b> integrate agents with crm and scheduling systems, and design platform features that cut manual onboarding work.</li>
+            <li><b>production debugging.</b> debug distributed failures spanning telephony, the llm, tool calls and crm writes using logs, traces, sql and code-path analysis, and attribute regressions to the exact config change or commit.</li>
+            <li><b>backend engineering.</b> ship features and fixes in a typescript monorepo (next.js, postgres, inngest), covered by tests and type checks and merged through pr review.</li>
+            <li><b>observability &amp; on-call.</b> build structured event telemetry, slis/slos, log-based metrics and datadog monitors; design alert dedupe, severity policy and incident.io routing.</li>
+          </ul>
+
+          <h2 class="label">stack</h2>
+          <ul class="facts"><li>typescript</li><li>next.js</li><li>postgres</li><li>inngest</li><li>vapi</li><li>elevenlabs</li><li>twilio</li><li>datadog</li><li>incident.io</li><li>sql</li></ul>
+
+          <nav class="case-nav"><a href="#cortex">← cortex</a><a href="#x100">100x →</a></nav>
+        </article>
+
+        <!-- ================= 100X ================= -->
+        <article class="view case" data-view="x100" data-parent="work" id="x100">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>experience · jul 2025 – may 2026 · remote</span>100x</h1>
+          <p class="role">founding ai engineer · sally, conversational &amp; real-time voice ai</p>
+          <p class="lede">i architected and shipped sally, a full-stack ai sales agent that talks to leads in real time for 30+ u.s. enterprise clients, and the guardrails that keep it honest.</p>
+
+          <h2 class="label">by the numbers</h2>
+          <div class="tiles">
+            <div class="tile">
+              <span class="tile-label">conversations a month</span>
+              <span class="tile-value">50K+</span>
+              <span class="tile-note">real-time sales conversations handled by sally across clients.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">u.s. enterprise clients</span>
+              <span class="tile-value">30+</span>
+              <div class="units" data-n="30" data-cols="10" aria-hidden="true"></div>
+            </div>
+            <div class="tile">
+              <span class="tile-label">lift in lead-to-close conversion</span>
+              <span class="tile-value">38%</span>
+              <div class="bars" role="img" aria-label="conversion indexed to 100 before sally, 138 with sally">
+                <div class="bar-row"><span>before</span><b class="bar muted" style="--w: 72.5%" data-tip="before sally: 100 (indexed)"></b><em>100</em></div>
+                <div class="bar-row"><span>with sally</span><b class="bar" style="--w: 100%" data-tip="with sally: 138 (indexed)"></b><em>138</em></div>
+              </div>
+              <span class="tile-note">conversion indexed to 100 before sally.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">fewer hallucinations</span>
+              <span class="tile-value">60%</span>
+              <div class="bars" role="img" aria-label="hallucination rate indexed to 100 before, 40 after the framework">
+                <div class="bar-row"><span>before</span><b class="bar muted" style="--w: 100%" data-tip="before: 100 (indexed)"></b><em>100</em></div>
+                <div class="bar-row"><span>after</span><b class="bar" style="--w: 40%" data-tip="after the framework: 40 (indexed)"></b><em>40</em></div>
+              </div>
+              <span class="tile-note">guardrail layers, structured output validation and automated regression testing.</span>
+            </div>
+            <div class="tile wide">
+              <span class="tile-label">speech-to-speech latency</span>
+              <span class="tile-value">500–800ms</span>
+              <div class="scale" role="img" aria-label="latency band from 500 to 800 milliseconds on a 0 to 1500 millisecond scale">
+                <div class="scale-track"><b class="scale-band" style="--a: 33.3%; --b: 53.3%" data-tip="500–800ms, caller stops talking → sally starts"></b></div>
+                <div class="scale-ticks"><span>0</span><span>500</span><span>1000</span><span>1500ms</span></div>
+              </div>
+              <span class="tile-note">from the moment a caller stops talking to the moment sally starts, with streaming stt/tts and neural vad turn-taking.</span>
+            </div>
+          </div>
+
+          <h2 class="label">one turn of a sally call</h2>
+          <div class="flow">
+            <span class="node">caller speaks</span><i>→</i>
+            <span class="node">neural vad<small>turn-taking</small></span><i>→</i>
+            <span class="node">streaming stt</span><i>→</i>
+            <span class="node">llm orchestration<small>prompt chaining · tool routing · context windowing</small></span><i>→</i>
+            <span class="node">guardrails<small>structured output validation</small></span><i>→</i>
+            <span class="node">streaming tts</span><i>→</i>
+            <span class="node">caller hears</span>
+          </div>
+          <p class="flow-note">the whole loop: 500–800ms.</p>
+
+          <h2 class="label">also at 100x: enterprise automation</h2>
+          <p>delivered enterprise automation on custom mcp servers with multi-model orchestration (gpt-4, claude, gemini) on fastapi and kubernetes, automating lead processing and crm enrichment to lift client arr/mrr.</p>
+
+          <h2 class="label">what i did</h2>
+          <ul class="did">
+            <li><b>architected and shipped sally</b>, a full-stack ai sales agent: llm orchestration with prompt chaining, tool-use routing, context windowing and eval pipelines.</li>
+            <li><b>real-time voice</b> with streaming stt/tts and neural vad turn-taking at 500–800ms speech-to-speech latency, driving a 38% lift in lead-to-close conversion.</li>
+            <li><b>hallucination-reduction framework</b>: guardrail layers, structured output validation and automated regression testing, cutting hallucination rates by 60%.</li>
+            <li><b>infrastructure</b> on aws with distributed tracing, ci/cd and docker/kubernetes.</li>
+          </ul>
+
+          <h2 class="label">stack</h2>
+          <ul class="facts"><li>python</li><li>langgraph</li><li>langchain</li><li>fastapi</li><li>streaming stt / tts</li><li>neural vad</li><li>mcp</li><li>gpt-4 · claude · gemini</li><li>aws</li><li>docker</li><li>kubernetes</li></ul>
+
+          <nav class="case-nav"><a href="#avoca">← avoca ai</a><a href="#medai">medai →</a></nav>
+        </article>
+
+        <!-- ================= MEDAI ================= -->
+        <article class="view case" data-view="medai" data-parent="work" id="medai">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>founder · feb 2024 – jul 2025</span>medai</h1>
+          <p class="role">founder &amp; ai engineer · clinical computer vision</p>
+          <p class="lede">computer vision that clinicians actually used: diabetic retinopathy screening and cbct-based dental implant planning, built and clinically deployed across 30+ clinics.</p>
+
+          <h2 class="label">by the numbers</h2>
+          <div class="tiles">
+            <div class="tile">
+              <span class="tile-label">screening accuracy</span>
+              <span class="tile-value">99%+</span>
+              <div class="meter" role="img" aria-label="99 percent"><b style="--w: 99%" data-tip="99%+ accuracy on diabetic retinopathy screening"></b></div>
+              <span class="tile-note">diabetic retinopathy screening.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">retinal images trained on</span>
+              <span class="tile-value">50K+</span>
+              <span class="tile-note">with gan augmentation to widen the training set.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">lower per-patient cost</span>
+              <span class="tile-value">55%</span>
+              <div class="bars" role="img" aria-label="per-patient cost indexed to 100 before, 45 with medai">
+                <div class="bar-row"><span>before</span><b class="bar muted" style="--w: 100%" data-tip="before: 100 (indexed)"></b><em>100</em></div>
+                <div class="bar-row"><span>medai</span><b class="bar" style="--w: 45%" data-tip="with medai: 45 (indexed)"></b><em>45</em></div>
+              </div>
+              <span class="tile-note">per-patient screening cost, indexed to 100.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">clinics using it</span>
+              <span class="tile-value">30+</span>
+              <div class="units" data-n="30" data-cols="10" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <h2 class="label">retinopathy screening</h2>
+          <div class="flow">
+            <span class="node">retinal image</span><i>→</i>
+            <span class="node">gan augmentation<small>50k+ images</small></span><i>→</i>
+            <span class="node">efficientnet<small>classifier</small></span><i>→</i>
+            <span class="node">dr grade</span><i>→</i>
+            <span class="node">clinician</span>
+          </div>
+
+          <h2 class="label">dental implant planning</h2>
+          <div class="flow">
+            <span class="node">cbct scan</span><i>→</i>
+            <span class="node">3d model<small>vtk</small></span><i>→</i>
+            <span class="node">ml-assisted plan</span><i>→</i>
+            <span class="node">dentist</span>
+          </div>
+
+          <h2 class="label">what i did</h2>
+          <ul class="did">
+            <li><b>founded medai</b> and built its computer vision from model to clinic.</li>
+            <li><b>diabetic retinopathy screening</b> with efficientnet and gan augmentation on 50k+ retinal images, reaching 99%+ accuracy.</li>
+            <li><b>clinically deployed</b> across 30+ clinics, with 55% lower per-patient cost.</li>
+            <li><b>cbct-based dental implant planning</b> for dentists.</li>
+          </ul>
+
+          <h2 class="label">stack</h2>
+          <ul class="facts"><li>computer vision</li><li>efficientnet</li><li>gans</li><li>vtk</li><li>python</li></ul>
+
+          <nav class="case-nav"><a href="#x100">← 100x</a><a href="#cortex">cortex →</a></nav>
+        </article>
+
+        <!-- ================= CORTEX ================= -->
+        <article class="view case" data-view="cortex" data-parent="projects" id="cortex">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>open source · building</span>cortex</h1>
+          <p class="role">persistent semantic memory layer for autonomous ai agents</p>
+          <p class="lede">an open-source, mcp-native memory server. agents remember across sessions, link what they learn into a knowledge graph, and consolidate experiences into lasting memory.</p>
+
+          <h2 class="label">by the numbers</h2>
+          <div class="tiles">
+            <div class="tile">
+              <span class="tile-label">search latency</span>
+              <span class="tile-value">&lt;5ms</span>
+              <span class="tile-note">hybrid retrieval over the whole memory store.</span>
+            </div>
+            <div class="tile">
+              <span class="tile-label">steps in memory consolidation</span>
+              <span class="tile-value">7</span>
+              <div class="steps" aria-hidden="true"><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b></div>
+              <span class="tile-note">episodic memories consolidate into lasting knowledge.</span>
+            </div>
+          </div>
+
+          <h2 class="label">how a memory is found</h2>
+          <div class="flow">
+            <span class="node">query</span><i>→</i>
+            <span class="node stack"><span>sqlite-vec<small>dense</small></span><span>fts5 bm25<small>sparse</small></span></span><i>→</i>
+            <span class="node">reciprocal rank fusion</span><i>→</i>
+            <span class="node">cross-encoder<small>rerank</small></span><i>→</i>
+            <span class="node">memories<small>&lt;5ms</small></span>
+          </div>
+
+          <h2 class="label">how a memory is stored</h2>
+          <div class="flow">
+            <span class="node">new memory</span><i>→</i>
+            <span class="node">spacy ner<small>entities</small></span><i>→</i>
+            <span class="node">jaro-winkler<small>entity resolution</small></span><i>→</i>
+            <span class="node">knowledge graph<small>self-linking</small></span><i>→</i>
+            <span class="node">episodic memory<small>7-step consolidation</small></span>
+          </div>
+
+          <h2 class="label">stack</h2>
+          <ul class="facts"><li>python</li><li>fastmcp</li><li>bge-small-en</li><li>sqlite</li><li>sqlite-vec</li><li>fts5</li><li>spacy</li><li>claude agent sdk</li></ul>
+
+          <p class="more">this is where my <a href="#research">research interests</a> start: what happens when an agent carries its past forward?</p>
+
+          <nav class="case-nav"><a href="#medai">← medai</a><a href="#avoca">avoca ai →</a></nav>
+        </article>
+
+        <!-- ================= WORK ================= -->
         <article class="view" data-view="work" id="work">
           <a class="back" href="#" data-home>← back</a>
           <h1 class="page-title"><span>chapter i</span>work</h1>
           <p class="lede">i don't build demos. i build ai systems that run in production.</p>
 
-          <div class="entry">
-            <div class="entry-head"><span class="tag">now</span><h2>deployment engineer · <a href="https://avoca.ai">avoca.ai</a></h2></div>
-            <p>taking ai systems from prototype to production for real customers.</p>
-          </div>
+          <a class="entry entry-link" href="#avoca">
+            <div class="entry-head"><span class="tag">jun 2026 – now</span><h2>avoca ai · deployed engineer</h2></div>
+            <p>enterprise deployments of real-time voice and sms agents for a yc w23 company: agent design, crm integrations, typescript backend and the observability behind it.</p>
+            <span class="read">read the full story →</span>
+          </a>
 
-          <div class="entry">
-            <div class="entry-head"><span class="tag">100x.inc</span><h2>sally · <a href="https://100x.inc">real-time voice ai</a></h2></div>
-            <p>a voice ai platform for enterprise, serving 50k+ conversations a month across 30+ u.s. enterprise clients.</p>
-            <ul class="facts">
-              <li>sub-800ms latency end to end</li>
-              <li>streaming stt / tts</li>
-              <li>langgraph orchestration</li>
-              <li>38% lift in conversion</li>
-            </ul>
-          </div>
+          <a class="entry entry-link" href="#x100">
+            <div class="entry-head"><span class="tag">jul 2025 – may 2026</span><h2>100x · founding ai engineer</h2></div>
+            <p>built sally, a real-time voice ai sales agent: 50k+ conversations a month, 30+ u.s. enterprise clients, 38% conversion lift, 60% fewer hallucinations.</p>
+            <span class="read">read the full story →</span>
+          </a>
 
-          <div class="entry">
-            <div class="entry-head"><span class="tag">building</span><h2>cortex · memory for ai agents</h2></div>
-            <p>a persistent semantic memory layer for autonomous agents, exposed as an mcp server.</p>
-            <ul class="facts">
-              <li>hybrid retrieval</li>
-              <li>self-linking knowledge graphs</li>
-              <li>episodic memory</li>
-              <li>sub-5ms search</li>
-            </ul>
-          </div>
-
-          <div class="entry">
-            <div class="entry-head"><span class="tag">founder</span><h2>medai · clinical computer vision</h2></div>
-            <p>shipped computer vision that clinicians actually adopted, in 30+ healthcare facilities.</p>
-            <ul class="facts">
-              <li>diabetic retinopathy screening, 99%+ accuracy</li>
-              <li>cbct-based dental implant planning</li>
-              <li>production ml inference</li>
-              <li>55% cost reduction</li>
-            </ul>
-          </div>
-
-          <div class="entry">
-            <div class="entry-head"><span class="tag">earlier</span><h2>pantrypal · demand forecasting</h2></div>
-            <p>real-time demand forecasting for inventory optimization, using lstm and gradient boosting ensembles.</p>
-          </div>
+          <a class="entry entry-link" href="#medai">
+            <div class="entry-head"><span class="tag">feb 2024 – jul 2025</span><h2>medai · founder &amp; ai engineer</h2></div>
+            <p>clinical computer vision in 30+ clinics: retinopathy screening at 99%+ accuracy and 55% lower per-patient cost, plus cbct-based implant planning.</p>
+            <span class="read">read the full story →</span>
+          </a>
 
           <a class="next" href="#projects">next chapter: projects →</a>
         </article>
 
-        <!-- ============ PROJECTS ============ -->
+        <!-- ================= PROJECTS ================= -->
         <article class="view" data-view="projects" id="projects">
           <a class="back" href="#" data-home>← back</a>
           <h1 class="page-title"><span>chapter ii</span>projects</h1>
           <p class="lede">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>. here's what i can show.</p>
 
           <div class="cards">
-            <a class="card" href="https://github.com/joetomryan">
-              <span class="tag">building</span>
+            <a class="card" href="#cortex">
+              <span class="tag">open source</span>
               <h2>cortex</h2>
-              <p>mcp-native semantic memory server for ai agents.</p>
-              <span class="go">↗</span>
+              <p>mcp-native semantic memory server for ai agents. hybrid retrieval, sub-5ms search.</p>
+              <span class="go">→</span>
             </a>
             <a class="card" href="https://github.com/joetomryan">
               <span class="tag hot">in development</span>
               <h2>nikolai</h2>
               <p>a multi-agent ai chief of staff. claude subagents, mcp and the a2a protocol.</p>
+              <span class="go">↗</span>
+            </a>
+            <a class="card" href="https://github.com/joetomryan">
+              <span class="tag">forecasting</span>
+              <h2>pantrypal</h2>
+              <p>real-time demand forecasting with lstm + gradient boosting ensembles, reducing retail food waste.</p>
               <span class="go">↗</span>
             </a>
             <a class="card" href="https://github.com/joetomryan/voice-ai-architecture">
@@ -205,13 +448,60 @@
             </a>
           </div>
 
+          <a class="next" href="#education">next chapter: education →</a>
+        </article>
+
+        <!-- ================= EDUCATION ================= -->
+        <article class="view" data-view="education" id="education">
+          <a class="back" href="#" data-home>← back</a>
+          <h1 class="page-title"><span>chapter iii</span>education</h1>
+          <p class="lede">b.e. computer science · sir m. visvesvaraya institute of technology, bangalore · 2022 – 2026</p>
+
+          <p class="prose">i had a good college life: friends, the basketball team, late nights that had nothing to do with exams. but most of my time didn't go into studying for grades. it went into building things real people used.</p>
+          <p class="prose">i believed then, and still do, that you learn more from shipping software and watching it fail than from any textbook. so i spent college building startups and real-time systems, and spending weekends at hackathons.</p>
+
+          <h2 class="label">four years, side by side</h2>
+          <div class="timeline" role="img" aria-label="college from 2022 to 2026, with medai from february 2024 to july 2025, 100x from july 2025 to may 2026 and avoca ai from june 2026">
+            <div class="tl-row"><span>college</span><div class="tl-track"><b class="muted" style="--a: 0%; --b: 88%" data-tip="b.e. computer science, 2022 – 2026"></b></div></div>
+            <div class="tl-row"><span>medai</span><div class="tl-track"><b style="--a: 41.7%; --b: 70%" data-tip="founded medai · feb 2024 – jul 2025"></b></div></div>
+            <div class="tl-row"><span>100x</span><div class="tl-track"><b style="--a: 70%; --b: 87.5%" data-tip="founding ai engineer · jul 2025 – may 2026"></b></div></div>
+            <div class="tl-row"><span>avoca ai</span><div class="tl-track"><b style="--a: 88.3%; --b: 95%" data-tip="deployed engineer · jun 2026 – now"></b></div></div>
+            <div class="tl-axis"><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span><span>2027</span></div>
+          </div>
+          <p class="flow-note">half my degree overlapped with running a company or building one.</p>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">startups</span><h2>building, not memorising</h2></div>
+            <p>i founded medai while in college and took clinical computer vision into 30+ clinics. in my final year i joined 100x as a founding ai engineer and shipped a voice agent handling 50k+ conversations a month. both taught me more than any semester did.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">won several</span><h2>hackathons</h2></div>
+            <p>a lot of my weekends went to hackathons, and i won multiple of them. win or lose, every one forced me to ship something real in a weekend, which is a skill no lecture teaches.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">philosophy</span><h2>learning through failure</h2></div>
+            <p>grades measure what you remember. building measures what you can do. i'd rather break a production system at 2am and learn exactly why than ace a test on it.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">campus</span><h2>outside the classroom</h2></div>
+            <p>played basketball for the college team and started <a href="#life">karuna</a>, a drive to get puppies vaccinated.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head"><span class="tag">certified</span><h2>certifications</h2></div>
+            <ul class="facts"><li>anthropic claude ai architect</li><li>anthropic claude developer</li><li>ai ethics &amp; safety</li><li>google ai certification</li></ul>
+          </div>
+
           <a class="next" href="#research">next chapter: research →</a>
         </article>
 
-        <!-- ============ RESEARCH ============ -->
+        <!-- ================= RESEARCH ================= -->
         <article class="view" data-view="research" id="research">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter iii</span>research</h1>
+          <h1 class="page-title"><span>chapter iv</span>research</h1>
           <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
 
           <div class="entry">
@@ -226,7 +516,7 @@
 
           <div class="entry">
             <div class="entry-head"><span class="tag">interest</span><h2>consciousness through memory</h2></div>
-            <p>cortex started as infrastructure: give agents memory that persists. but persistent memory raises a bigger question. if a system carries its past forward, reflects on it and changes because of it, what is it becoming? i think deep memory architectures are one of the more concrete paths toward something like machine consciousness.</p>
+            <p><a href="#cortex">cortex</a> started as infrastructure: give agents memory that persists. but persistent memory raises a bigger question. if a system carries its past forward, reflects on it and changes because of it, what is it becoming? i think deep memory architectures are one of the more concrete paths toward something like machine consciousness.</p>
             <ul class="questions">
               <li>what is the smallest memory architecture that gives an agent a sense of continuity over time?</li>
               <li>how should episodic memories consolidate into semantic knowledge, the way they do in us?</li>
@@ -237,15 +527,15 @@
           <a class="next" href="#life">next chapter: life →</a>
         </article>
 
-        <!-- ============ LIFE ============ -->
+        <!-- ================= LIFE ================= -->
         <article class="view" data-view="life" id="life">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter iv</span>life</h1>
+          <h1 class="page-title"><span>chapter v</span>life</h1>
           <p class="lede">what i do when i'm not deploying things. (sometimes still deploying things.)</p>
 
           <div class="entry">
             <div class="entry-head"><span class="tag">obsession</span><h2>building startups</h2></div>
-            <p>my favourite hobby is also my work. i love building things at scale that help a lot of people, whether that's screening in 30+ clinics or thousands of conversations a month.</p>
+            <p>my favourite hobby is also my work. i love building things at scale that help a lot of people, whether that's screening in 30+ clinics or 50k+ conversations a month.</p>
           </div>
 
           <div class="entry">
@@ -279,11 +569,11 @@
           <a class="next" href="#contact">next chapter: contact →</a>
         </article>
 
-        <!-- ============ CONTACT ============ -->
+        <!-- ================= CONTACT ================= -->
         <article class="view" data-view="contact" id="contact">
           <a class="back" href="#" data-home>← back</a>
-          <h1 class="page-title"><span>chapter v</span>contact</h1>
-          <p class="lede">building something, hiring, or thinking about the same questions? write to me.</p>
+          <h1 class="page-title"><span>chapter vi</span>contact</h1>
+          <p class="lede">building something, hiring, or thinking about the same questions? write to me. i'm in bangalore, working remote.</p>
 
           <button class="copy" data-email="joetomryan7@gmail.com">
             <span class="copy-text">joetomryan7@gmail.com</span>
@@ -308,6 +598,7 @@
     </div>
   </div>
 
+  <div class="tip" role="tooltip" aria-hidden="true"></div>
   <script src="/app.js" defer></script>
 </body>
 </html>
