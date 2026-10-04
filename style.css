@@ -1,6 +1,7 @@
 @font-face { font-family: "Lora"; font-weight: 400; font-style: normal; font-display: swap; src: url("/fonts/lora-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Lora"; font-weight: 400; font-style: italic; font-display: swap; src: url("/fonts/lora-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "Lora"; font-weight: 500; font-style: normal; font-display: swap; src: url("/fonts/lora-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lora"; font-weight: 500; font-style: italic; font-display: swap; src: url("/fonts/lora-latin-500-italic.woff2") format("woff2"); }
 @font-face { font-family: "Lora"; font-weight: 600; font-style: normal; font-display: swap; src: url("/fonts/lora-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "Lora"; font-weight: 700; font-style: normal; font-display: swap; src: url("/fonts/lora-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
@@ -10,15 +11,17 @@
 
 :root {
   color-scheme: light;
-  --desk: #ebe4d6;
-  --sheet: #fbf8f1;
-  --ink: #1f1c18;
-  --dim: #7d7466;
-  --rule: #d9d0bf;
-  --link: #2c5aa0;
+  /* an aged book: yellowed paper, brown-black ink */
+  --paper: #f1e5c9;
+  --desk: #e7d6b2;
+  --sheet: #f4eacf;
+  --ink: #1d160e;
+  --dim: #5b4e3c;
+  --rule: #cdb994;
+  --link: #2b4f86;
   --accent: #8b2e1f;
-  --water: #dde8e0;
-  --track: #ead7d0;
+  --water: #d6dccb;
+  --track: #dcc2ad;
   --border: 2px solid var(--ink);
   --shadow: 8px 8px 0 var(--ink);
   --serif: "Lora", Georgia, "Times New Roman", serif;
@@ -33,10 +36,16 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--sheet);
+  min-height: 100vh;
   color: var(--ink);
-  font: 400 18px/1.7 var(--serif);
-  -webkit-font-smoothing: antialiased;
+  font: 500 18px/1.7 var(--serif);
+  /* paper grain and darker, foxed edges like an old page */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0 0.12 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 40%, rgba(255, 248, 225, 0.55) 0%, rgba(255, 248, 225, 0) 60%),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(120, 82, 35, 0.16) 100%),
+    var(--paper);
+  background-attachment: fixed;
 }
 
 a { color: var(--link); text-decoration: none; }
@@ -155,7 +164,7 @@ kbd {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.label small { font: 400 italic 14px var(--serif); text-transform: none; letter-spacing: 0; color: var(--dim); }
+.label small { font: 500 italic 14px var(--serif); text-transform: none; letter-spacing: 0; color: var(--dim); }
 
 .rows { list-style: none; margin: 0 0 56px; padding: 0; border-top: var(--border); border-bottom: var(--border); }
 .rows li + li { border-top: 1px solid var(--rule); }
@@ -240,7 +249,7 @@ kbd {
   right: 8px;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font: 400 italic 12px var(--serif);
+  font: 500 italic 12px var(--serif);
   opacity: 0;
   transition: opacity 0.2s 0.1s;
 }
@@ -286,7 +295,7 @@ kbd {
 .page-title span {
   display: block;
   margin-bottom: 14px;
-  font: 400 italic 16px var(--serif);
+  font: 500 italic 16px var(--serif);
   letter-spacing: 0;
   color: var(--accent);
 }
@@ -391,7 +400,7 @@ kbd {
   70% { transform: translateY(-18px) rotate(300deg); }
   100% { transform: translateY(0) rotate(360deg); }
 }
-.dim { color: var(--dim); font: italic 14px var(--serif); }
+.dim { color: var(--dim); font: 500 italic 14px var(--serif); }
 
 .tank {
   position: relative;
@@ -459,7 +468,7 @@ kbd {
 .copy:hover { background: var(--desk); }
 .copy:active { transform: translate(6px, 6px); box-shadow: none; }
 .copy-text { display: block; font: 700 clamp(20px, 4vw, 36px)/1.15 var(--serif); word-break: break-all; }
-.copy-hint { display: block; margin-top: 6px; font: italic 14px var(--serif); color: var(--dim); }
+.copy-hint { display: block; margin-top: 6px; font: 500 italic 14px var(--serif); color: var(--dim); }
 .stamp {
   position: absolute;
   top: 50%;
@@ -488,7 +497,7 @@ kbd {
 
 /* ---------- experience case pages ---------- */
 
-.role { margin: 10px 0 0; font: 400 italic 18px var(--serif); color: var(--ink); }
+.role { margin: 10px 0 0; font: 500 italic 18px var(--serif); color: var(--ink); }
 
 .case .label, article .prose + .label { margin-top: 44px; }
 .case > p { max-width: 680px; }
@@ -660,7 +669,7 @@ kbd {
   margin-top: 64px;
   padding-top: 16px;
   border-top: 1px solid var(--rule);
-  font: italic 14px var(--serif);
+  font: 500 italic 14px var(--serif);
   color: var(--dim);
 }
 
