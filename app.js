@@ -66,12 +66,6 @@
     if (e.key === 'Escape' && location.hash) goHome();
   });
 
-  /* ---------- name: every letter jumps on hover ---------- */
-
-  document.querySelectorAll('.name .word').forEach((word) => {
-    word.innerHTML = [...word.textContent].map((c) => `<span class="ch" aria-hidden="true">${c}</span>`).join('');
-  });
-
   /* ---------- click anywhere: a few drops of ink ---------- */
 
   if (!reduceMotion) {
