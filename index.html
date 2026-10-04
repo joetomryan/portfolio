@@ -4,128 +4,296 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>joe tom ryan</title>
-  <meta name="description" content="deployment engineer at avoca.ai. i build ai systems that run in production.">
+  <meta name="description" content="deployment engineer at avoca.ai. i build ai systems that run in production: voice, memory, vision.">
   <meta property="og:title" content="joe tom ryan">
   <meta property="og:description" content="deployment engineer at avoca.ai. i build ai systems that run in production.">
   <meta property="og:url" content="https://joetomryan.com">
   <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#f1efe8">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>joe tom ryan</h1>
-      <nav>
-        <a href="#journey">journey</a>
-        <a href="#work">work</a>
-        <a href="#outside">outside work</a>
-        <a href="#contact">contact</a>
-      </nav>
-    </header>
+  <div class="wipe" aria-hidden="true"></div>
 
-    <section class="intro">
-      <p>hey, i'm joe. i'm a deployment engineer at <a href="https://avoca.ai">avoca.ai</a>.</p>
-      <p>i don't build demos. i build ai systems that run in production: voice agents that hold real conversations, memory for autonomous agents, and computer vision that clinics actually use.</p>
+  <header class="bar">
+    <a class="logo" href="#" data-home>jtr</a>
+    <span class="status"><i></i>shipping</span>
+    <span class="hint">press <kbd>1</kbd>–<kbd>5</kbd> · <kbd>esc</kbd> home</span>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <main class="view" data-view="home">
+    <section class="hero">
+      <h1 class="name" aria-label="joe tom ryan">
+        <span class="word">joe</span> <span class="word">tom</span> <span class="word">ryan</span>
+      </h1>
+      <p class="tagline">deployment engineer at <a href="https://avoca.ai">avoca.ai</a>.<br>i build ai systems that run in production: <mark>voice</mark>, <mark>memory</mark>, <mark>vision</mark>.</p>
     </section>
 
-    <section id="journey">
-      <h2>journey</h2>
-      <ol class="timeline">
+    <section class="block">
+      <h2 class="label">experience</h2>
+      <ol class="rows">
         <li>
           <span class="when">now</span>
-          <div>
-            <h3>deployment engineer · <a href="https://avoca.ai">avoca.ai</a></h3>
-            <p>taking ai systems from prototype to production for real customers.</p>
-          </div>
+          <span class="what"><b>deployment engineer</b> @ avoca.ai</span>
+          <span class="metric">ai to production</span>
         </li>
         <li>
-          <span class="when">last year</span>
-          <div>
-            <h3>building at <a href="https://100x.inc">100x.inc</a></h3>
-            <p>built <a href="https://100x.inc">sally</a>, a real-time voice ai platform serving 50k+ conversations a month across 30+ u.s. enterprise clients. sub-800ms latency, streaming stt/tts, langgraph orchestration, and a 38% lift in conversion.</p>
-            <p>alongside it, built <a href="https://github.com/joetomryan">cortex</a>, a persistent semantic memory layer for autonomous ai agents.</p>
-          </div>
+          <span class="when">100x.inc</span>
+          <span class="what"><b>sally</b> real-time voice ai</span>
+          <span class="metric">50k+ convos / mo</span>
         </li>
         <li>
-          <span class="when">before</span>
-          <div>
-            <h3>founder · medai</h3>
-            <p>shipped clinically adopted computer vision to 30+ healthcare facilities: diabetic retinopathy screening at 99%+ accuracy, cbct-based dental implant planning, and production ml inference that cut costs by 55%.</p>
-          </div>
+          <span class="when">building</span>
+          <span class="what"><b>cortex</b> memory for ai agents</span>
+          <span class="metric">sub-5ms search</span>
         </li>
         <li>
-          <span class="when">start</span>
-          <div>
-            <h3>first projects</h3>
-            <p>built <a href="https://github.com/joetomryan">pantrypal</a>, real-time demand forecasting with lstm and gradient boosting ensembles for inventory optimization.</p>
-          </div>
+          <span class="when">founder</span>
+          <span class="what"><b>medai</b> clinical computer vision</span>
+          <span class="metric">30+ clinics</span>
         </li>
       </ol>
     </section>
 
-    <section id="work">
-      <h2>work</h2>
-      <ul class="list">
-        <li>
-          <a href="https://github.com/joetomryan">cortex</a>
-          <span>mcp-native semantic memory server for ai agents. hybrid retrieval, self-linking knowledge graphs, episodic memory, sub-5ms search.</span>
-        </li>
-        <li>
-          <a href="https://100x.inc">sally</a>
-          <span>real-time voice ai for enterprise. 50k+ conversations a month.</span>
-        </li>
-        <li>
-          <a href="https://github.com/joetomryan">nikolai</a>
-          <span>multi-agent ai chief of staff. claude subagents, mcp and the a2a protocol. in development.</span>
-        </li>
-        <li>
-          <a href="https://github.com/joetomryan">medai</a>
-          <span>retinopathy screening and dental implant planning used in 30+ clinics.</span>
-        </li>
-      </ul>
-
-      <h3 class="sub">open source</h3>
-      <ul class="list">
-        <li>
-          <a href="https://github.com/joetomryan/voice-ai-architecture">voice-ai-architecture</a>
-          <span>reference design for real-time voice ai.</span>
-        </li>
-        <li>
-          <a href="https://github.com/joetomryan/multi-agent-patterns">multi-agent-patterns</a>
-          <span>reusable orchestration patterns.</span>
-        </li>
-        <li>
-          <a href="https://github.com/joetomryan/retinopathy-classifier">retinopathy-classifier</a>
-          <span>efficientnet + gans.</span>
-        </li>
-        <li>
-          <a href="https://github.com/joetomryan/dental-implant-planner">dental-implant-planner</a>
-          <span>3d planning with vtk and ml.</span>
-        </li>
-      </ul>
-      <p class="note">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>.</p>
+    <section class="block numbers">
+      <div><b data-count="50" data-suffix="k+">50k+</b><span>voice conversations a month</span></div>
+      <div><b data-count="800" data-prefix="&lt;" data-suffix="ms">&lt;800ms</b><span>voice latency</span></div>
+      <div><b data-count="38" data-suffix="%">38%</b><span>conversion lift</span></div>
+      <div><b data-count="99" data-suffix="%+">99%+</b><span>screening accuracy</span></div>
     </section>
 
-    <section id="outside">
-      <h2>outside work</h2>
-      <!-- TODO: replace with joe's real hobbies -->
-      <ul class="list">
-        <li><b>hobby one</b><span>a line about it.</span></li>
-        <li><b>hobby two</b><span>a line about it.</span></li>
-        <li><b>hobby three</b><span>a line about it.</span></li>
+    <section class="block">
+      <h2 class="label">stack <small>(click to light up)</small></h2>
+      <ul class="chips">
+        <li><button>python</button></li>
+        <li><button>langgraph</button></li>
+        <li><button>mcp</button></li>
+        <li><button>a2a</button></li>
+        <li><button>claude</button></li>
+        <li><button>multi-agent systems</button></li>
+        <li><button>streaming stt / tts</button></li>
+        <li><button>hybrid retrieval</button></li>
+        <li><button>knowledge graphs</button></li>
+        <li><button>computer vision</button></li>
+        <li><button>efficientnet</button></li>
+        <li><button>gans</button></li>
+        <li><button>vtk</button></li>
+        <li><button>lstm</button></li>
+        <li><button>gradient boosting</button></li>
       </ul>
     </section>
 
-    <section id="contact">
-      <h2>contact</h2>
-      <p>best way to reach me is <a href="mailto:joetomryan7@gmail.com">email</a>. also on <a href="https://linkedin.com/in/joetomryan">linkedin</a>, <a href="https://twitter.com/joetomryan">twitter</a> and <a href="https://github.com/joetomryan">github</a>.</p>
-    </section>
-
-    <footer>joetomryan.com</footer>
+    <nav class="columns" aria-label="sections">
+      <a href="#work" data-key="1"><span class="num">01</span><span class="title">work</span><span class="teaser">everything i've shipped, in order</span><span class="arrow">→</span></a>
+      <a href="#projects" data-key="2"><span class="num">02</span><span class="title">projects</span><span class="teaser">cortex, nikolai and open source</span><span class="arrow">→</span></a>
+      <a href="#research" data-key="3"><span class="num">03</span><span class="title">research</span><span class="teaser">ai safety and machine memory</span><span class="arrow">→</span></a>
+      <a href="#life" data-key="4"><span class="num">04</span><span class="title">life</span><span class="teaser">karuna, basketball, aquascaping</span><span class="arrow">→</span></a>
+      <a href="#contact" data-key="5"><span class="num">05</span><span class="title">contact</span><span class="teaser">say hi</span><span class="arrow">→</span></a>
+    </nav>
   </main>
+
+  <!-- ============ WORK ============ -->
+  <article class="view page" data-view="work" id="work">
+    <a class="back" href="#" data-home>← back</a>
+    <h1 class="page-title"><span>01</span>work</h1>
+    <p class="lede">i don't build demos. i build ai systems that run in production.</p>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">now</span><h2>deployment engineer · <a href="https://avoca.ai">avoca.ai</a></h2></div>
+      <p>taking ai systems from prototype to production for real customers.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">100x.inc</span><h2>sally · <a href="https://100x.inc">real-time voice ai</a></h2></div>
+      <p>a voice ai platform for enterprise, serving 50k+ conversations a month across 30+ u.s. enterprise clients.</p>
+      <ul class="facts">
+        <li>sub-800ms latency end to end</li>
+        <li>streaming stt / tts</li>
+        <li>langgraph orchestration</li>
+        <li>38% lift in conversion</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">building</span><h2>cortex · memory for ai agents</h2></div>
+      <p>a persistent semantic memory layer for autonomous agents, exposed as an mcp server.</p>
+      <ul class="facts">
+        <li>hybrid retrieval</li>
+        <li>self-linking knowledge graphs</li>
+        <li>episodic memory</li>
+        <li>sub-5ms search</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">founder</span><h2>medai · clinical computer vision</h2></div>
+      <p>shipped computer vision that clinicians actually adopted, in 30+ healthcare facilities.</p>
+      <ul class="facts">
+        <li>diabetic retinopathy screening, 99%+ accuracy</li>
+        <li>cbct-based dental implant planning</li>
+        <li>production ml inference</li>
+        <li>55% cost reduction</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">earlier</span><h2>pantrypal · demand forecasting</h2></div>
+      <p>real-time demand forecasting for inventory optimization, using lstm and gradient boosting ensembles.</p>
+    </div>
+
+    <a class="next" href="#projects">next: projects →</a>
+  </article>
+
+  <!-- ============ PROJECTS ============ -->
+  <article class="view page" data-view="projects" id="projects">
+    <a class="back" href="#" data-home>← back</a>
+    <h1 class="page-title"><span>02</span>projects</h1>
+    <p class="lede">most production work lives in private repos at <a href="https://github.com/100xinc">100x.inc</a>. here's what i can show.</p>
+
+    <div class="cards">
+      <a class="card" href="https://github.com/joetomryan">
+        <span class="tag">building</span>
+        <h2>cortex</h2>
+        <p>mcp-native semantic memory server for ai agents.</p>
+        <span class="go">↗</span>
+      </a>
+      <a class="card" href="https://github.com/joetomryan">
+        <span class="tag hot">in development</span>
+        <h2>nikolai</h2>
+        <p>a multi-agent ai chief of staff. claude subagents, mcp and the a2a protocol.</p>
+        <span class="go">↗</span>
+      </a>
+      <a class="card" href="https://github.com/joetomryan/voice-ai-architecture">
+        <span class="tag">open source</span>
+        <h2>voice-ai-architecture</h2>
+        <p>reference design for real-time voice ai.</p>
+        <span class="go">↗</span>
+      </a>
+      <a class="card" href="https://github.com/joetomryan/multi-agent-patterns">
+        <span class="tag">open source</span>
+        <h2>multi-agent-patterns</h2>
+        <p>reusable orchestration patterns for agent systems.</p>
+        <span class="go">↗</span>
+      </a>
+      <a class="card" href="https://github.com/joetomryan/retinopathy-classifier">
+        <span class="tag">open source</span>
+        <h2>retinopathy-classifier</h2>
+        <p>diabetic retinopathy detection with efficientnet + gans.</p>
+        <span class="go">↗</span>
+      </a>
+      <a class="card" href="https://github.com/joetomryan/dental-implant-planner">
+        <span class="tag">open source</span>
+        <h2>dental-implant-planner</h2>
+        <p>3d implant planning with vtk and ml.</p>
+        <span class="go">↗</span>
+      </a>
+    </div>
+
+    <a class="next" href="#research">next: research →</a>
+  </article>
+
+  <!-- ============ RESEARCH ============ -->
+  <article class="view page" data-view="research" id="research">
+    <a class="back" href="#" data-home>← back</a>
+    <h1 class="page-title"><span>03</span>research</h1>
+    <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">interest</span><h2>ai safety</h2></div>
+      <p>i ship agents that act on their own in front of real customers. that makes safety a practical question for me, not an abstract one: how do you know what an agent will do, and how do you keep it that way?</p>
+      <ul class="questions">
+        <li>how do you evaluate an agent whose behaviour depends on what it remembers?</li>
+        <li>can an agent's memory be audited, corrected and made to forget?</li>
+        <li>when should an autonomous system stop and hand control back to a human?</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">interest</span><h2>consciousness through memory</h2></div>
+      <p>cortex started as infrastructure: give agents memory that persists. but persistent memory raises a bigger question. if a system carries its past forward, reflects on it and changes because of it, what is it becoming? i think deep memory architectures are one of the more concrete paths toward something like machine consciousness.</p>
+      <ul class="questions">
+        <li>what is the smallest memory architecture that gives an agent a sense of continuity over time?</li>
+        <li>how should episodic memories consolidate into semantic knowledge, the way they do in us?</li>
+        <li>can an agent build a model of itself from its own history?</li>
+      </ul>
+    </div>
+
+    <a class="next" href="#life">next: life →</a>
+  </article>
+
+  <!-- ============ LIFE ============ -->
+  <article class="view page" data-view="life" id="life">
+    <a class="back" href="#" data-home>← back</a>
+    <h1 class="page-title"><span>04</span>life</h1>
+    <p class="lede">what i do when i'm not deploying things. (sometimes still deploying things.)</p>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">obsession</span><h2>building startups</h2></div>
+      <p>my favourite hobby is also my work. i love building things at scale that help a lot of people, whether that's screening in 30+ clinics or thousands of conversations a month.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">founded</span><h2>karuna</h2></div>
+      <p>karuna is a drive i started to get puppies vaccinated, so they survive their first months without catching parvo, lepto and other diseases that kill so many of them early.</p>
+      <div class="paws" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">court</span><h2>basketball</h2></div>
+      <p>played for my college team. <button class="ball" aria-label="bounce the ball">🏀</button> <small class="dim">(tap it)</small></p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">underwater</span><h2>aquascaping</h2></div>
+      <p>building nature underwater. what fascinates me is the science: managing nitrates, the nitrogen cycle and co2 so plants grow, and watching a glass box develop into a mature ecosystem of its own.</p>
+      <div class="tank" aria-hidden="true">
+        <div class="cycle">
+          <span>fish waste</span><i>→</i><span>ammonia</span><i>→</i><span>nitrite</span><i>→</i><span>nitrate</span><i>→</i><span>plants</span>
+        </div>
+        <div class="bubbles"></div>
+        <div class="plants"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><span class="tag">daily</span><h2>training</h2></div>
+      <p>working out and staying athletic. it keeps the rest of this running.</p>
+    </div>
+
+    <a class="next" href="#contact">next: contact →</a>
+  </article>
+
+  <!-- ============ CONTACT ============ -->
+  <article class="view page" data-view="contact" id="contact">
+    <a class="back" href="#" data-home>← back</a>
+    <h1 class="page-title"><span>05</span>contact</h1>
+    <p class="lede">building something, hiring, or thinking about the same questions? write to me.</p>
+
+    <button class="copy" data-email="joetomryan7@gmail.com">
+      <span class="copy-text">joetomryan7@gmail.com</span>
+      <span class="copy-hint">click to copy</span>
+      <span class="stamp" aria-hidden="true">copied!</span>
+    </button>
+
+    <ul class="links">
+      <li><a href="https://linkedin.com/in/joetomryan">linkedin ↗</a></li>
+      <li><a href="https://twitter.com/joetomryan">twitter ↗</a></li>
+      <li><a href="https://github.com/joetomryan">github ↗</a></li>
+      <li><a href="mailto:joetomryan7@gmail.com">email ↗</a></li>
+    </ul>
+  </article>
+
+  <footer class="foot">
+    <span>© <span data-year>2026</span> joe tom ryan</span>
+    <span>hand-written html. no frameworks.</span>
+  </footer>
+
+  <script src="/app.js" defer></script>
 </body>
 </html>
