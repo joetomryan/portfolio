@@ -488,6 +488,10 @@ kbd {
 .links a:hover { background: var(--desk); text-decoration: none; }
 
 
+/* y combinator badge */
+.yc { white-space: nowrap; }
+.yc svg { display: inline-block; width: 0.9em; height: 0.9em; margin-right: 0.22em; vertical-align: -0.1em; }
+
 /* ---------- experience case pages ---------- */
 
 .role { margin: 10px 0 0; font: 500 italic 18px var(--serif); color: var(--ink); }
