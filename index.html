@@ -46,6 +46,7 @@
 
     <div class="desk">
       <div class="sheet">
+        <div class="turn" aria-hidden="true"></div>
 
         <!-- ================= HOME ================= -->
         <main class="view" data-view="home">
@@ -91,41 +92,30 @@
             </li>
           </ol>
 
-          <h2 class="label">the library <small>(pick a volume, or press 1–6)</small></h2>
-          <div class="library">
-            <nav class="shelf" aria-label="chapters">
-              <span class="filler" aria-hidden="true" style="--c: #3b2a1c; --h: 82%; --w: 30px"></span>
-              <a class="spine" href="#work" data-key="1" data-sub="everything i've shipped, in order" style="--c: #22402e">
-                <span class="spine-num">i</span><span class="spine-title">work</span><span class="spine-call">jtr<br>001</span>
-              </a>
-              <a class="spine" href="#projects" data-key="2" data-sub="cortex, nikolai and open source" style="--c: #1f2a4d">
-                <span class="spine-num">ii</span><span class="spine-title">projects</span><span class="spine-call">jtr<br>002</span>
-              </a>
-              <a class="spine" href="#education" data-key="3" data-sub="b.e. computer science, startups over grades" style="--c: #5a3a22">
-                <span class="spine-num">iii</span><span class="spine-title">education</span><span class="spine-call">jtr<br>003</span>
-              </a>
-              <span class="filler" aria-hidden="true" style="--c: #46301f; --h: 74%; --w: 22px"></span>
-              <a class="spine" href="#research" data-key="4" data-sub="ai safety and memory in machines" style="--c: #1c1a17">
-                <span class="spine-num">iv</span><span class="spine-title">research</span><span class="spine-call">jtr<br>004</span>
-              </a>
-              <a class="spine" href="#life" data-key="5" data-sub="karuna, basketball, aquascaping, training" style="--c: #5e1f1a">
-                <span class="spine-num">v</span><span class="spine-title">life</span><span class="spine-call">jtr<br>005</span>
-              </a>
-              <a class="spine" href="#contact" data-key="6" data-sub="how to reach me" style="--c: #2f4a49">
-                <span class="spine-num">vi</span><span class="spine-title">contact</span><span class="spine-call">jtr<br>006</span>
-              </a>
-              <span class="filler" aria-hidden="true" style="--c: #2b2b24; --h: 86%; --w: 34px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #4a1f17; --h: 70%; --w: 24px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #23331f; --h: 92%; --w: 28px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #3d2c1d; --h: 78%; --w: 20px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #1f2a3d; --h: 88%; --w: 32px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #5a2a1c; --h: 80%; --w: 26px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #2e2a22; --h: 72%; --w: 22px"></span>
-              <span class="filler" aria-hidden="true" style="--c: #3a4a3a; --h: 84%; --w: 28px"></span>
-              <span class="pile" aria-hidden="true"><b style="--c: #4a3020; --w: 96px"></b><b style="--c: #1f2a3d; --w: 108px"></b><b style="--c: #5e1f1a; --w: 100px"></b></span>
-            </nav>
-            <p class="shelf-caption" aria-live="polite">pick a volume to open it</p>
-          </div>
+          <h2 class="label">pick a book <small>(or press 1–6)</small></h2>
+          <nav class="shelf" aria-label="chapters">
+            <a class="spine" href="#work" data-key="1" style="--c: #2f5a45">
+              <span class="spine-num">i</span><span class="spine-title">work</span><span class="spine-sub">what i've shipped</span>
+            </a>
+            <a class="spine" href="#projects" data-key="2" style="--c: #33438a">
+              <span class="spine-num">ii</span><span class="spine-title">projects</span><span class="spine-sub">cortex, nikolai, oss</span>
+            </a>
+            <a class="spine" href="#education" data-key="3" style="--c: #2f6468">
+              <span class="spine-num">iii</span><span class="spine-title">education</span><span class="spine-sub">built, not memorised</span>
+            </a>
+            <a class="spine light" href="#research" data-key="4" style="--c: #e9e4d8">
+              <span class="spine-num">iv</span><span class="spine-title">research</span><span class="spine-sub">safety and memory</span>
+            </a>
+            <a class="spine" href="#life" data-key="5" style="--c: #7a2e22">
+              <span class="spine-num">v</span><span class="spine-title">life</span><span class="spine-sub">karuna, hoops, tanks</span>
+            </a>
+            <a class="spine" href="#contact" data-key="6" style="--c: #8a7a55">
+              <span class="spine-num">vi</span><span class="spine-title">contact</span><span class="spine-sub">say hi</span>
+            </a>
+            <span class="filler" aria-hidden="true" style="--c: #c9b88f; height: 190px"></span>
+            <span class="filler lean" aria-hidden="true" style="--c: #a2683f; height: 200px"></span>
+            <span class="bookend" aria-hidden="true"></span>
+          </nav>
         </main>
 
         <!-- ================= AVOCA ================= -->
@@ -544,22 +534,23 @@
           <div class="entry">
             <div class="entry-head"><span class="tag">founded</span><h2>karuna</h2></div>
             <p>karuna is a drive i started to get puppies vaccinated, so they survive their first months without catching parvo, lepto and other diseases that kill so many of them early.</p>
+            <div class="paws" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span></div>
           </div>
 
           <div class="entry">
             <div class="entry-head"><span class="tag">court</span><h2>basketball</h2></div>
-            <p>played for my college team.</p>
+            <p>played for my college team. <button class="ball" aria-label="bounce the ball">🏀</button> <small class="dim">(tap it)</small></p>
           </div>
 
           <div class="entry">
             <div class="entry-head"><span class="tag">underwater</span><h2>aquascaping</h2></div>
             <p>building nature underwater. what fascinates me is the science: managing nitrates, the nitrogen cycle and co2 so plants grow, and watching a glass box develop into a mature ecosystem of its own.</p>
-            <div class="flow">
-              <span class="node">fish waste</span><i>→</i>
-              <span class="node">ammonia</span><i>→</i>
-              <span class="node">nitrite</span><i>→</i>
-              <span class="node">nitrate</span><i>→</i>
-              <span class="node">plants<small>with co2 and light</small></span>
+            <div class="tank" aria-hidden="true">
+              <div class="cycle">
+                <span>fish waste</span><i>→</i><span>ammonia</span><i>→</i><span>nitrite</span><i>→</i><span>nitrate</span><i>→</i><span>plants</span>
+              </div>
+              <div class="bubbles"></div>
+              <div class="plants"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
             </div>
           </div>
 
@@ -580,6 +571,7 @@
           <button class="copy" data-email="joetomryan7@gmail.com">
             <span class="copy-text">joetomryan7@gmail.com</span>
             <span class="copy-hint">click to copy</span>
+            <span class="stamp" aria-hidden="true">copied</span>
           </button>
 
           <ul class="links">

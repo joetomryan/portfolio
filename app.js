@@ -1,5 +1,7 @@
 (() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const views = [...document.querySelectorAll('[data-view]')];
+  const turn = document.querySelector('.turn');
   const spines = [...document.querySelectorAll('.spine')];
   const navLinks = [...document.querySelectorAll('[data-nav]')];
   const folio = document.querySelector('[data-folio]');
@@ -25,7 +27,20 @@
     window.scrollTo(0, 0);
   };
 
-  const route = () => show(viewFor(location.hash));
+  let first = true;
+  const route = () => {
+    const view = viewFor(location.hash);
+    if (first || reduceMotion) {
+      first = false;
+      show(view);
+      return;
+    }
+    // turn the page: a sheet slides across, the content swaps underneath it
+    turn.classList.remove('go');
+    void turn.offsetWidth;
+    turn.classList.add('go');
+    setTimeout(() => show(view), 300);
+  };
 
   const goHome = () => {
     if (location.hash) history.pushState(null, '', location.pathname);
@@ -42,7 +57,7 @@
     })
   );
 
-  /* ---------- keyboard: 1-6 open a chapter, esc goes home ---------- */
+  /* ---------- keyboard: 1-5 open a chapter, esc goes home ---------- */
 
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -50,6 +65,25 @@
     if (spine) location.hash = spine.getAttribute('href');
     if (e.key === 'Escape' && location.hash) goHome();
   });
+
+  /* ---------- click anywhere: a few drops of ink ---------- */
+
+  if (!reduceMotion) {
+    document.addEventListener('pointerdown', (e) => {
+      for (let i = 0; i < 6; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot';
+        const angle = (Math.PI * 2 * i) / 6 + Math.random() * 0.6;
+        const dist = 18 + Math.random() * 22;
+        d.style.left = `${e.clientX - 3}px`;
+        d.style.top = `${e.clientY - 3}px`;
+        d.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+        d.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+        d.addEventListener('animationend', () => d.remove());
+        document.body.appendChild(d);
+      }
+    });
+  }
 
   /* ---------- unit grids, flow diagrams, step rows ---------- */
 
@@ -82,17 +116,30 @@
   });
   window.addEventListener('scroll', hideTip, { passive: true });
 
-  /* ---------- library shelf: hovering a volume reads its spine ---------- */
+  /* ---------- aquarium bubbles ---------- */
 
-  const caption = document.querySelector('.shelf-caption');
-  if (caption) {
-    const idle = caption.textContent;
-    spines.forEach((spine) => {
-      const read = () => (caption.textContent = `${spine.querySelector('.spine-title').textContent} — ${spine.dataset.sub}`);
-      spine.addEventListener('pointerenter', read);
-      spine.addEventListener('focus', read);
-      spine.addEventListener('pointerleave', () => (caption.textContent = idle));
-      spine.addEventListener('blur', () => (caption.textContent = idle));
+  const bubbles = document.querySelector('.bubbles');
+  if (bubbles) {
+    for (let i = 0; i < 14; i++) {
+      const b = document.createElement('span');
+      const size = 4 + Math.random() * 8;
+      b.style.left = `${Math.random() * 100}%`;
+      b.style.width = b.style.height = `${size}px`;
+      b.style.animationDuration = `${4 + Math.random() * 5}s`;
+      b.style.animationDelay = `${-Math.random() * 8}s`;
+      b.style.setProperty('--drift', `${(Math.random() - 0.5) * 30}px`);
+      bubbles.appendChild(b);
+    }
+  }
+
+  /* ---------- basketball ---------- */
+
+  const ball = document.querySelector('.ball');
+  if (ball) {
+    ball.addEventListener('click', () => {
+      ball.classList.remove('bounce');
+      void ball.offsetWidth;
+      ball.classList.add('bounce');
     });
   }
 
@@ -104,9 +151,9 @@
       const email = copy.dataset.email;
       try {
         await navigator.clipboard.writeText(email);
-        const hint = copy.querySelector('.copy-hint');
-        hint.textContent = 'copied to clipboard';
-        setTimeout(() => (hint.textContent = 'click to copy'), 1800);
+        copy.classList.remove('copied');
+        void copy.offsetWidth;
+        copy.classList.add('copied');
       } catch {
         location.href = `mailto:${email}`;
       }
