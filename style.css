@@ -127,6 +127,9 @@ kbd {
 .sheet {
   position: relative;
   overflow: hidden;
+  /* clip only sideways (for the page turn) so the buddy can stand on top of the name */
+  overflow-x: clip;
+  overflow-y: visible;
   padding: 0 12px 32px 4px;
 }
 
@@ -143,21 +146,29 @@ kbd {
   letter-spacing: 0;
 }
 
-/* a little pixel-art me, leaning on the name and waving */
-.name-last { white-space: nowrap; }
+/* a little pixel-art me who wanders along the name and keeps away from the cursor */
+.name-stage { position: relative; margin: 0 0 24px; padding-bottom: 62px; }
+.name-stage .name { margin: 0; }
 .buddy {
-  display: inline-block;
-  height: 1.15em;
-  width: calc(1.15em * 24 / 31);
-  margin-left: -0.03em;
-  vertical-align: baseline;
-  image-rendering: pixelated;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 54px;
+  pointer-events: none;
+  will-change: transform;
 }
-.buddy .wave-b { opacity: 0; }
-.buddy .wave-a { animation: wave-a 3.2s steps(1, end) infinite; }
-.buddy .wave-b { animation: wave-b 3.2s steps(1, end) infinite; }
-@keyframes wave-a { 0%, 12%, 24%, 36% { opacity: 1; } 6%, 18%, 30% { opacity: 0; } }
-@keyframes wave-b { 0%, 12%, 24%, 36% { opacity: 0; } 6%, 18%, 30% { opacity: 1; } }
+.buddy .f { display: none; }
+.buddy[data-f="stand"] .f-stand { display: inline; }
+.buddy[data-f="walk1"] .f-walk1 { display: inline; }
+.buddy[data-f="walk2"] .f-walk2 { display: inline; }
+.buddy[data-f="jump"] .f-jump { display: inline; }
+.buddy[data-f="wave1"] .f-wave1 { display: inline; }
+.buddy[data-f="wave2"] .f-wave2 { display: inline; }
+@media (max-width: 560px) {
+  .name-stage { padding-bottom: 46px; }
+  .buddy { width: 33px; height: 40.5px; }
+}
 
 .kicker { margin: 0 0 8px; font-weight: 600; }
 
