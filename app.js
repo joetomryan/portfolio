@@ -141,24 +141,34 @@
     });
   }
 
-  /* ---------- the pixel buddy: walks beside and on top of the name, avoids the cursor ---------- */
+  /* ---------- the pixel buddy: waves beside the name, then sits down at his desk to code ---------- */
 
   const stage = document.querySelector('.name-stage');
   const buddy = stage && stage.querySelector('.buddy');
-  if (stage && buddy) {
+  const desk = stage && stage.querySelector('.buddy-desk');
+  const say = stage && stage.querySelector('.buddy-say');
+  if (stage && buddy && desk && say) {
     const name = stage.querySelector('.name');
-    const WALK = 45; // px per second
-    const RUN = 240;
-    const FLEE_RADIUS = 140;
-    const PANIC_RADIUS = 70;
-    const JUMP_TIME = 0.6; // seconds
+    const ROWS = 33; // the standing sprite's height, in pixels of art
+    const DESK_ROWS = 35;
+    const DESK_COLS = 46;
+    const HEAD_COL = 4; // where his head starts in the standing sprite
+    const DESK_HEAD_COL = 8; // and in the desk scene
+    const WALK = 12; // steps from where he waves to the chair, in pixels of art
+    let u = 0; // screen pixels per pixel of art
+    let spot = null; // where he stands: { x, y } with y the line he stands on
+    let timers = [];
+    let run = 0;
+    let started = false;
+    let seated = false;
+    let busy = false;
 
-    // Places he can stand: the baseline just right of the name, and the top of each line of letters.
-    let levels = [];
-    let w = 0;
-    let h = 0;
-    const me = { level: 0, x: 0, y: 0, mode: 'rest', until: 0, target: 0, jump: null, frame: 'stand', waveUntil: 0 };
-    const pointer = { x: 0, y: 0, active: false };
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const stop = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      run++;
+    };
 
     const fontMetrics = () => {
       const style = getComputedStyle(name);
@@ -168,194 +178,146 @@
       return { ascent: m.fontBoundingBoxAscent, cap: m.actualBoundingBoxAscent };
     };
 
-    const measure = () => {
+    const layout = () => {
       const box = stage.getBoundingClientRect();
-      if (!box.width) return false; // the home page isn't showing
-      const size = buddy.getBoundingClientRect(); // an <svg> has no offsetWidth
-      w = size.width;
-      h = size.height;
+      if (!box.width) return null; // the home page isn't showing
+      u = buddy.getBoundingClientRect().height / ROWS;
       const range = document.createRange();
       range.selectNodeContents(name);
-      const lines = [];
+      let last = null;
       for (const r of range.getClientRects()) {
-        const line = lines.find((l) => Math.abs(l.top - r.top) < 4);
-        if (line) {
-          line.left = Math.min(line.left, r.left);
-          line.right = Math.max(line.right, r.right);
-        } else lines.push({ top: r.top, left: r.left, right: r.right });
+        if (!last || r.top > last.top + 4) last = { top: r.top, left: r.left, right: r.right };
+        else {
+          last.left = Math.min(last.left, r.left);
+          last.right = Math.max(last.right, r.right);
+        }
       }
-      if (!lines.length) return false;
+      if (!last) return null;
+      const need = (WALK - DESK_HEAD_COL + DESK_COLS) * u + 4; // him plus the desk
+      return { box, last, need, beside: box.width - (last.right - box.left) >= need };
+    };
+
+    const measure = () => {
+      let L = layout();
+      if (!L) return false;
+      if (stage.classList.contains('rooftop') === L.beside) {
+        stage.classList.toggle('rooftop', !L.beside); // the padding changes, so measure again
+        L = layout();
+        if (!L) return false;
+      }
       const { ascent, cap } = fontMetrics();
-      levels = [];
-      const lastLine = lines[lines.length - 1];
-      const side = {
-        y: lastLine.top - box.top + ascent, // baseline
-        x0: lastLine.right - box.left + 2,
-        x1: box.width - w,
+      const lineTop = L.last.top - L.box.top;
+      spot = L.beside
+        ? { x: L.last.right - L.box.left + 2, y: lineTop + ascent } // on the baseline, right of the name
+        : { x: Math.max(L.last.left - L.box.left, L.last.right - L.box.left - L.need), y: lineTop + ascent - cap }; // on top of the letters
+      return true;
+    };
+
+    const frame = (f) => (buddy.dataset.f = f);
+    const placeStanding = (x) => {
+      buddy.style.transform = `translate(${Math.round(x - HEAD_COL * u)}px, ${Math.round(spot.y - ROWS * u)}px)`;
+    };
+    const placeDesk = () => {
+      const headLeft = spot.x + WALK * u;
+      const top = spot.y - DESK_ROWS * u;
+      desk.style.transform = `translate(${Math.round(headLeft - DESK_HEAD_COL * u)}px, ${Math.round(top)}px)`;
+      say.style.left = `${Math.round(headLeft + 8.5 * u)}px`;
+      say.style.top = `${Math.round(top + 2)}px`;
+    };
+
+    const typeLoop = () => {
+      let n = 0;
+      const step = () => {
+        if (!seated) return;
+        if (!busy) {
+          desk.dataset.type = desk.dataset.type === '1' ? '2' : '1';
+          n++;
+        }
+        // bursts of typing with little pauses, like thinking
+        later(step, n % 7 === 0 ? 350 + Math.random() * 500 : 110 + Math.random() * 90);
       };
-      if (side.x1 - side.x0 >= 4) levels.push(side);
-      for (const l of lines) {
-        levels.push({
-          y: l.top - box.top + ascent - cap, // tops of the capitals
-          x0: l.left - box.left,
-          x1: Math.max(l.left - box.left, l.right - box.left - w),
-        });
-      }
-      me.level = Math.min(me.level, levels.length - 1);
-      const lv = levels[me.level];
-      me.x = Math.min(Math.max(me.x || lv.x0, lv.x0), lv.x1);
-      me.y = lv.y;
-      return true;
+      step();
     };
 
-    const draw = (frame) => {
-      if (frame !== me.frame) buddy.dataset.f = me.frame = frame;
-      buddy.style.transform = `translate(${Math.round(me.x)}px, ${Math.round(me.y - h)}px)`;
+    const sit = () => {
+      seated = true;
+      buddy.classList.add('off');
+      desk.classList.add('on');
+      placeDesk();
+      if (!reduceMotion) typeLoop();
     };
 
-    const jumpTo = (levelIndex, x, now) => {
-      const to = levels[levelIndex];
-      me.jump = { from: { x: me.x, y: me.y }, to: { x: Math.min(Math.max(x, to.x0), to.x1), y: to.y }, level: levelIndex, start: now };
-      me.mode = 'jump';
-    };
-
-    // The spot furthest from the cursor, on any level, for when he's cornered.
-    const escape = (px, py) => {
-      let best = null;
-      levels.forEach((lv, i) => {
-        for (const x of [lv.x0, (lv.x0 + lv.x1) / 2, lv.x1]) {
-          const d = Math.hypot(x + w / 2 - px, lv.y - h / 2 - py);
-          if (Math.abs(x - me.x) + Math.abs(lv.y - me.y) > 40 && (!best || d > best.d)) best = { i, x, d };
-        }
-      });
-      return best;
-    };
-
-    const randomHop = (now) => {
-      const choices = levels.map((_, i) => i).filter((i) => i !== me.level);
-      if (!choices.length) return false;
-      const next = choices[Math.floor(Math.random() * choices.length)];
-      const to = levels[next];
-      jumpTo(next, to.x0 + Math.random() * (to.x1 - to.x0), now);
-      return true;
-    };
-
-    let last = performance.now();
-    const tick = (now) => {
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      if (!levels.length && !measure()) return requestAnimationFrame(tick);
-      const lv = levels[me.level];
-
-      if (me.mode === 'jump') {
-        const t = Math.min((now - me.jump.start) / 1000 / JUMP_TIME, 1);
-        const { from, to } = me.jump;
-        me.x = from.x + (to.x - from.x) * t;
-        me.y = from.y + (to.y - from.y) * t - 50 * 4 * t * (1 - t);
-        if (t === 1) {
-          me.level = me.jump.level;
-          me.y = to.y;
-          me.mode = 'rest';
-          me.until = now + 500;
-        }
-        draw('jump');
-        return requestAnimationFrame(tick);
-      }
-
-      // keep away from the cursor
-      const box = stage.getBoundingClientRect();
-      const px = pointer.x - box.left;
-      const py = pointer.y - box.top;
-      const dx = me.x + w / 2 - px;
-      const dist = Math.hypot(dx, me.y - h / 2 - py);
-      if (pointer.active && dist < FLEE_RADIUS) {
-        const dir = dx === 0 ? 1 : Math.sign(dx);
-        const cornered = (dir < 0 && me.x <= lv.x0 + 2) || (dir > 0 && me.x >= lv.x1 - 2);
-        if (dist < PANIC_RADIUS || cornered) {
-          const spot = escape(px, py);
-          if (spot) {
-            jumpTo(spot.i, spot.x, now);
-            return requestAnimationFrame(tick);
-          }
-        }
-        me.mode = 'run';
-        me.x = Math.min(Math.max(me.x + dir * RUN * dt, lv.x0), lv.x1);
-        draw(Math.floor(now / 80) % 2 ? 'walk1' : 'walk2');
-        return requestAnimationFrame(tick);
-      }
-
-      // otherwise potter about: walk a little, rest (sometimes wave), now and then hop up or down
-      if (me.mode === 'run') {
-        me.mode = 'rest';
-        me.until = now + 700;
-      }
-      if (me.mode === 'rest') {
-        if (now < me.until) {
-          const waving = now < me.waveUntil;
-          draw(waving ? (Math.floor(now / 200) % 2 ? 'wave1' : 'wave2') : 'stand');
-          return requestAnimationFrame(tick);
-        }
-        if (Math.random() < 0.25 && randomHop(now)) return requestAnimationFrame(tick);
-        me.mode = 'walk';
-        me.target = lv.x0 + Math.random() * (lv.x1 - lv.x0);
-      }
-      if (me.mode === 'walk') {
-        const step = WALK * dt;
-        if (Math.abs(me.target - me.x) <= step) {
-          me.x = me.target;
-          me.mode = 'rest';
-          me.until = now + 1500 + Math.random() * 2500;
-          me.waveUntil = Math.random() < 0.4 ? now + 1400 : 0;
-        } else {
-          me.x += Math.sign(me.target - me.x) * step;
-        }
-        draw(Math.floor(now / 160) % 2 ? 'walk1' : 'walk2');
-      }
-      requestAnimationFrame(tick);
-    };
-
-    let started = false;
     const start = () => {
-      if (!measure()) return; // home page not showing yet; tried again when it is
-      started = true;
-      me.level = 0; // start right next to the name
-      me.x = levels[0].x0;
-      me.y = levels[0].y;
-      draw('stand');
-      if (reduceMotion) return;
-      me.mode = 'rest';
-      me.until = performance.now() + 1900;
-      me.waveUntil = performance.now() + 1700; // say hi first
-      requestAnimationFrame(tick);
+      stop();
+      seated = false;
+      busy = false;
+      say.classList.remove('show');
+      desk.classList.remove('on');
+      desk.dataset.look = 'screen';
+      desk.dataset.type = '1';
+      buddy.classList.remove('off');
+      if (!measure()) return false;
+      placeStanding(spot.x);
+      if (reduceMotion) {
+        sit();
+        return true;
+      }
+      // say hi, then walk over to the desk and sit down
+      for (let i = 0; i <= 8; i++) later(() => frame(i % 2 ? 'wave2' : 'wave1'), i * 220);
+      later(() => frame('stand'), 9 * 220);
+      later(() => {
+        const mine = run;
+        const t0 = performance.now();
+        const from = spot.x;
+        const to = spot.x + WALK * u;
+        const step = (now) => {
+          if (mine !== run) return;
+          const k = Math.min((now - t0) / 900, 1);
+          placeStanding(from + (to - from) * k);
+          frame(Math.floor(now / 150) % 2 ? 'walk1' : 'walk2');
+          if (k < 1) requestAnimationFrame(step);
+          else sit();
+        };
+        requestAnimationFrame(step);
+      }, 9 * 220 + 300);
+      return true;
     };
 
-    window.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      pointer.x = e.clientX;
-      pointer.y = e.clientY;
-      pointer.active = true;
-    });
-    document.addEventListener('mouseleave', () => (pointer.active = false));
-    // on touch screens, a tap near him sends him somewhere else
-    window.addEventListener('pointerdown', (e) => {
-      if (e.pointerType === 'mouse' || reduceMotion || me.mode === 'jump' || !levels.length) return;
-      const box = stage.getBoundingClientRect();
-      const px = e.clientX - box.left;
-      const py = e.clientY - box.top;
-      if (Math.hypot(me.x + w / 2 - px, me.y - h / 2 - py) < 90) {
-        const spot = escape(px, py);
-        if (spot) jumpTo(spot.i, spot.x, performance.now());
+    // click him while he's coding and he'll tell you he's busy
+    const poke = () => {
+      if (!seated || busy) return;
+      busy = true;
+      desk.dataset.look = 'you';
+      say.classList.add('show');
+      later(() => {
+        say.classList.remove('show');
+        desk.dataset.look = 'screen';
+        busy = false;
+      }, 2600);
+    };
+    desk.addEventListener('click', poke);
+    desk.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        poke();
       }
     });
-    const remeasure = () => {
-      if (!started) return start();
-      levels = [];
-      if (measure() && reduceMotion) draw('stand');
-    };
-    window.addEventListener('resize', remeasure);
-    window.addEventListener('hashchange', () => setTimeout(remeasure, 350));
 
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(start);
+    const relayout = () => {
+      if (!started) {
+        started = start();
+        return;
+      }
+      if (!measure()) return;
+      if (seated) {
+        placeStanding(spot.x);
+        placeDesk();
+      } else started = start();
+    };
+    window.addEventListener('resize', relayout);
+    window.addEventListener('hashchange', () => setTimeout(relayout, 350));
+
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => (started = start()));
   }
 
   document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()));

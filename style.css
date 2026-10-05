@@ -146,30 +146,87 @@ kbd {
   letter-spacing: 0;
 }
 
-/* a little pixel-art me who walks beside and on top of the name, and keeps away from the cursor */
+/* a little pixel-art me: waves beside the name, then sits down at his desk to code */
 .name-stage {
   position: relative;
   margin: 0 0 32px;
-  padding-top: 0.35em;                       /* headroom for when he stands on the letters */
+  padding-top: 0.25em;
   font-size: clamp(48px, 8vw, 84px);        /* same as the name, so em sizes follow it */
 }
+.name-stage.rooftop { padding-top: calc(1.15em * 35 / 33 + 6px); } /* no room beside the name: he sits on top of it */
 .name-stage .name { margin: 0; }
-.buddy {
+.buddy, .buddy-desk {
   position: absolute;
   left: 0;
   top: 0;
-  height: 1.15em;
-  width: calc(1.15em * 25 / 31);
-  pointer-events: none;
   will-change: transform;
 }
+.buddy { height: 1.15em; width: calc(1.15em * 25 / 33); pointer-events: none; }
+.buddy.off { display: none; }
 .buddy .f { display: none; }
 .buddy[data-f="stand"] .f-stand { display: inline; }
-.buddy[data-f="walk1"] .f-walk1 { display: inline; }
-.buddy[data-f="walk2"] .f-walk2 { display: inline; }
-.buddy[data-f="jump"] .f-jump { display: inline; }
 .buddy[data-f="wave1"] .f-wave1 { display: inline; }
 .buddy[data-f="wave2"] .f-wave2 { display: inline; }
+.buddy[data-f="walk1"] .f-walk1 { display: inline; }
+.buddy[data-f="walk2"] .f-walk2 { display: inline; }
+
+.buddy-desk {
+  display: none;
+  height: calc(1.15em * 35 / 33);
+  width: calc(1.15em * 46 / 33);
+  cursor: pointer;
+  outline: none;
+}
+.buddy-desk.on { display: block; }
+.buddy-desk:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.buddy-desk .d-look, .buddy-desk .d-arm { display: none; }
+.buddy-desk[data-look="screen"] .look-screen, .buddy-desk[data-look="you"] .look-you { display: inline; }
+.buddy-desk[data-type="1"] .type-1, .buddy-desk[data-type="2"] .type-2 { display: inline; }
+/* the code on his screen changes every so often, and the cursor blinks */
+.buddy-desk .d-code { animation: code 3.6s steps(1, end) infinite; }
+.buddy-desk .code-2 { animation-delay: -2.4s; }
+.buddy-desk .code-3 { animation-delay: -1.2s; }
+@keyframes code { 0%, 33.3% { opacity: 1; } 33.4%, 100% { opacity: 0; } }
+.buddy-desk .d-cursor { animation: blink 1s steps(1, end) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.buddy-desk .d-steam { animation: steam 2.2s steps(1, end) infinite; }
+@keyframes steam { 50% { transform: translateY(-1px); opacity: 0.6; } }
+
+/* what he says when you click him: a little dialogue box */
+.buddy-say {
+  position: absolute;
+  z-index: 5;
+  padding: 6px 12px;
+  background: #f7e8c6;
+  color: #3b2a1a;
+  border: 3px solid #7a5230;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px #2b1c14;
+  font: 500 15px/1.3 var(--serif);
+  white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 12px));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s, visibility 0.15s;
+}
+.buddy-say::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 10px;
+  height: 10px;
+  background: #f7e8c6;
+  border-right: 3px solid #7a5230;
+  border-bottom: 3px solid #7a5230;
+  box-shadow: 2px 2px 0 0 #2b1c14;
+  transform: translateX(-50%) rotate(45deg);
+}
+.buddy-say.show { opacity: 1; visibility: visible; }
+@media (max-width: 560px) {
+  .buddy-say { font-size: 13px; padding: 4px 10px; }
+}
 
 .kicker { margin: 0 0 8px; font-weight: 600; }
 
