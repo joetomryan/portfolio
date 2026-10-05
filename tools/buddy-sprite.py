@@ -7,9 +7,9 @@
 
 PAL = {
   'K': '#2b1c14',                                  # outline
-  'H': '#33211a', 'h': '#5b3a28',                  # hair, highlight
-  'S': '#c98c62', 's': '#a86f4b',                  # skin, shadow
-  'E': '#1b120d', 'M': '#8a3b2b', 'c': '#d77d63',  # eyes, mouth, blush
+  'H': '#5b3b25', 'h': '#7d5636', 'g': '#3e2617',  # hair, highlight, shadow (also the brows)
+  'S': '#e7c09c', 's': '#c89a74',                  # skin, shadow
+  'E': '#1b120d', 'M': '#a8604a',                  # eyes, mouth
   'R': '#8b2e1f', 'r': '#6c2216', 'W': '#efe6d6',  # red hoodie, shadow, drawstrings
   'P': '#34466b', 'p': '#26344f',                  # jeans
   'B': '#f1ece2', 'b': '#c4bcae',                  # sneakers
@@ -23,23 +23,23 @@ PAL = {
 
 # The standing body, 25 wide. Hair rows 7-8 are the textured fringe: uneven tufts with skin showing between them.
 STAND = """
-........KKKKKKKKK........
-......KKHHHHHHHHHKK......
-.....KHHhHHHHHHHhHHK.....
-....KHHHHhHHHHHhHHHHK....
-....KHHHHHHHhHHHHHHHK....
-....KHhHHHHHHHHHHHhHK....
-....KHHHHHHHHHHHHHHHK....
-....KHHSHHSHHHSHHSHHK....
-....KSHSSHSSHSSHSSHSK....
-....KSSSSSSSSSSSSSSSK....
-....KSSSEESSSSSEESSSK....
-....KScSEESSSSSEEScSK....
-....KSSSSSSSSSSSSSSSK....
-....KSSSSSSMMMSSSSSSK....
-.....KSSSSSSSSSSSSSK.....
-......KsSSSSSSSSSsK......
-........KKKsSSsKKK.......
+.......KKKKKKKKKK.......
+.....KKHHhHHHHHHHKK.....
+....KHHHHHHhHHHHHHHKK...
+...KHhHHHHHHHHHHHhHHHK..
+...KHHHHHhHHHHhHHHHHhK..
+...KHHHHHHHHgHHHHHHHHK..
+...KHHHHHgSSgHHHHHHHHK..
+...KHHHHSSSSSgHHHHHHHK..
+...KHHHSSSSSSSgHHHHHHK..
+...KHHSSSSSSSSSSgHHHHK..
+...KHSSggSSSSSSggSHHHK..
+...KHSSEESSSSSSEESHHHK..
+...KHSSSSSSSsSSSSSHHHK..
+....KHSSSSSSSSSSSSHHK...
+.....KSSSSSMMSSSSSHK....
+......KsSSSSSSSSSsK.....
+........KKKsSSsKKK......
 ........KKRRRRRKK........
 ......KKRRRWRWRRRKK......
 ....KRRKRRRRWRWRRRRKRRK..
@@ -147,21 +147,21 @@ def wave(cells):
 # Him from the side, facing right: hair at the back, the fringe falling over his forehead at the front.
 PROFILE = """
 .....KKKKKKKK...
-...KKHHHHHHHHKK.
-..KHHhHHHHHHHHHK
-..KHHHHHhHHHHHHK
-.KHHHHHHHHhHHHHK
+...KKHHhHHHHHKK.
+..KHHHHHHhHHHHHK
 .KHhHHHHHHHHHHHK
-.KHHHHHHHHHHHSHK
-.KHHHHHHHHHSHSHK
-.KHHHHHHHHSSHSSK
-.KHHHHHHHSSSSSSK
-.KHHHHHHSSSSEESK
-.KsHHHHHSSSSEESK
-.KsHHHHHSSSScSSK
-.KHHHHHSSSSSSSMK
-..KHHHSSSSSSSSK.
-...KsSSSSSSSSK..
+.KHHHHhHHHHHhHHK
+.KHHHHHHHHHHgHHK
+.KHHHHHHHHHgSHHK
+.KHHHHHHHHgSSSHK
+.KHHHHHHHHSSSSSK
+.KHHHHHHHSSSggSK
+.KHHHHHHHSSSEESK
+.KsHHHHHHSSSSSSK
+.KsHHHHHHSSSSsSK
+.KHHHHHHSSSSSSMK
+..KHHHHHSSSSSSK.
+...KHHsSSSSSSK..
 .....KKsSSKKK...
 .....KRRRRRRK...
 ....KRRRRWRRRK..
@@ -209,23 +209,10 @@ def side_walk(step):
         clear(g, SH - 1, SH - 1, PX + 10, PX + 14)
     return outline(g)
 
-def stretch(cells):
-    """Both arms up, like a stretch after a long sit."""
-    g = wave(cells)
-    clear(g, 19, 24, 2, 6)            # drop the hanging left arm too
-    fill(g, 19, 23, 7, 7, 'K')
-    arm = grid(SW, SH)
-    paint(arm, [(y, SW - 1 - x, c) for y, x, c in cells])  # the right arm, mirrored
-    outline(arm)
-    blit(g, [''.join(r) for r in arm])
-    return g
-
 STAND_FRAMES = {
     'stand': stand(),
     'wave1': wave(WAVE_UP),
     'wave2': wave(WAVE_DOWN),
-    'stretch1': stretch(WAVE_UP),
-    'stretch2': stretch(WAVE_DOWN),
     'side': side(),
     'walk1': side_walk(1),
     'walk2': side_walk(2),
@@ -267,7 +254,7 @@ def seated(look):
         for i, c in enumerate(t):
             g[y][x + i] = c
     if look == 'you':                                           # brow down: he's been interrupted
-        paint(g, [(DY + 9, DX + 12, 'K'), (DY + 9, DX + 13, 'K')])
+        paint(g, [(DY + 9, DX + 12, 'K'), (DY + 9, DX + 13, 'K'), (DY + 9, DX + 11, 'g')])
     return g
 
 def desk():

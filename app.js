@@ -154,7 +154,8 @@
     const DESK_COLS = 34;
     const HEAD_COL = 4; // where his head starts in the standing sprite
     const DESK_HEAD_COL = 2; // and in the desk scene
-    const WALK = 10; // steps from where he waves to the chair, in pixels of art
+    const GAP = 6; // space between the name and where he stands, in pixels of art
+    const WALK = 18; // steps from there to the chair
     let u = 0; // screen pixels per pixel of art
     let spot = null; // where he stands: { x, y } with y the line he stands on
     let timers = [];
@@ -193,7 +194,7 @@
         }
       }
       if (!last) return null;
-      const need = (WALK - DESK_HEAD_COL + DESK_COLS) * u + 4; // him plus the desk
+      const need = (GAP + WALK - DESK_HEAD_COL + DESK_COLS) * u + 4; // the gap, him and the desk
       return { box, last, need, beside: box.width - (last.right - box.left) >= need };
     };
 
@@ -208,7 +209,7 @@
       const { ascent, cap } = fontMetrics();
       const lineTop = L.last.top - L.box.top;
       spot = L.beside
-        ? { x: L.last.right - L.box.left + 2, y: lineTop + ascent } // on the baseline, right of the name
+        ? { x: L.last.right - L.box.left + GAP * u, y: lineTop + ascent } // on the baseline, right of the name
         : { x: Math.max(L.last.left - L.box.left, L.last.right - L.box.left - L.need), y: lineTop + ascent - cap }; // on top of the letters
       return true;
     };
@@ -266,37 +267,34 @@
     const sit = () => {
       seated = true;
       buddy.classList.add('off');
-      desk.classList.add('on');
-      placeDesk();
+      desk.dataset.seated = '1';
       if (reduceMotion) return;
       typeLoop();
       later(standUp, WORK_MS);
     };
 
-    // every so often he gets up, walks back to the name, stretches, waves, and goes back to work
+    // every so often he gets up, walks back toward the name, waves at you, and goes back to work
     const standUp = () => {
       if (busy) {
         later(standUp, 300); // not while he's telling you off
         return;
       }
       seated = false;
-      desk.classList.remove('on');
+      desk.dataset.seated = '0';
       buddy.classList.remove('off');
       placeStanding(chairX());
       buddy.dataset.dir = 'left';
       frame('side');
-      later(() => walkTo(chairX(), spot.x, 'left', 700, () => {
+      later(() => walkTo(chairX(), spot.x, 'left', 800, () => {
         buddy.dataset.dir = 'right';
         frame('stand');
-        later(() => cycle('stretch1', 'stretch2', 400, 1600, () => {
-          cycle('wave1', 'wave2', 220, 2000, () => {
-            frame('stand');
-            later(() => {
-              frame('side');
-              later(() => walkTo(spot.x, chairX(), 'right', 700, sit), 200);
-            }, 250);
-          });
-        }), 200);
+        later(() => cycle('wave1', 'wave2', 220, 2600, () => {
+          frame('stand');
+          later(() => {
+            frame('side');
+            later(() => walkTo(spot.x, chairX(), 'right', 800, sit), 200);
+          }, 300);
+        }), 250);
       }), 200);
     };
 
@@ -305,13 +303,15 @@
       seated = false;
       busy = false;
       say.classList.remove('show');
-      desk.classList.remove('on');
+      desk.dataset.seated = '0';
       desk.dataset.look = 'screen';
       desk.dataset.type = '1';
       buddy.classList.remove('off');
       buddy.dataset.dir = 'right';
       if (!measure()) return false;
       placeStanding(spot.x);
+      placeDesk();
+      desk.classList.add('on'); // the desk is there from the start
       if (reduceMotion) {
         sit();
         return true;
@@ -321,7 +321,7 @@
         frame('stand');
         later(() => {
           frame('side'); // turns to face the desk
-          later(() => walkTo(spot.x, chairX(), 'right', 900, sit), 300);
+          later(() => walkTo(spot.x, chairX(), 'right', 1000, sit), 300);
         }, 250);
       });
       return true;

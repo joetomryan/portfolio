@@ -161,15 +161,13 @@ kbd {
   top: 0;
   will-change: transform;
 }
-.buddy { height: 0.85em; width: calc(0.85em * 25 / 33); pointer-events: none; }
+.buddy { height: 0.85em; width: calc(0.85em * 25 / 33); pointer-events: none; z-index: 2; }
 .buddy.off { display: none; }
 .buddy .f { display: none; }
 .buddy[data-f="stand"] .f-stand { display: inline; }
 .buddy[data-f="wave1"] .f-wave1 { display: inline; }
 .buddy[data-f="wave2"] .f-wave2 { display: inline; }
 .buddy[data-f="side"] .f-side { display: inline; }
-.buddy[data-f="stretch1"] .f-stretch1 { display: inline; }
-.buddy[data-f="stretch2"] .f-stretch2 { display: inline; }
 /* the side view is drawn facing right; flip it to walk back to the name */
 .buddy[data-dir="left"] .f-side, .buddy[data-dir="left"] .f-walk1, .buddy[data-dir="left"] .f-walk2 {
   transform: scaleX(-1);
@@ -183,14 +181,16 @@ kbd {
   display: none;
   height: 0.85em;
   width: calc(0.85em * 34 / 33);
-  cursor: pointer;
+  z-index: 1;
   outline: none;
 }
 .buddy-desk.on { display: block; }
+.buddy-desk[data-seated="1"] { cursor: pointer; }
 .buddy-desk:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+/* the desk is always there; he only appears in the chair while he's working */
 .buddy-desk .d-look, .buddy-desk .d-arm { display: none; }
-.buddy-desk[data-look="screen"] .look-screen, .buddy-desk[data-look="you"] .look-you { display: inline; }
-.buddy-desk[data-type="1"] .type-1, .buddy-desk[data-type="2"] .type-2 { display: inline; }
+.buddy-desk[data-seated="1"][data-look="screen"] .look-screen, .buddy-desk[data-seated="1"][data-look="you"] .look-you { display: inline; }
+.buddy-desk[data-seated="1"][data-type="1"] .type-1, .buddy-desk[data-seated="1"][data-type="2"] .type-2 { display: inline; }
 /* the code on his screen changes every so often, and the cursor blinks */
 .buddy-desk .d-code { animation: code 3.6s steps(1, end) infinite; }
 .buddy-desk .code-2 { animation-delay: -2.4s; }
