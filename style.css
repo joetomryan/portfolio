@@ -498,54 +498,42 @@ span.repo-name { color: var(--ink); }
 }
 .dim { color: var(--dim); font: 500 italic 14px var(--serif); }
 
+/* the aquascape: a pixel tank with fish that swim back and forth and plants that sway */
 .tank {
-  position: relative;
-  height: 200px;
   margin-top: 16px;
   border: var(--border);
   border-top-width: 6px;
-  background: var(--water);
+  background: #bcdad1;
+  line-height: 0;
   overflow: hidden;
 }
+.scape { display: block; width: 100%; height: auto; }
+.scape .sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 4s ease-in-out infinite alternate; }
+.scape .sway:nth-of-type(odd) { animation-duration: 5s; animation-delay: -2s; }
+.scape .swim { transform-box: fill-box; transform-origin: center; animation: swim 12s ease-in-out infinite; }
+@keyframes swim {
+  0% { transform: translateX(0) scaleX(1); }
+  47% { transform: translateX(var(--d)) scaleX(1); }
+  53% { transform: translateX(var(--d)) scaleX(-1); }
+  97% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+.scape .bob { animation: bob 2.6s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(1px); } }
+.scape .bubble { animation: rise 5s linear infinite; }
+@keyframes rise { 70% { opacity: 1; } to { transform: translateY(-26px); opacity: 0; } }
+@keyframes sway { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
 .cycle {
-  position: absolute;
-  inset: 12px 12px auto;
-  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
+  margin-top: 10px;
   font: 500 11px var(--mono);
   text-transform: uppercase;
 }
 .cycle span { padding: 1px 6px; background: var(--sheet); border: 1.5px solid var(--ink); }
 .cycle i { font-style: normal; }
-.bubbles span {
-  position: absolute;
-  bottom: -12px;
-  border: 1.5px solid var(--ink);
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: rise linear infinite;
-}
-@keyframes rise { to { transform: translate(var(--drift, 0), -230px); opacity: 0.1; } }
-.plants { position: absolute; bottom: 0; left: 0; right: 0; height: 90px; display: flex; align-items: flex-end; justify-content: space-around; }
-.plants b {
-  width: 6px;
-  background: #3d7a4f;
-  border: 1.5px solid var(--ink);
-  border-bottom: 0;
-  transform-origin: bottom;
-  animation: sway 4s ease-in-out infinite alternate;
-}
-.plants b:nth-child(1) { height: 60%; }
-.plants b:nth-child(2) { height: 90%; animation-delay: -1s; }
-.plants b:nth-child(3) { height: 45%; animation-delay: -2s; }
-.plants b:nth-child(4) { height: 75%; animation-delay: -0.5s; }
-.plants b:nth-child(5) { height: 100%; animation-delay: -3s; }
-.plants b:nth-child(6) { height: 55%; animation-delay: -1.5s; }
-.plants b:nth-child(7) { height: 80%; animation-delay: -2.5s; }
-@keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
 
 /* contact */
 

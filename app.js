@@ -97,22 +97,6 @@
   });
   window.addEventListener('scroll', hideTip, { passive: true });
 
-  /* ---------- aquarium bubbles ---------- */
-
-  const bubbles = document.querySelector('.bubbles');
-  if (bubbles) {
-    for (let i = 0; i < 14; i++) {
-      const b = document.createElement('span');
-      const size = 4 + Math.random() * 8;
-      b.style.left = `${Math.random() * 100}%`;
-      b.style.width = b.style.height = `${size}px`;
-      b.style.animationDuration = `${4 + Math.random() * 5}s`;
-      b.style.animationDelay = `${-Math.random() * 8}s`;
-      b.style.setProperty('--drift', `${(Math.random() - 0.5) * 30}px`);
-      bubbles.appendChild(b);
-    }
-  }
-
   /* ---------- basketball ---------- */
 
   const ball = document.querySelector('.ball');
