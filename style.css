@@ -143,6 +143,22 @@ kbd {
   letter-spacing: 0;
 }
 
+/* a little pixel-art me, leaning on the name and waving */
+.name-last { white-space: nowrap; }
+.buddy {
+  display: inline-block;
+  height: 1.15em;
+  width: calc(1.15em * 24 / 31);
+  margin-left: -0.03em;
+  vertical-align: baseline;
+  image-rendering: pixelated;
+}
+.buddy .wave-b { opacity: 0; }
+.buddy .wave-a { animation: wave-a 3.2s steps(1, end) infinite; }
+.buddy .wave-b { animation: wave-b 3.2s steps(1, end) infinite; }
+@keyframes wave-a { 0%, 12%, 24%, 36% { opacity: 1; } 6%, 18%, 30% { opacity: 0; } }
+@keyframes wave-b { 0%, 12%, 24%, 36% { opacity: 0; } 6%, 18%, 30% { opacity: 1; } }
+
 .kicker { margin: 0 0 8px; font-weight: 600; }
 
 .about { margin: 0 0 48px; padding-left: 22px; }
