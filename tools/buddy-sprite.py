@@ -7,7 +7,7 @@
 
 PAL = {
   'K': '#2b1c14',                                  # outline
-  'H': '#5b3b25', 'h': '#7d5636', 'g': '#3e2617',  # hair, highlight, shadow (also the brows)
+  'H': '#201b1f', 'h': '#45393f', 'g': '#0e0b0d',  # black hair, highlight strands, shadow (also the brows)
   'S': '#d4a47c', 's': '#b3835c',                  # skin, shadow
   'E': '#1b120d', 'M': '#a8604a',                  # eyes, mouth
   'R': '#8b2e1f', 'r': '#6c2216', 'W': '#efe6d6',  # red hoodie, shadow, drawstrings
@@ -24,19 +24,19 @@ PAL = {
 # The standing body, 25 wide. Hair rows 7-8 are the textured fringe: uneven tufts with skin showing between them.
 STAND = """
 .......KKKKKKKKKK.......
-.....KKHHhHHHHHHHKK.....
-....KHHHHHHhHHHHHHHKK...
-...KHhHHHHHHHHHHHhHHHK..
-...KHHHHHhHHHHhHHHHHhK..
-...KHHHHHHHHgHHHHHHHHK..
-...KHHHHHgSSgHHHHHHHHK..
-...KHHHHSSSSSgHHHHHHHK..
-...KHHHSSSSSSSgHHHHHHK..
-...KHHSSSSSSSSSSgHHHHK..
+.....KKHhHHHhHHHHKK.....
+....KHhHHHhHHHhHHHHKK...
+...KHHhHHhHHHHHhHHhHHK..
+...KHhHHHHhHHhHHHHHhHK..
+...KHHhHHHHHgHHHhHHHHK..
+...KHHHHHgSSgHHhHHhHHK..
+...KHhHHSSSSSgHHHHHHhK..
+...KHHHSSSSSSSgHhHHHHK..
+...KHHSSSSSSSSSSgHHhHK..
 ...KHSSggSSSSSSggSHHHK..
-...KHSSEESSSSSSEESHHHK..
+...KHSSEESSSSSSEESHhHK..
 ...KHSSSSSSSsSSSSSHHHK..
-....KHSSSSSSSSSSSSHHK...
+....KHSSSSSSSSSSSSHhK...
 .....KSSSSSMMSSSSSHK....
 ......KsSSSSSSSSSsK.....
 ........KKKsSSsKKK......
@@ -147,20 +147,20 @@ def wave(cells):
 # Him from the side, facing right: hair at the back, the fringe falling over his forehead at the front.
 PROFILE = """
 .....KKKKKKKK...
-...KKHHhHHHHHKK.
-..KHHHHHHhHHHHHK
-.KHhHHHHHHHHHHHK
-.KHHHHhHHHHHhHHK
-.KHHHHHHHHHHgHHK
-.KHHHHHHHHHgSHHK
-.KHHHHHHHHgSSSHK
-.KHHHHHHHHSSSSSK
-.KHHHHHHHSSSggSK
-.KHHHHHHHSSSEESK
-.KsHHHHHHSSSSSSK
-.KsHHHHHHSSSSsSK
-.KHHHHHHSSSSSSMK
-..KHHHHHSSSSSSK.
+...KKHhHHHhHHKK.
+..KHhHHHHhHHHhHK
+.KHHhHHhHHHHHHHK
+.KHhHHHhHHHHhHHK
+.KHHHhHHHhHHgHHK
+.KHhHHHHhHHgSHHK
+.KHHHhHHHHgSSSHK
+.KHHHHHhHgSSSSSK
+.KHhHHHHHSSSggSK
+.KHHHhHHgSSSEESK
+.KsHHHHhHSSSSSSK
+.KsHhHHHgSSSSsSK
+.KHHHHhHSSSSSSMK
+..KHhHHHSSSSSSK.
 ...KHHsSSSSSSK..
 .....KKsSSKKK...
 .....KRRRRRRK...
