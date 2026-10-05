@@ -201,15 +201,23 @@
     };
 
     const frame = (f) => (buddy.dataset.f = f);
+    let greeting = false; // the bubble is following him around while he's up
     const placeStanding = (x) => {
-      buddy.style.transform = `translate(${Math.round(x - HEAD_COL * u)}px, ${Math.round(spot.y - ROWS * u)}px)`;
+      const top = spot.y - ROWS * u;
+      buddy.style.transform = `translate(${Math.round(x - HEAD_COL * u)}px, ${Math.round(top)}px)`;
+      if (greeting) {
+        say.style.left = `${Math.round(x + 8.5 * u)}px`; // over his head
+        say.style.top = `${Math.round(top + 2)}px`;
+      }
     };
     const placeDesk = () => {
       const headLeft = spot.x + WALK * u;
       const top = spot.y - DESK_ROWS * u;
       desk.style.transform = `translate(${Math.round(headLeft - DESK_HEAD_COL * u)}px, ${Math.round(top)}px)`;
-      say.style.left = `${Math.round(headLeft + 7.5 * u)}px`;
-      say.style.top = `${Math.round(top + 2)}px`;
+      if (!greeting) {
+        say.style.left = `${Math.round(headLeft + 7.5 * u)}px`;
+        say.style.top = `${Math.round(top + 2)}px`;
+      }
     };
 
     const WORK_MS = 10000; // how long he codes before taking a break
@@ -252,6 +260,10 @@
 
     const sit = () => {
       seated = true;
+      if (greeting) {
+        say.classList.remove('show');
+        greeting = false;
+      }
       buddy.classList.add('off');
       desk.dataset.seated = '1';
       typeLoop();
@@ -316,6 +328,9 @@
     const poke = () => {
       if (!seated || busy) return;
       busy = true;
+      greeting = false;
+      say.textContent = "fixing a bug. don't disturb!";
+      placeDesk();
       desk.dataset.look = 'you';
       say.classList.add('show');
       later(() => {
@@ -325,6 +340,29 @@
       }, 2600);
     };
     desk.addEventListener('click', poke);
+
+    // click him while he's up and about and he'll say hi
+    let greetTimer = 0;
+    const greet = () => {
+      if (seated) return;
+      greeting = true;
+      say.textContent = 'hey, sup';
+      const x = parseFloat(buddy.style.transform.replace(/.*translate\(([-\d.]+)px.*/, '$1')) + HEAD_COL * u;
+      placeStanding(x);
+      say.classList.add('show');
+      clearTimeout(greetTimer);
+      greetTimer = setTimeout(() => {
+        say.classList.remove('show');
+        greeting = false;
+      }, 1800);
+    };
+    buddy.addEventListener('click', greet);
+    buddy.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        greet();
+      }
+    });
     desk.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();

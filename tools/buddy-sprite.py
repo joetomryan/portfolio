@@ -316,7 +316,8 @@ DESK_LAYERS = [
     ('d-arm type-2', arm(2)),
 ]
 
-print(f'<svg class="buddy" viewBox="0 0 {SW} {SH}" shape-rendering="crispEdges" data-f="stand" aria-hidden="true">'
+print(f'<svg class="buddy" viewBox="0 0 {SW} {SH}" shape-rendering="crispEdges" data-f="stand" '
+      'role="button" tabindex="0" aria-label="joe. click to say hi.">'
       + ''.join(f'<g class="f f-{n}">{rects(g)}</g>' for n, g in STAND_FRAMES.items()) + '</svg>')
 print(f'<svg class="buddy-desk" viewBox="0 0 {DW} {DH}" shape-rendering="crispEdges" data-look="screen" data-type="1" '
       'role="button" tabindex="0" aria-label="joe, coding at his desk. click to say hi.">'

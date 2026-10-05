@@ -161,7 +161,8 @@ kbd {
   top: 0;
   will-change: transform;
 }
-.buddy { height: 0.85em; width: calc(0.85em * 25 / 33); pointer-events: none; z-index: 2; }
+.buddy { height: 0.85em; width: calc(0.85em * 25 / 33); z-index: 2; cursor: pointer; outline: none; }
+.buddy:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .buddy.off { display: none; }
 .buddy .f { display: none; }
 .buddy[data-f="stand"] .f-stand { display: inline; }
