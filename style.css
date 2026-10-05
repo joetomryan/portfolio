@@ -168,6 +168,14 @@ kbd {
 .buddy[data-f="wave1"] .f-wave1 { display: inline; }
 .buddy[data-f="wave2"] .f-wave2 { display: inline; }
 .buddy[data-f="side"] .f-side { display: inline; }
+.buddy[data-f="stretch1"] .f-stretch1 { display: inline; }
+.buddy[data-f="stretch2"] .f-stretch2 { display: inline; }
+/* the side view is drawn facing right; flip it to walk back to the name */
+.buddy[data-dir="left"] .f-side, .buddy[data-dir="left"] .f-walk1, .buddy[data-dir="left"] .f-walk2 {
+  transform: scaleX(-1);
+  transform-box: view-box;
+  transform-origin: center;
+}
 .buddy[data-f="walk1"] .f-walk1 { display: inline; }
 .buddy[data-f="walk2"] .f-walk2 { display: inline; }
 

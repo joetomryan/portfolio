@@ -209,10 +209,23 @@ def side_walk(step):
         clear(g, SH - 1, SH - 1, PX + 10, PX + 14)
     return outline(g)
 
+def stretch(cells):
+    """Both arms up, like a stretch after a long sit."""
+    g = wave(cells)
+    clear(g, 19, 24, 2, 6)            # drop the hanging left arm too
+    fill(g, 19, 23, 7, 7, 'K')
+    arm = grid(SW, SH)
+    paint(arm, [(y, SW - 1 - x, c) for y, x, c in cells])  # the right arm, mirrored
+    outline(arm)
+    blit(g, [''.join(r) for r in arm])
+    return g
+
 STAND_FRAMES = {
     'stand': stand(),
     'wave1': wave(WAVE_UP),
     'wave2': wave(WAVE_DOWN),
+    'stretch1': stretch(WAVE_UP),
+    'stretch2': stretch(WAVE_DOWN),
     'side': side(),
     'walk1': side_walk(1),
     'walk2': side_walk(2),

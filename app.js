@@ -225,6 +225,7 @@
       say.style.top = `${Math.round(top + 2)}px`;
     };
 
+    const WORK_MS = 5000; // how long he codes before taking a break
     const typeLoop = () => {
       let n = 0;
       const step = () => {
@@ -239,12 +240,64 @@
       step();
     };
 
+    // a two-frame animation for a while, then carry on
+    const cycle = (a, b, every, ms, then) => {
+      for (let t = 0; t < ms; t += every) later(() => frame((t / every) % 2 ? b : a), t);
+      later(then, ms);
+    };
+
+    const walkTo = (from, to, dir, ms, then) => {
+      const mine = run;
+      buddy.dataset.dir = dir;
+      const t0 = performance.now();
+      const step = (now) => {
+        if (mine !== run) return;
+        const k = Math.min((now - t0) / ms, 1);
+        placeStanding(from + (to - from) * k);
+        frame(Math.floor(now / 150) % 2 ? 'walk1' : 'walk2');
+        if (k < 1) requestAnimationFrame(step);
+        else then();
+      };
+      requestAnimationFrame(step);
+    };
+
+    const chairX = () => spot.x + WALK * u;
+
     const sit = () => {
       seated = true;
       buddy.classList.add('off');
       desk.classList.add('on');
       placeDesk();
-      if (!reduceMotion) typeLoop();
+      if (reduceMotion) return;
+      typeLoop();
+      later(standUp, WORK_MS);
+    };
+
+    // every so often he gets up, walks back to the name, stretches, waves, and goes back to work
+    const standUp = () => {
+      if (busy) {
+        later(standUp, 300); // not while he's telling you off
+        return;
+      }
+      seated = false;
+      desk.classList.remove('on');
+      buddy.classList.remove('off');
+      placeStanding(chairX());
+      buddy.dataset.dir = 'left';
+      frame('side');
+      later(() => walkTo(chairX(), spot.x, 'left', 700, () => {
+        buddy.dataset.dir = 'right';
+        frame('stand');
+        later(() => cycle('stretch1', 'stretch2', 400, 1600, () => {
+          cycle('wave1', 'wave2', 220, 2000, () => {
+            frame('stand');
+            later(() => {
+              frame('side');
+              later(() => walkTo(spot.x, chairX(), 'right', 700, sit), 200);
+            }, 250);
+          });
+        }), 200);
+      }), 200);
     };
 
     const start = () => {
@@ -256,6 +309,7 @@
       desk.dataset.look = 'screen';
       desk.dataset.type = '1';
       buddy.classList.remove('off');
+      buddy.dataset.dir = 'right';
       if (!measure()) return false;
       placeStanding(spot.x);
       if (reduceMotion) {
@@ -263,24 +317,13 @@
         return true;
       }
       // say hi, then walk over to the desk and sit down
-      for (let i = 0; i <= 8; i++) later(() => frame(i % 2 ? 'wave2' : 'wave1'), i * 220);
-      later(() => frame('stand'), 9 * 220);
-      later(() => frame('side'), 9 * 220 + 250); // turns to face the desk
-      later(() => {
-        const mine = run;
-        const t0 = performance.now();
-        const from = spot.x;
-        const to = spot.x + WALK * u;
-        const step = (now) => {
-          if (mine !== run) return;
-          const k = Math.min((now - t0) / 900, 1);
-          placeStanding(from + (to - from) * k);
-          frame(Math.floor(now / 150) % 2 ? 'walk1' : 'walk2');
-          if (k < 1) requestAnimationFrame(step);
-          else sit();
-        };
-        requestAnimationFrame(step);
-      }, 9 * 220 + 550);
+      cycle('wave1', 'wave2', 220, 2000, () => {
+        frame('stand');
+        later(() => {
+          frame('side'); // turns to face the desk
+          later(() => walkTo(spot.x, chairX(), 'right', 900, sit), 300);
+        }, 250);
+      });
       return true;
     };
 
