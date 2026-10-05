@@ -8,7 +8,7 @@
 PAL = {
   'K': '#2b1c14',                                  # outline
   'H': '#5b3b25', 'h': '#7d5636', 'g': '#3e2617',  # hair, highlight, shadow (also the brows)
-  'S': '#e7c09c', 's': '#c89a74',                  # skin, shadow
+  'S': '#d4a47c', 's': '#b3835c',                  # skin, shadow
   'E': '#1b120d', 'M': '#a8604a',                  # eyes, mouth
   'R': '#8b2e1f', 'r': '#6c2216', 'W': '#efe6d6',  # red hoodie, shadow, drawstrings
   'P': '#34466b', 'p': '#26344f',                  # jeans

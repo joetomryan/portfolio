@@ -155,7 +155,7 @@
     const HEAD_COL = 4; // where his head starts in the standing sprite
     const DESK_HEAD_COL = 2; // and in the desk scene
     const GAP = 6; // space between the name and where he stands, in pixels of art
-    const WALK = 18; // steps from there to the chair
+    const WALK = 30; // steps from there to the chair
     let u = 0; // screen pixels per pixel of art
     let spot = null; // where he stands: { x, y } with y the line he stands on
     let timers = [];
@@ -226,7 +226,7 @@
       say.style.top = `${Math.round(top + 2)}px`;
     };
 
-    const WORK_MS = 5000; // how long he codes before taking a break
+    const WORK_MS = 10000; // how long he codes before taking a break
     const typeLoop = () => {
       let n = 0;
       const step = () => {
@@ -285,15 +285,19 @@
       placeStanding(chairX());
       buddy.dataset.dir = 'left';
       frame('side');
-      later(() => walkTo(chairX(), spot.x, 'left', 800, () => {
+      // about ten seconds away from the desk: walk back, wave, a breather, wave again, walk back
+      later(() => walkTo(chairX(), spot.x, 'left', 1200, () => {
         buddy.dataset.dir = 'right';
         frame('stand');
         later(() => cycle('wave1', 'wave2', 220, 2600, () => {
           frame('stand');
-          later(() => {
-            frame('side');
-            later(() => walkTo(spot.x, chairX(), 'right', 800, sit), 200);
-          }, 300);
+          later(() => cycle('wave1', 'wave2', 220, 2600, () => {
+            frame('stand');
+            later(() => {
+              frame('side');
+              later(() => walkTo(spot.x, chairX(), 'right', 1200, sit), 200);
+            }, 300);
+          }), 1400);
         }), 250);
       }), 200);
     };
@@ -321,7 +325,7 @@
         frame('stand');
         later(() => {
           frame('side'); // turns to face the desk
-          later(() => walkTo(spot.x, chairX(), 'right', 1000, sit), 300);
+          later(() => walkTo(spot.x, chairX(), 'right', 1300, sit), 300);
         }, 250);
       });
       return true;
