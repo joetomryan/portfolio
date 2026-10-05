@@ -829,9 +829,11 @@ span.repo-name { color: var(--ink); }
   .folio { justify-content: center; }
 }
 
+/* for people who ask for less motion: skip the full-width page-turn sweep. the small pixel
+   animations and click effects (the bouncing ball, the copied stamp) stay, since they are tiny
+   and most of them only happen when you ask for them */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .paws span { opacity: 1; }
+  .turn.go { animation: none; }
 }
 
 /* without javascript, show charts at their final state */

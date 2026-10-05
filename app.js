@@ -160,7 +160,9 @@
       const ctx = document.createElement('canvas').getContext('2d');
       ctx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       const m = ctx.measureText('JTRH');
-      return { ascent: m.fontBoundingBoxAscent, cap: m.actualBoundingBoxAscent };
+      const size = parseFloat(style.fontSize);
+      // older Safari and Firefox don't report font metrics; fall back to IBM Plex Serif's proportions
+      return { ascent: m.fontBoundingBoxAscent || size * 1.025, cap: m.actualBoundingBoxAscent || size * 0.7 };
     };
 
     const layout = () => {
@@ -252,7 +254,6 @@
       seated = true;
       buddy.classList.add('off');
       desk.dataset.seated = '1';
-      if (reduceMotion) return;
       typeLoop();
       later(standUp, WORK_MS);
     };
@@ -300,10 +301,6 @@
       placeStanding(spot.x);
       placeDesk();
       desk.classList.add('on'); // the desk is there from the start
-      if (reduceMotion) {
-        sit();
-        return true;
-      }
       // say hi, then walk over to the desk and sit down
       cycle('wave1', 'wave2', 220, 2000, () => {
         frame('stand');
