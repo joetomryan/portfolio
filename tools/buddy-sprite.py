@@ -1,131 +1,113 @@
-# Generates the pixel buddy SVG on the home page: python3 tools/buddy-sprite.py
+# Generates the pixel buddy on the home page: python3 tools/buddy-sprite.py
 # Paste its output in place of the <svg class="buddy"> element in index.html.
-# Pixel sprite frames for the walking buddy. 16 x 27 grid, one char per pixel.
+# One character per pixel. The body is drawn on a 24-wide grid, then padded so raised arms fit.
 PAL = {
-  'K': '#231812',                   # outline
-  'H': '#23160f', 'h': '#4a3022',   # hair, highlight
-  'S': '#c98c62', 's': '#a86f4b',   # skin, shadow
+  'K': '#2b1c14',                                  # outline
+  'H': '#33211a', 'h': '#5b3a28',                  # hair, highlight
+  'S': '#c98c62', 's': '#a86f4b',                  # skin, shadow
   'E': '#1b120d', 'M': '#8a3b2b', 'c': '#d77d63',  # eyes, mouth, blush
-  'T': '#f6f4ef', 't': '#d9d4ca',   # white tee, shadow
-  'N': '#151515',                   # swoosh
-  'P': '#1d1d21', 'p': '#38383f',   # black pants, highlight
-  'B': '#f6f4ef', 'b': '#cfc8bb',   # white sneakers, sole shadow
+  'R': '#8b2e1f', 'r': '#6c2216',                  # red hoodie, shadow
+  'W': '#efe6d6',                                  # hoodie drawstrings
+  'P': '#34466b', 'p': '#26344f',                  # jeans
+  'B': '#f1ece2', 'b': '#c4bcae',                  # sneakers
 }
-LEFT = [                 # left half (cols 0-7); the right half mirrors it
-  "....KKKK",  # 0
-  "...KHHHK",  # 1  center part
-  "..KHHhHS",  # 2
-  "..KHhHHS",  # 3
-  ".KHHHHSS",  # 4
-  ".KHHHSSS",  # 5
-  ".KHSSSSS",  # 6  hair ends at the temples
-  ".KSSESSS",  # 7  eyes
-  ".KSSESSS",  # 8
-  ".KscSSSS",  # 9  blush
-  "..KSSSSM",  # 10 mouth
-  "...KsSSS",  # 11
-  "....KKSS",  # 12 chin
-  "......KS",  # 13 neck
-  "...KKTTT",  # 14 shoulders
-  "..KTTTTT",  # 15
-  ".KTTTTTT",  # 16 sleeves
-  ".KSKTTTT",  # 17 arms
-  ".KSKTTTT",  # 18
-  ".KSKtttt",  # 19 hem
-  ".KsKPPPP",  # 20 hands, waistband
-  "..KKPPPP",  # 21
-  "...KPPPK",  # 22 legs
-  "...KpPPK",  # 23
-  "..KBBBBK",  # 24 sneakers
-  "..KbbbbK",  # 25
-  "..KKKKKK",  # 26
-]
-OX = 3            # padding so raised arms fit
-W, H = 16 + 2 * OX, len(LEFT)
+BODY = """
+......KKKKKK............
+....KKHHHHhhKK..........
+...KHHHHHhhHHHK.........
+..KHHHHHHHHHHHHK........
+..KHHHHHHHHHHHHK........
+..KHHHHHHHSHHHHK........
+..KHSSHSSSSSSSHK........
+..KSSSESSSSESSSK........
+.KsSSSESSSSESSSK........
+.KsScSSSSSSSScSK........
+..KSSSSSMMSSSSK.........
+...KsSSSSSSSSsK.........
+....KKKSSSSKKK..........
+......KsSSsK............
+..KKKKRRRRRRRRKKKKK.....
+.KRRKRRRWRRWRRRRKRRK....
+.KRRKRRRWRRWRRRRKRRK....
+.KRRKRRRRRRRRRRRKRRK....
+.KRRKRRRRRRRRRRRKRRK....
+.KrRKrRRRRRRRRRrKRrK....
+.KSSKrrrrrrrrrrrKSSK....
+..KKKPPPPPPPPPPPKKK.....
+....KPPPPPpPPPPPK.......
+.....KPPPPKPPPPPK.......
+.....KPPPKKKPPPK........
+.....KPPPK.KPPPK........
+.....KPPPK.KPPPK........
+.....KpPPK.KPPpK........
+....KBBBBK.KBBBBK.......
+....KbbbbK.KbbbbK.......
+....KKKKKK.KKKKKK.......
+"""
+# right arm raised for the wave: two positions (from the original avatar)
+WAVE_A = {1: (16, "KKK"), 2: (15, "KSSSK"), 3: (15, "KSSSK"), 4: (15, "KsSSK"), 5: (16, "KSK"),
+          6: (15, "KRRK"), 7: (15, "KRRK"), 8: (14, "KRRK"), 9: (14, "KRRK"), 10: (14, "KRK")}
+WAVE_B = {1: (18, "KKK"), 2: (17, "KSSSK"), 3: (17, "KSSSK"), 4: (17, "KSSsK"), 5: (17, "KSK"),
+          6: (16, "KRRK"), 7: (16, "KRRK"), 8: (15, "KRRK"), 9: (14, "KRRK"), 10: (14, "KRK")}
+OX = 3                                   # left padding so a mirrored raised arm fits
+CENTER2 = 17                             # mirror axis (x -> 17 - x) in body coordinates
+ROWS = BODY.strip('\n').split('\n')
+H = len(ROWS)
 
 def base():
-    g = []
-    for row in LEFT:
-        right = row[::-1]
-        g.append(list('.' * OX + row + right + '.' * OX))
-    # asymmetric details: swoosh on the chest, swooshes on the shoes
-    put(g, 16, 10, "N"); put(g, 17, 8, "NN")
-    put(g, 24, 4, "N"); put(g, 24, 10, "N")
-    return g
+    W = 24 + OX + 2
+    return [list('.' * OX + r + '.' * (W - OX - len(r))) for r in ROWS]
 
 def put(g, y, x, s):
     for i, c in enumerate(s):
-        g[y][x + OX + i] = c
+        if c != '.': g[y][x + OX + i] = c
 
-def copy(g): return [r[:] for r in g]
+def lower_arm(g, side):
+    """Remove a hanging arm (for raising it). side 'R' or 'L' (viewer's right/left)."""
+    cols = (17, 18, 19) if side == 'R' else (1, 2, 3)
+    for y in range(14, 22):
+        for x in cols:
+            g[y][x + OX] = '.'
+    edge = 16 if side == 'R' else 4
+    for y in range(15, 21):
+        g[y][edge + OX] = 'K'
+    return g
+
+def raise_arm(g, side, wave):
+    lower_arm(g, side)
+    for y, (x, s) in wave.items():
+        if side == 'R':
+            put(g, y, x, s)
+        else:  # mirror the raised arm onto the left side
+            put(g, y, CENTER2 - (x + len(s) - 1), s[::-1])
+    return g
 
 def lift_leg(g, side):
-    """Raise one leg a pixel (walk pose). side: 'L' or 'R' (viewer's left/right)."""
-    cols = range(2 + OX, 8 + OX) if side == 'L' else range(8 + OX, 14 + OX)
-    for y in range(21, 27):
+    """Walking: raise one leg by a pixel."""
+    cols = range(4, 11) if side == 'L' else range(10, 18)
+    for y in range(24, H):
         for x in cols:
-            g[y - 1][x] = g[y][x] if y > 21 else g[y - 1][x]
+            g[y - 1][x + OX] = g[y][x + OX]
     for x in cols:
-        g[26][x] = '.'
+        g[H - 1][x + OX] = '.'
     return g
 
-def swing_arm(g, side):
-    """Shift one hand up a pixel so the arms look like they swing."""
-    x = tuple(v + OX for v in ((1, 2, 3) if side == 'L' else (12, 13, 14)))
-    for y in range(17, 21):
-        for xx in x:
-            g[y - 1][xx] = g[y][xx] if y > 17 else g[y - 1][xx]
-    for xx in x:
-        g[20][xx] = '.' if xx in (1 + OX, 14 + OX) else g[20][xx]
+def tuck(g):
+    """Jumping: pull the legs up."""
+    for _ in range(2):
+        for side in ('L', 'R'):
+            lift_leg(g, side)
     return g
 
-# a raised right arm in body coordinates (the 16-wide body; may spill into the padding)
-ARM_UP = {
-    'high': [(8, 15, 'K'), (8, 16, 'K'),
-             (9, 14, 'K'), (9, 15, 'S'), (9, 16, 'S'), (9, 17, 'K'),
-             (10, 14, 'K'), (10, 15, 'S'), (10, 16, 's'), (10, 17, 'K'),
-             (11, 14, 'K'), (11, 15, 'S'), (11, 16, 'S'), (11, 17, 'K'),
-             (12, 13, 'K'), (12, 14, 'S'), (12, 15, 'S'), (12, 16, 'K'),
-             (13, 13, 'K'), (13, 14, 'S'), (13, 15, 'S'), (13, 16, 'K'),
-             (14, 13, 'T'), (14, 14, 'T'), (14, 15, 'K'),
-             (15, 13, 'T'), (15, 14, 'T'), (15, 15, 'K')],
-    'tilt': [(9, 16, 'K'), (9, 17, 'K'),
-             (10, 15, 'K'), (10, 16, 'S'), (10, 17, 'S'), (10, 18, 'K'),
-             (11, 15, 'K'), (11, 16, 'S'), (11, 17, 's'), (11, 18, 'K'),
-             (12, 14, 'K'), (12, 15, 'S'), (12, 16, 'S'), (12, 17, 'K'),
-             (13, 13, 'K'), (13, 14, 'S'), (13, 15, 'S'), (13, 16, 'K'),
-             (14, 13, 'T'), (14, 14, 'T'), (14, 15, 'K'),
-             (15, 13, 'T'), (15, 14, 'T'), (15, 15, 'K')],
+FRAMES = {
+    'stand': base(),
+    'walk1': lift_leg(base(), 'L'),
+    'walk2': lift_leg(base(), 'R'),
+    'jump':  tuck(raise_arm(raise_arm(base(), 'R', WAVE_A), 'L', WAVE_A)),
+    'wave1': raise_arm(base(), 'R', WAVE_A),
+    'wave2': raise_arm(base(), 'R', WAVE_B),
 }
-
-def raise_arm(g, side, pose):
-    """Raise one arm. pose 'high' (hand up) or 'tilt' (hand waving out to the side)."""
-    mirror = (lambda x: x) if side == 'R' else (lambda x: 15 - x)
-    for y in range(17, 21):            # remove the hanging arm, close the torso edge
-        for x in (12, 13, 14):
-            g[y][mirror(x) + OX] = '.'
-        g[y][mirror(12) + OX] = 'K'
-    for y, x, ch in ARM_UP[pose]:
-        g[y][mirror(x) + OX] = ch
-    return g
-
-def tuck_legs(g):
-    """Jump pose: knees up, shoes pulled in."""
-    for y in range(22, 27):
-        for x in range(W): g[y][x] = '.'
-    put(g, 22, 3, "KBBBK..KBBBK")
-    put(g, 23, 3, "KbbbK..KbbbK")
-    put(g, 24, 3, "KKKKK..KKKKK")
-    put(g, 22, 4, "N"); put(g, 22, 11, "N")
-    return g
-
-FRAMES = {}
-FRAMES['stand'] = base()
-FRAMES['walk1'] = swing_arm(lift_leg(base(), 'L'), 'R')
-FRAMES['walk2'] = swing_arm(lift_leg(base(), 'R'), 'L')
-FRAMES['jump']  = tuck_legs(raise_arm(raise_arm(base(), 'L', 'high'), 'R', 'high'))
-FRAMES['wave1'] = raise_arm(base(), 'R', 'high')
-FRAMES['wave2'] = raise_arm(base(), 'R', 'tilt')
+W = max(max((x for x, c in enumerate(row) if c != '.'), default=0) for g in FRAMES.values() for row in g) + 1
 
 def rects(g):
     out = []
@@ -142,8 +124,5 @@ def rects(g):
                 x += 1
     return ''.join(out)
 
-svg = [f'<svg class="buddy" viewBox="0 0 {W} {H}" shape-rendering="crispEdges" data-f="stand" aria-hidden="true">']
-for name, g in FRAMES.items():
-    svg.append(f'<g class="f f-{name}">{rects(g)}</g>')
-svg.append('</svg>')
-print(''.join(svg))
+print(f'<svg class="buddy" viewBox="0 0 {W} {H}" shape-rendering="crispEdges" data-f="stand" aria-hidden="true">'
+      + ''.join(f'<g class="f f-{n}">{rects(g)}</g>' for n, g in FRAMES.items()) + '</svg>')

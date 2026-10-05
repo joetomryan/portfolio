@@ -146,15 +146,20 @@ kbd {
   letter-spacing: 0;
 }
 
-/* a little pixel-art me who wanders along the name and keeps away from the cursor */
-.name-stage { position: relative; margin: 0 0 24px; padding-bottom: 62px; }
+/* a little pixel-art me who walks beside and on top of the name, and keeps away from the cursor */
+.name-stage {
+  position: relative;
+  margin: 0 0 32px;
+  padding-top: 0.35em;                       /* headroom for when he stands on the letters */
+  font-size: clamp(48px, 8vw, 84px);        /* same as the name, so em sizes follow it */
+}
 .name-stage .name { margin: 0; }
 .buddy {
   position: absolute;
   left: 0;
   top: 0;
-  width: 44px;
-  height: 54px;
+  height: 1.15em;
+  width: calc(1.15em * 25 / 31);
   pointer-events: none;
   will-change: transform;
 }
@@ -165,10 +170,6 @@ kbd {
 .buddy[data-f="jump"] .f-jump { display: inline; }
 .buddy[data-f="wave1"] .f-wave1 { display: inline; }
 .buddy[data-f="wave2"] .f-wave2 { display: inline; }
-@media (max-width: 560px) {
-  .name-stage { padding-bottom: 46px; }
-  .buddy { width: 33px; height: 40.5px; }
-}
 
 .kicker { margin: 0 0 8px; font-weight: 600; }
 
