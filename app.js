@@ -150,11 +150,11 @@
   if (stage && buddy && desk && say) {
     const name = stage.querySelector('.name');
     const ROWS = 33; // the standing sprite's height, in pixels of art
-    const DESK_ROWS = 35;
-    const DESK_COLS = 46;
+    const DESK_ROWS = 33;
+    const DESK_COLS = 34;
     const HEAD_COL = 4; // where his head starts in the standing sprite
-    const DESK_HEAD_COL = 8; // and in the desk scene
-    const WALK = 12; // steps from where he waves to the chair, in pixels of art
+    const DESK_HEAD_COL = 2; // and in the desk scene
+    const WALK = 10; // steps from where he waves to the chair, in pixels of art
     let u = 0; // screen pixels per pixel of art
     let spot = null; // where he stands: { x, y } with y the line he stands on
     let timers = [];
@@ -221,7 +221,7 @@
       const headLeft = spot.x + WALK * u;
       const top = spot.y - DESK_ROWS * u;
       desk.style.transform = `translate(${Math.round(headLeft - DESK_HEAD_COL * u)}px, ${Math.round(top)}px)`;
-      say.style.left = `${Math.round(headLeft + 8.5 * u)}px`;
+      say.style.left = `${Math.round(headLeft + 7.5 * u)}px`;
       say.style.top = `${Math.round(top + 2)}px`;
     };
 
@@ -265,6 +265,7 @@
       // say hi, then walk over to the desk and sit down
       for (let i = 0; i <= 8; i++) later(() => frame(i % 2 ? 'wave2' : 'wave1'), i * 220);
       later(() => frame('stand'), 9 * 220);
+      later(() => frame('side'), 9 * 220 + 250); // turns to face the desk
       later(() => {
         const mine = run;
         const t0 = performance.now();
@@ -279,7 +280,7 @@
           else sit();
         };
         requestAnimationFrame(step);
-      }, 9 * 220 + 300);
+      }, 9 * 220 + 550);
       return true;
     };
 

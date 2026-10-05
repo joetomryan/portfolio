@@ -144,106 +144,162 @@ def wave(cells):
     blit(g, [''.join(r) for r in arm])
     return g
 
-def walk(side):
-    g = stand()
-    x0, x1 = (6, 11) if side == 'L' else (13, 18)
-    for y in range(26, SH):           # lift one foot by a pixel
-        for x in range(x0, x1 + 1):
-            g[y - 1][x] = g[y][x]
-    clear(g, SH - 1, SH - 1, x0, x1)
+# Him from the side, facing right: hair at the back, the fringe falling over his forehead at the front.
+PROFILE = """
+.....KKKKKKKK...
+...KKHHHHHHHHKK.
+..KHHhHHHHHHHHHK
+..KHHHHHhHHHHHHK
+.KHHHHHHHHhHHHHK
+.KHhHHHHHHHHHHHK
+.KHHHHHHHHHHHSHK
+.KHHHHHHHHHSHSHK
+.KHHHHHHHHSSHSSK
+.KHHHHHHHSSSSSSK
+.KHHHHHHSSSSEESK
+.KsHHHHHSSSSEESK
+.KsHHHHHSSSScSSK
+.KHHHHHSSSSSSSMK
+..KHHHSSSSSSSSK.
+...KsSSSSSSSSK..
+.....KKsSSKKK...
+.....KRRRRRRK...
+....KRRRRWRRRK..
+....KRRRRWRRRRK.
+...KRRKRRRRRRRK.
+...KRRKRRRRRRRK.
+...KRRKRRRRRRRK.
+...KrRKrRRRRRrK.
+...KSSKrrrrrrrK.
+....KKPPPPPPPK..
+.....KPPPpPPPK..
+.....KPPPPPPPK..
+.....KPPPPPPPK..
+.....KpPPPPPpK..
+.....KBBBBBBBBK.
+.....KbbbbbbbbK.
+.....KKKKKKKKKK.
+"""
+PX = 4  # the profile sits at this offset in the 25-wide frame, so his head starts where it does face-on
+
+def profile_rows():
+    return [r.ljust(16, '.') for r in PROFILE.strip('\n').split('\n')]
+
+def side():
+    g = grid(SW, SH)
+    blit(g, profile_rows(), PX)
     return g
+
+def side_walk(step):
+    """Legs apart: the back leg swings back, the front leg forward."""
+    g = side()
+    legs = [row[:] for row in g]
+    clear(g, 26, SH - 1, PX + 5, PX + 14)
+    back = -1 if step == 1 else 0
+    front = 1 if step == 1 else 0
+    for y in range(26, SH):
+        for x in range(PX + 5, PX + 10):
+            if legs[y][x] != '.': g[y][x + back] = legs[y][x]
+        for x in range(PX + 10, PX + 15):
+            if legs[y][x] != '.': g[y][x + front] = legs[y][x]
+    if step == 2:                     # the other stride: front foot lifts
+        for y in range(27, SH):
+            for x in range(PX + 10, PX + 15):
+                g[y - 1][x] = g[y][x]
+        clear(g, SH - 1, SH - 1, PX + 10, PX + 14)
+    return outline(g)
 
 STAND_FRAMES = {
     'stand': stand(),
     'wave1': wave(WAVE_UP),
     'wave2': wave(WAVE_DOWN),
-    'walk1': walk('L'),
-    'walk2': walk('R'),
+    'side': side(),
+    'walk1': side_walk(1),
+    'walk2': side_walk(2),
 }
 
-# ---------- the desk scene ----------
-# 44 wide, 35 tall, same pixel size as the standing sprite. Layers are listed back to front.
+# ---------- the desk scene, from the side ----------
+# 34 wide, 33 tall, same pixel size as the standing sprite. He sits facing right, away from the name,
+# with the laptop in front of him. Layers are listed back to front.
 
-DW, DH = 46, 35
-DX = 4  # the character sits at this x offset; his head is at the same rows as when standing
+DW, DH = 34, 33
+DX, DY = 1, 5  # where his head lands when he sits: a little lower than standing
 
 def chair():
     g = grid(DW, DH)
-    fill(g, 12, 24, 5, 27, 'D')
-    fill(g, 13, 24, 6, 6, 'd')
+    fill(g, 14, 29, 3, 4, 'D')        # the back
+    fill(g, 13, 13, 3, 4, 'd')
+    fill(g, 28, 29, 3, 17, 'D')       # the seat
+    fill(g, 30, 32, 5, 6, 'D')        # legs
+    fill(g, 30, 32, 15, 16, 'D')
     return outline(g)
 
 def seated(look):
     g = grid(DW, DH)
-    blit(g, rows_of(STAND)[:25], DX)  # head, torso, hands; the desk hides the rest
-    clear(g, 19, 24, 22, 24)          # the right arm is drawn separately, reaching to the keyboard
-    fill(g, 19, 23, 21, 21, 'K')
-    if look == 'screen':              # eyes slide to the right, toward the laptop
-        for y in (10, 11):
-            for x in (12, 19):
-                g[y][x] = 'S'
-            for x in (14, 21):
-                g[y][x] = 'E'
-    else:                             # looks at you, brows down
-        paint(g, [(9, 12, 'K'), (9, 13, 'K'), (9, 19, 'K'), (9, 20, 'K')])
+    blit(g, profile_rows()[:17], DX, DY)                      # head and neck
+    rows = [
+        (22, 6, 'KRRRRRRK'),
+        (23, 5, 'KRRRRWRRRK'),
+        (24, 5, 'KRRRRWRRRRK'),
+        (25, 5, 'KRRRRRRRRRK'),
+        (26, 5, 'KrRRRRRRRRPPPPPPPK'),                          # hem, then the thighs under the desk
+        (27, 5, 'KPPPPPPPPPPPPPPPK'),
+        (28, 17, 'KPPPK'),                                      # the lower leg
+        (29, 17, 'KpPPK'),
+        (30, 17, 'KBBBBBBK'),                                   # the shoe
+        (31, 17, 'KbbbbbbK'),
+        (32, 17, 'KKKKKKKK'),
+    ]
+    for y, x, t in rows:
+        for i, c in enumerate(t):
+            g[y][x + i] = c
+    if look == 'you':                                           # brow down: he's been interrupted
+        paint(g, [(DY + 9, DX + 12, 'K'), (DY + 9, DX + 13, 'K')])
     return g
 
 def desk():
     g = grid(DW, DH)
-    fill(g, 25, 25, 1, 44, 'T')
-    fill(g, 26, 27, 1, 44, 'U')
-    fill(g, 28, 33, 2, 4, 'U')
-    fill(g, 28, 33, 41, 43, 'U')
-    fill(g, 21, 24, 2, 5, 'm')        # a mug, beside his left hand
-    fill(g, 23, 23, 2, 5, 'R')
-    paint(g, [(22, 6, 'm'), (22, 7, 'm'), (23, 7, 'm'), (24, 7, 'm'), (24, 6, 'm')])
+    fill(g, 24, 24, 15, 32, 'T')
+    fill(g, 25, 25, 15, 32, 'U')
+    fill(g, 26, 32, 30, 32, 'U')      # the far leg; the near one is behind him
     return outline(g)
-
-def steam():
-    g = grid(DW, DH)
-    paint(g, [(19, 4, 'q'), (18, 3, 'q'), (18, 5, 'q')])
-    return g
 
 def laptop():
     g = grid(DW, DH)
-    fill(g, 10, 22, 27, 42, 'L')      # the lid
-    fill(g, 11, 21, 29, 40, 'N')      # the screen
-    fill(g, 23, 23, 26, 43, 'l')      # keyboard
-    fill(g, 24, 24, 26, 43, 'L')      # base
+    fill(g, 22, 22, 18, 28, 'l')      # keyboard
+    fill(g, 23, 23, 18, 28, 'L')      # base
+    fill(g, 11, 21, 25, 31, 'L')      # the lid, turned a little toward us so the screen shows
+    fill(g, 12, 20, 26, 30, 'N')
     return outline(g)
 
 CODE = {
-    1: [(12, 28, 'vvv'), (12, 32, 'yyyy'), (14, 29, 'AAAA'), (14, 34, 'ooo'), (16, 29, 'GGGGGGG'),
-        (18, 28, 'AA'), (18, 31, 'yyyy'), (20, 28, 'vvv')],
-    2: [(12, 28, 'vvv'), (12, 32, 'yyy'), (14, 29, 'AAAAA'), (16, 29, 'AA'), (16, 32, 'GGGGGG'),
-        (18, 29, 'ooo'), (18, 33, 'yyy'), (20, 28, 'AAAA')],
-    3: [(12, 28, 'AA'), (12, 31, 'GGGGG'), (14, 29, 'vvvv'), (14, 34, 'yy'), (16, 29, 'oooooo'),
-        (18, 28, 'vvv'), (18, 32, 'AAAAA'), (20, 28, 'yy')],
+    1: [(13, 26, 'vv'), (13, 29, 'yy'), (15, 27, 'AAA'), (17, 27, 'GGGG'), (19, 26, 'AA')],
+    2: [(13, 26, 'vv'), (13, 29, 'y'), (15, 27, 'AAAA'), (17, 27, 'oo'), (19, 26, 'AAA')],
+    3: [(13, 26, 'AA'), (13, 29, 'GG'), (15, 27, 'vvv'), (17, 27, 'yyyy'), (19, 26, 'v')],
 }
 
 def code(n):
     g = grid(DW, DH)
-    for y, x, s in CODE[n]:
-        for i, c in enumerate(s):
-            g[y][x + 2 + i] = c
+    for y, x, t in CODE[n]:
+        for i, c in enumerate(t):
+            g[y][x + i] = c
     return g
 
 def cursor():
     g = grid(DW, DH)
-    g[20][35] = 'C'
+    g[19][29] = 'C'
     return g
 
 def arm(frame):
+    """The near arm, reaching forward to the keyboard."""
     g = grid(DW, DH)
-    sleeve = [(19, 22), (19, 23), (20, 23), (20, 24), (21, 24), (21, 25), (22, 25), (22, 26)]
-    for y, x in sleeve:
-        g[y][x] = 'R'
-    g[22][26] = 'r'
+    fill(g, 22, 23, 12, 17, 'R')
+    g[23][12] = 'r'
     if frame == 1:
-        fill(g, 22, 23, 27, 28, 'S')
+        fill(g, 21, 22, 18, 19, 'S')  # hand hovering over the keys
     else:
-        g[22][27] = 'r'
-        fill(g, 21, 22, 28, 29, 'S')
+        g[22][18] = 'r'
+        fill(g, 22, 23, 19, 20, 'S')  # hand down on the keys
     return outline(g)
 
 DESK_LAYERS = [
@@ -251,7 +307,6 @@ DESK_LAYERS = [
     ('d-look look-screen', seated('screen')),
     ('d-look look-you', seated('you')),
     ('d-desk', desk()),
-    ('d-steam', steam()),
     ('d-laptop', laptop()),
     ('d-code code-1', code(1)),
     ('d-code code-2', code(2)),
