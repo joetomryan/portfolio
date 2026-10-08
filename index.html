@@ -463,7 +463,13 @@
         <article class="view" data-view="research">
           <a class="back" href="#" data-home>← back</a>
           <h1 class="page-title"><span>chapter iv</span>Research</h1>
-          <p class="lede">no papers yet. these are the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
+          <p class="lede">no papers yet. one essay, and the questions i keep coming back to. if you're working on them, i'd love to talk.</p>
+
+          <a class="entry entry-link" href="#conscious">
+            <div class="entry-head"><span class="tag hot">essay</span><h2>conscious</h2></div>
+            <p><b>common sense from watching, not reading.</b> a child learns "things fall" from one cup sliding off one table, and keeps the rule, not the video. conscious is a memory system that does the same: observe, get surprised, compress the surprise into a rule, forget the episode. what the 2026 world models got right, where the new benchmarks show they stop, and the loop i think is missing between a model that predicts the world and one that understands it.</p>
+            <span class="read">read the essay →</span>
+          </a>
 
           <div class="entry">
             <div class="entry-head"><span class="tag">interest</span><h2>ai safety</h2></div>
@@ -486,6 +492,117 @@
           </div>
 
           <a class="next" href="#life">next chapter: life →</a>
+        </article>
+
+        <article class="view essay" data-view="conscious" data-parent="research">
+          <a class="back" href="#research">← research</a>
+          <h1 class="page-title"><span>essay · october 2026</span>Conscious</h1>
+          <p class="role">common sense from watching, not reading.</p>
+          <p class="lede">a memory that keeps the lesson and forgets the footage. what the 2026 world models got right, where they stop, and the one loop i think is missing between a model that predicts the world and a model that understands it.</p>
+
+          <div class="tldr">
+            <span class="tag hot">tl;dr</span>
+            <p>we train ai on billions of words <em>about</em> the world and never let it watch the world. a child learns "things fall" from one cup sliding off one table, and keeps the rule, not the video. <b>conscious</b> is my name for a memory system that does the same thing: observe, get surprised, compress the surprise into a rule, let the episode decay. the world models that shipped this year (v-jepa 2.1, leworldmodel, dreamer 4) finally make the "observe" part cheap. the benchmarks that shipped this year (intphys 2, what-if world) show the "understand" part is still missing. this post is about the loop that connects them.</p>
+          </div>
+
+          <h2>the cup</h2>
+          <p class="prose">a kid sees a cup slide off a table. it falls, it breaks, someone shouts. a week later the kid remembers none of it. not the cup, not the table, not the colour of the floor. but if you put a glass near the edge of a counter in front of that kid, they reach for it. the specific experience is gone and the general rule survived. that is the whole trick. memory in us is not a recording. it is a compression step where the detail is thrown away on purpose and the structure is kept.</p>
+          <p class="prose">now look at how we build ai. we take every sentence ever written about cups and tables and gravity, and we fit a model to the statistics of those sentences. it works, embarrassingly well. a language model can tell you that cups fall. it has never seen one fall. it has never been surprised by anything. and i think that last part is the actual gap, not the seeing. surprise is the signal that tells a memory system what is worth keeping.</p>
+
+          <h2>what i mean by conscious</h2>
+          <p class="prose">i am not making a claim about qualia. i am using the word the way you use it when you say someone is <em>conscious of</em> something: they noticed, it registered, it changed what they do next. conscious, as a system, is four verbs:</p>
+          <ol class="did">
+            <li><b>observe.</b> take in the world as it happens, not as a description of it. video, audio, your own actions and their results.</li>
+            <li><b>expect.</b> at every moment, predict what comes next. not pixels, the state of things. the cup stays on the table.</li>
+            <li><b>get surprised.</b> when the prediction fails, that moment is tagged. the cup moved. the floor did something. this is the only thing that gets written to memory as an episode: what i expected, what happened instead, and the gap.</li>
+            <li><b>consolidate and forget.</b> offline, a slower process looks at the pile of surprises and asks one question: what rule, had i known it, would have made this not surprising? that rule is written down. the episode is allowed to decay.</li>
+          </ol>
+          <p class="prose">the rules are not loose text. they are typed relations: <em>causes</em>, <em>enables</em>, <em>precedes</em>, <em>prevents</em>. "unsupported object → falls" is a rule. "worm in apple → check the next apple" is a rule. the point of typing them is that they can be chained, and a chain of rules is a prediction about something you have never seen. that is what common sense is for. it is not a lookup table of facts, it is the ability to be un-surprised by a new situation.</p>
+          <p class="prose">the thing that makes this buildable in 2026, rather than a diagram in a cognitive science textbook, is that each of the four verbs now has a serious piece of engineering behind it. the pieces just have not been put in the same room.</p>
+
+          <h2>the field moved toward this while nobody said so</h2>
+          <p class="prose">a year ago "learn from observation" was a yann lecun position paper. this year it is a model zoo.</p>
+          <ul class="did">
+            <li><b>v-jepa 2 → 2.1.</b> meta's video world model trains on over a million hours of unlabelled video by predicting the next moment <em>in representation space</em>, not in pixels. v-jepa 2.1 (march 2026) scaled it to 2b parameters and 163 million clips and images, and the headline result was not a benchmark, it was a robot: 20% better grasping, because the model finally had depth. a prediction objective, given enough footage, learned something that transfers to a hand.<sup><a href="#src-1">1</a></sup></li>
+            <li><b>leworldmodel.</b> the same idea at 15 million parameters, trained end to end from pixels on one gpu in a few hours, with two loss terms instead of six. the trick (sigreg) stops the model from cheating by mapping everything to the same embedding. planning is up to 48× faster than foundation-model world models. this is the one that convinced me observation learning is not a scale story. a child's brain is not a datacentre either.<sup><a href="#src-2">2</a></sup></li>
+            <li><b>dreamer 4.</b> deepmind trained an agent to reach diamonds in minecraft from recorded video alone, never touching the live game during training, over action sequences longer than 20,000 steps. it learned a world from watching, then practised inside its own imagination of that world. that is the "expect" verb, taken seriously.<sup><a href="#src-3">3</a></sup></li>
+            <li><b>genie 3.</b> a world model you can walk around in for minutes at 24fps, now in people's hands and already forked by waymo into a driving simulator. generation got good enough that we can finally ask the harder question, which is whether any of it is <em>right</em>.<sup><a href="#src-4">4</a></sup></li>
+            <li><b>the child's eye.</b> and the result i keep coming back to: a generic network trained on 61 hours of headcam video from one child, aged six months to two years, learned word-to-object mappings and generalised them to new objects. that is roughly 1% of that kid's waking life. the data was never the bottleneck. the objective was.<sup><a href="#src-5">5</a></sup></li>
+          </ul>
+          <p class="prose">the pattern across all five: throw away the symbolic scaffolding, predict in a learned space, and get representations that move to robots, games and language. lecun's bet paid off, at least the first half of it.</p>
+
+          <h2>but prediction is not understanding, and now we can measure the gap</h2>
+          <p class="prose">this is the part i did not have a year ago. the benchmarks caught up with the models, and they say something uncomfortable.</p>
+          <ul class="did">
+            <li><b>intphys 2</b> shows models short clips where an object does something impossible (vanishes, passes through a wall, changes shape) and asks them to flag it. the same violation-of-expectation setup used on infants. most models score at chance. humans are near perfect.<sup><a href="#src-6">6</a></sup></li>
+            <li><b>what-if world</b> (may 2026) is cleverer. it hands a model two prompts describing the same scene with one physical detail changed and checks whether the two generated videos differ the way physics says they should. nine state-of-the-art models, none above 52%. and the detail that matters: scores tracked how <em>visible</em> the intervention was, not how simple the physics was. subtle changes scored 14%. the models are tracking appearance, not cause.<sup><a href="#src-7">7</a></sup></li>
+            <li><b>interpreting physics in video world models</b> (icml 2026) probed v-jepa 2 layer by layer. physical quantities like velocity and acceleration become readable about a third of the way into the network, peak in the middle, and then <em>fade toward the output</em>. and the model does not keep factorised physical variables the way a physics engine would; it keeps distributed, task-specific features.<sup><a href="#src-8">8</a></sup></li>
+            <li><b>the lazy encoder.</b> a follow-up to leworldmodel found a failure mode they call physical representation laziness: the embeddings do not collapse, the regulariser is satisfied, and the encoder still captures only the minimum needed to predict the next step. planning then fails. not collapsed, just lazy.<sup><a href="#src-9">9</a></sup></li>
+          </ul>
+          <p class="prose">put those four together and you get one sentence: <b>a prediction objective learns the cheapest representation that predicts, and understanding is never the cheapest representation.</b> the physics lives in the middle of the network and the output layers discard it, because the output layers only need to be right about the next frame. the cup only needs to look like it is falling. it does not need to fall for a reason.</p>
+          <p class="prose">this is exactly why i do not think "scale the world model" is the answer. you can scale a lazy encoder. you get a lazier one that is right more often. what is missing is a second objective that <em>pays</em> for keeping the principle around.</p>
+
+          <h2>the memory people are rediscovering the brain</h2>
+          <p class="prose">meanwhile, in a completely separate corner of the field, people building memory for llm agents hit the same wall from the other side. i build this stuff for a living (<a href="#cortex">cortex</a> is my own attempt), so this one is personal.</p>
+          <p class="prose">the 2026 survey of agent memory names the tension cleanly: systems oscillate between <em>hoarding</em> (store everything, drown in noise) and <em>amnesia</em> (compress aggressively, lose the rare fact that mattered). its proposed fix is an offline consolidation phase during idle time, with new memories held in a probation buffer and promoted only after they pass checks. its open question is the right one: how do you estimate what matters without seeing the future?<sup><a href="#src-10">10</a></sup></p>
+          <p class="prose">then everyone started building sleep. letta split the agent in two, a wake agent that talks and a sleep agent that rewrites memory in the background.<sup><a href="#src-11">11</a></sup> "language models need sleep" (june 2026) alternates wake phases that take in data with sleep phases that consolidate fragile memories into weights, and reports that plain in-context learning collapses back to pretrained behaviour under continual learning while the sleep version holds on.<sup><a href="#src-12">12</a></sup> google's nested learning and hope replaced one memory with a spectrum of modules updating at different speeds, with the fast ones gated by surprise.<sup><a href="#src-13">13</a></sup> and a governance paper caught the failure mode i have hit myself: summarising a summary of a summary drifts, so keep an immutable episodic ledger and check every rewrite against it.<sup><a href="#src-14">14</a></sup></p>
+          <p class="prose">none of this is new to neuroscience. the complementary learning systems story has been around since the nineties: a fast hippocampus writes episodes, a slow cortex extracts structure, and sleep is when the transfer happens. richards and frankland went further in 2017 and argued that forgetting is not a bug in that system, it <em>is</em> the generalisation step. transience prevents overfitting to specific past events. memory exists to make decisions, not to store things.<sup><a href="#src-15">15</a></sup> a cup that is forgotten is a rule that is kept.</p>
+
+          <h2>the loop nobody is closing</h2>
+          <p class="prose">here is what i think is going on. the world-model people have a perceiver that watches and predicts, and they are discovering its representations are lazy. the memory people have a consolidator that compresses and forgets, and they are discovering they have nothing principled to feed it, so they feed it chat logs. each side has the other's missing piece.</p>
+          <p class="prose">conscious is the loop that connects them, and the connecting signal is surprise. concretely:</p>
+          <ol class="did">
+            <li><b>the episode is the prediction error, not the observation.</b> most memory systems store what happened. i think that is the wrong unit. store a triple: what the world model expected, what it observed, and the delta between them. an expected event writes nothing. the cup on the table is not a memory. the cup on the floor is. this is also what makes the "store everything" problem disappear, because most of life is unsurprising.</li>
+            <li><b>consolidation is rule induction over surprises.</b> offline, a language model reads the surprise ledger and does one job: propose the rule that, had the perceiver held it, would have removed the surprise. "unsupported → falls." "pushed past the edge → leaves the surface." it writes that rule as a typed relation in plain language, with a pointer back to the episodes that produced it. the language model here is a knowledge builder, not the perceiver. it never looks at pixels. it looks at what the perceiver got wrong.</li>
+            <li><b>rules are born on probation and earn their keep by killing future surprise.</b> this is my answer to the survey's open question. you do not estimate importance up front, you measure it after the fact. a new rule is injected into the perceiver's expectation (as a conditioning signal, a prior, a constraint on the predictor) and watched. if the perceiver's error on related events drops, the rule is promoted and the episodes behind it are allowed to decay. if it does not, the rule is retired and the episodes stay. importance is retroactive. so is the forgetting.</li>
+            <li><b>the ledger is append-only.</b> episodes are never rewritten and rules are never edited. a better rule is a new row that supersedes the old one, with the old one kept. this is boring database discipline and it is also the thing that stops the drift the governance paper describes. it has a second benefit i care about more: every rule the system acts on has a provenance chain back to observations a human can replay. memory you can audit, correct and make forget. that is my <a href="#research">safety question</a> and my consciousness question turning out to be the same question.</li>
+          </ol>
+          <p class="prose">the thing that is new here, as far as i can tell, is not any one piece. it is that the surprise signal the world model already produces for free is the exact write-trigger the memory system has been missing, and the rules the memory system produces are the exact second objective the world model needs to stop being lazy. a recent paper argued that language models are a special case of world models, and that there is a continuous spectrum between next-token prediction and jepa-style next-state prediction.<sup><a href="#src-16">16</a></sup> i think the interesting architecture is not a point on that spectrum. it is both ends at once, wired through a ledger of surprises: jepa perceives, tokens explain, and the explanation feeds back into perception.</p>
+
+          <h2>how i would test it, and how i would be wrong</h2>
+          <p class="prose">a research direction is worth exactly what it would cost to falsify. three experiments, each on benchmarks that already exist, with the result that would kill the idea.</p>
+          <ul class="questions">
+            <li><b>transfer of surprise.</b> let the system watch scene a (a ball rolling off a ledge) until it has consolidated a rule. then show it scene b, visually different, same physics, with an impossible event in it. the prediction: surprise on the impossible event in scene b goes <em>up</em> after consolidation, and goes up more for visually subtle violations, which is exactly where what-if world says current models fail. if consolidated rules do not move the intphys 2 or what-if world score of the base world model, the loop is decoration.</li>
+            <li><b>the rule has to be load-bearing.</b> probe the perceiver before and after a rule is injected. if the physical variables that fade toward the output in the interpretability study start surviving to the output, the rule is doing work inside the representation. if the probes do not move and only the language model's answers change, then the language model is narrating, not building, and this is just rag with extra steps.</li>
+            <li><b>the social version.</b> run the same loop on egocentric social video and evaluate on goal and intention inference. mindworldbench (september 2026) is the first benchmark to ask video models to go from a character's belief and desire to their visible behaviour, and v-jepa style models have never been evaluated on anything like it.<sup><a href="#src-17">17</a></sup> if physical rules consolidate and social ones do not, then "common sense" is two different mechanisms and i have only found one.</li>
+          </ul>
+
+          <h2>what i am not claiming</h2>
+          <p class="prose">a few things i want to say before someone says them for me.</p>
+          <ul class="did">
+            <li><b>error compounds.</b> a language model writing rules from a perceiver's mistakes is a pipeline, and a wrong rule poisons everything downstream. that is why rules are on probation and never trusted for having been written. the only authority a rule has is the surprise it removed.</li>
+            <li><b>llms already pass the common-sense tests.</b> true, and i think the tests are leaking. an audit of socialiqa and two theory-of-mind benchmarks found duplicated items, ambiguous wording and implausible gold answers, and traced a large share of model errors to faulty items rather than faulty models. cleaning the set moved scores by 7 to 12 points without anyone learning anything.<sup><a href="#src-18">18</a></sup> the common sense that matters, intervention and counterfactual, is exactly what the video benchmarks show nobody has yet.</li>
+            <li><b>this is not a consciousness claim.</b> it is a claim about what a system should write down and what it should throw away. if that turns out to be most of what we mean by being conscious of the world, fine. if not, it still gets you a robot that does not drop the cup.</li>
+            <li><b>i have not built it.</b> cortex is the memory half. the perceiver half is a weekend with leworldmodel's code and a lot of ledge-rolling-ball footage. that is the next thing i am doing.</li>
+          </ul>
+
+          <h2>why i think this is the road</h2>
+          <p class="prose">every serious path to agi i can see runs through a system that learns continuously from its own experience without being retrained. the world-model people are building the experience. the memory people are building the continuity. what sits between them is a decision about what is worth remembering, and the only honest answer to that is <em>whatever i could not predict</em>. a kid who keeps every cup never learns about cups. a kid who forgets every cup never learns either. the kid who keeps "things fall" and forgets the cup is the one we are trying to build.</p>
+          <p class="prose">if you are working on world models, agent memory, or the thing in between, i would genuinely love to talk. <a href="mailto:joetomryan7@gmail.com">joetomryan7@gmail.com</a>.</p>
+
+          <h2 class="label">sources</h2>
+          <ol class="sources">
+            <li id="src-1"><a href="https://arxiv.org/abs/2603.14482">v-jepa 2.1: unlocking dense features in video self-supervised learning</a> (meta, 2026) · <a href="https://bdtechtalks.com/2026/03/23/v-jepa-2-1/">techtalks write-up</a></li>
+            <li id="src-2"><a href="https://arxiv.org/abs/2603.19312">leworldmodel: stable end-to-end joint-embedding predictive architecture from pixels</a> (maes et al., 2026)</li>
+            <li id="src-3"><a href="https://danijar.com/project/dreamer4/">dreamer 4</a> (hafner, yan, lillicrap, deepmind, 2025)</li>
+            <li id="src-4"><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/project-genie/">project genie / genie 3</a> (google deepmind, 2026)</li>
+            <li id="src-5"><a href="https://www.science.org/doi/10.1126/science.adi1374">grounded language acquisition through the eyes and ears of a single child</a> (vong, wang, orhan, lake, science 2024)</li>
+            <li id="src-6"><a href="https://arxiv.org/abs/2506.09849">intphys 2: benchmarking intuitive physics understanding in complex synthetic environments</a> (meta fair, 2025)</li>
+            <li id="src-7"><a href="https://arxiv.org/abs/2605.27589">what-if world: a causal benchmark for general world models in embodied scenarios</a> (cai et al., ucla, 2026)</li>
+            <li id="src-8"><a href="https://arxiv.org/abs/2602.07050">interpreting physics in video world models</a> (joseph, garrido, balestriero et al., icml 2026)</li>
+            <li id="src-9"><a href="https://arxiv.org/abs/2609.04264">spectral-target physical latent structuring for jepa-style world models</a> (zhu et al., 2026)</li>
+            <li id="src-10"><a href="https://arxiv.org/abs/2603.07670">memory for autonomous llm agents: mechanisms, evaluation, and emerging frontiers</a> (du, 2026)</li>
+            <li id="src-11"><a href="https://letta.com/blog/sleep-time-compute">sleep-time compute</a> (letta, 2025)</li>
+            <li id="src-12"><a href="https://arxiv.org/abs/2606.03979">language models need sleep: learning to self-modify and consolidate memories</a> (2026)</li>
+            <li id="src-13"><a href="https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/">nested learning and hope</a> (google research, neurips 2025)</li>
+            <li id="src-14"><a href="https://arxiv.org/abs/2603.11768">governing evolving memory in llm agents: the ssgm framework</a> (2026)</li>
+            <li id="src-15"><a href="https://doi.org/10.1016/j.neuron.2017.04.037">the persistence and transience of memory</a> (richards &amp; frankland, neuron 2017)</li>
+            <li id="src-16"><a href="https://arxiv.org/abs/2606.28127">from tokens to states: llms as a special case of world models and the continuous path beyond</a> (dubois, 2026)</li>
+            <li id="src-17"><a href="https://arxiv.org/abs/2609.39147">mindworldbench: evaluating mental-state-to-behavior reasoning in image-to-video generation</a> (2026)</li>
+            <li id="src-18"><a href="https://arxiv.org/abs/2506.23864">garbage in, reasoning out? why benchmark scores are unreliable and what to do about it</a> (mousavi et al., findings of eacl 2026)</li>
+          </ol>
+
+          <nav class="case-nav"><a href="#research">← research</a><a href="#life">life →</a></nav>
         </article>
 
         <!-- ================= LIFE ================= -->

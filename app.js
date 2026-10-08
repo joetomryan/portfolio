@@ -50,6 +50,19 @@
   window.addEventListener('hashchange', route);
   route();
 
+  // footnotes inside an essay scroll within the page instead of changing the hash,
+  // which the router would read as a request for another chapter
+  document.querySelectorAll('.essay a[href^="#src-"]').forEach((a) =>
+    a.addEventListener('click', (e) => {
+      const target = document.getElementById(a.getAttribute('href').slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ block: 'center' });
+      document.querySelectorAll('.sources .lit').forEach((li) => li.classList.remove('lit'));
+      target.classList.add('lit');
+    })
+  );
+
   document.querySelectorAll('[data-home]').forEach((a) =>
     a.addEventListener('click', (e) => {
       e.preventDefault();

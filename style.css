@@ -840,3 +840,32 @@ span.repo-name { color: var(--ink); }
 /* without javascript, show charts at their final state */
 html:not(.js) .bar, html:not(.js) .meter b { width: var(--w); }
 html:not(.js) .scale-band, html:not(.js) .tl-track b { width: calc(var(--b) - var(--a)); }
+
+/* ---------- essays (research chapter) ---------- */
+
+.essay h2 { margin: 44px 0 14px; font: 700 26px/1.25 var(--serif); max-width: 680px; }
+.essay h2.label { margin-top: 56px; font: 600 13px var(--serif); }
+.essay .role { max-width: 680px; }
+.essay .lede { max-width: 680px; }
+.essay .did { max-width: 680px; }
+.essay .did li { margin-bottom: 14px; }
+.essay .questions { max-width: 680px; }
+.essay sup { font: 500 11px var(--mono); line-height: 0; vertical-align: 0.55em; }
+.essay sup a { color: var(--accent); }
+.essay sup a:hover { text-decoration: none; background: var(--track); }
+
+.tldr {
+  margin: 28px 0 8px;
+  padding: 18px 22px;
+  max-width: 680px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--sheet);
+}
+.tldr .tag { margin-bottom: 10px; }
+.tldr p { margin: 0; font-size: 17px; }
+
+.sources { margin: 0; padding-left: 26px; max-width: 680px; font-size: 15px; line-height: 1.6; color: var(--dim); }
+.sources li { margin-bottom: 8px; padding-left: 4px; }
+.sources li::marker { font: 500 12px var(--mono); color: var(--accent); }
+.sources li.lit { background: var(--desk); color: var(--ink); }
