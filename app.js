@@ -12,7 +12,7 @@
 
   // page numbers: chapters first, then the experience pages after them
   const pageOrder = [...views.filter((v) => !v.dataset.parent), ...views.filter((v) => v.dataset.parent)];
-  const titles = { x100: '100x', avoca: 'avoca ai' };
+  const titles = { x100: '100x', avoca: 'avoca ai', killswitch: 'kill switch' };
 
   const show = (view) => {
     const name = view.dataset.view;
@@ -52,7 +52,7 @@
 
   // footnotes inside an essay scroll within the page instead of changing the hash,
   // which the router would read as a request for another chapter
-  document.querySelectorAll('.essay a[href^="#src-"]').forEach((a) =>
+  document.querySelectorAll('.essay a[href^="#src-"], .essay a[href^="#k-"]').forEach((a) =>
     a.addEventListener('click', (e) => {
       const target = document.getElementById(a.getAttribute('href').slice(1));
       if (!target) return;
